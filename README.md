@@ -1,2 +1,2 @@
 # celestial-translations
-Celestial MC translation files, feel free to contribute!
+Celestial MC EE translation files, feel free to contribute!
