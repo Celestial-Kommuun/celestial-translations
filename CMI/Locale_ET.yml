@@ -1,0 +1,4354 @@
+# Full color code support and some variables
+# Keep in mind that variables wont work for some lines, when it will for anothers :)
+# Just keep them where there are now and everything will be ok :)
+# Some lines can have global variables set. For player who will be effected. In example /heal Zrips then Zrips data will be used
+# [serverName] to show server name
+# [playerName] to show target player name
+# [playerDisplayName] to show target player display name
+# [lvl] to show target player level
+# [exp] to show target player total exp
+# [hp] to show target player health
+# [maxHp] to show target player max health
+# [hunger] to show target player hunger level
+# [gameMode] to show target player gamemode
+# [prefix] to show target player prefix if possible
+# [suffix] to show target player suffix if possible
+# Sender is console or player who performs command. In example Zrips performs /heal Zhax then Zrips data will be used
+# [senderName] to show Sender player name
+# [senderDisplayName] to show Sender player display name
+# [senderLvl] to show Sender player level
+# [senderExp] to show Sender player total exp
+# [senderHp] to show Sender player health
+# [senderMaxHp] to show Sender player max health
+# [senderHunger] to show Sender player hunger level
+# [senderGameMode] to show Sender player gamemode
+# [senderPrefix] to show Sender player prefix if possible
+# [senderSuffix] to show Sender player suffix if possible
+# Source is player which is being used for extra info. In example Zrips performs /tp Zhax Zrips then Zhax data will be used as its location is being taken for new player location
+# [sourceName] to show source player name
+# [sourceDisplayName] to show source player display name
+# [sourceLvl] to show source player level
+# [sourceExp] to show source player total exp
+# [sourceHp] to show source player health
+# [sourceMaxHp] to show source player max health
+# [sourceHunger] to show source player hunger level
+# [sourceGameMode] to show source player gamemode
+# [sourcePrefix] to show source player prefix if possible
+# [sourceSuffix] to show source player suffix if possible
+# ***********************************************
+# Some lines supports option to send them to custom places, like action bar, title, sub title or even create JSON/clickable messages
+# If line starts with !toast! then player will get toast message (advancement popup, only 1.12 and up). Some extra variables can be used to define type and icon. example: !toast! -t:goal -icon:paper Hello world!
+# If line starts with !actionbar! then player will get action bar message defined after this variable
+# If line starts with !actionbar:[seconds]! then player will get action bar message for defined amount of time
+# If line starts with !broadcast! then everyone will receive message. You can add extra !toast! !actionbar! or !title! to send message for everyone to specific place, in example !broadcast!!title!
+# If line starts with !customtext:[cTextName]! then custom text will be taken by name provided and shown for player. In case its used after !broadcast! then everyone who is online will get this custom text message
+# If line starts with !title! then player will get title message defined after this variable, in addition it can contain !subtitle! which will add subtitle message
+# If line starts with !bossbar:[name]-[timer]! then player will get bossbar message defined after this variable, in addition you can define how long this message will be visible. You need to define bossbar name which can be anything you want, but lines with same name will override each other to prevent stacking
+# To include clickable messages: <T>Text</T><H>Hover text</H><C>command</C><SC>Suggested text</SC>
+# <T> and </T> required, other is optional
+# Use /n to break line
+# To have more than one JSON message use <Next>
+# <C> performs command as a player who clicked
+# <CC> performs command from console once
+# <CCI> performs command from console every time player clicks text
+# <URL> includes url
+#
+#
+#
+# ATTENTION! As of 9.0.0.0 CMI version some of the locale lines got moved to CMILib file. This is to centralize some of most used ones across multiple plugins.
+# After you update locale in CMILib file perform /CMIL RELOAD command for changes to take effect
+
+info:
+  Same: '&cEi saa oma seljakotti redigeerimiseks avada!'
+  cantLoginWithDifCap: '&cEi saa sisse logida erineva nime suurtähtedega! Vana nimi:
+    &e[oldName]&c. Praegune: &e[currentName]'
+  Searching: '&eMängija andmete otsimine, palun oodake, see võib aega võtta!'
+  NoCommandWhileSleeping: '&cMagamise ajal ei saa käsklusi kasutada!'
+  PurgeNotEnabled: '&cPuhastusfunktsioon ei ole konfiguratsioonifailis lubatud!'
+  TeamManagementDisabled: '&7Sellel funktsioonil on piiratud funktsionaalsus, kui
+    DisableTeamManagement on seatud väärtusele true!'
+  NoGameMode: '&cPalun kasuta 0/1/2/3 või Survival/Creative/Adventure/Spectator või
+    s/c/a/sp!'
+  NameChange: '&6[playerDisplayName] &elogis sisse, tuntud ka kui: &6[namelist]'
+  Cooldowns: '&eSee käsk on jahtumas veel &6[time]'
+  specializedCooldowns: '&eSelle käsu jahutusaeg on käimas, palun oodake. &6[time]'
+  specializedRunning: '&eKäsk on veel töös, palun oodake &6[time]'
+  CooldownOneTime: '&eSeda käsku saab kasutada ainult üks kord!'
+  WarmUp:
+    canceled: '&eKäsk tühistati teie liikumise tõttu'
+    counter: '!actionbar!&6--> Oota &e[time] &6sekundit <--'
+    DontMove: '!title!&6Ära liigu!!subtitle!&7Oota &c[time] &7sekundit'
+    Boss:
+      DontMove: '&4Ära liigu &7[autoTimeLeft] &4sekundit!'
+      WaitFor: '&4Oota &7[autoTimeLeft] &4sekundit!'
+  FailedSpawnerMine: '!actionbar!&cEi õnnestunud kaevandada Spawnerit. &7[percent]%
+    &ckukkumise võimalus'
+  ClickSpawner: '!actionbar!&7[percent]% &eKukkumise võimalus'
+  Elevator:
+    created: '&eLoodud lifti silt'
+  CantPlaceSpawner: '&eEi saa paigutada spawnerit nii lähedale teisele spawnerile
+    (&6[range]&e)'
+  ChunksLoading: '&eMaailma tükkide andmed on endiselt laadimisel. Palun oodake natuke
+    ja proovige uuesti.'
+  CantUseNonEncrypted: '!actionbar!&cSelle eseme käsud ei ole krüpteeritud. Ei saa
+    neid kasutada!'
+  CantUseTrident: '!actionbar!&cCan''t use trident with riptide enchant at this moment!'
+  CantDecode: '!actionbar!&cEi saa dekodeerida sõnumit/käsklust. Võtmefail sisaldab
+    valet võtit selle ülesande jaoks. Teavitage sellest serveri administratsiooni'
+  CantTeleport: '&eSa ei saa teleporteerida, sest sul on liiga palju piiratud esemeid.
+    Kerige üle selle rea, et näha maksimaalset lubatud esemete arvu.'
+  CantTeleportDistance: '&eSorry you cant teleport over &6[amount] &eblocks away!'
+  BlackList: '&e[material] [amount] &6Max: [max]'
+  wrongPortal: '&cTe olete vales mõjupiirkonnas'
+  ItemWillBreak: '!actionbar!&eTeie ese (&6[itemName]&e) varsti puruneb! &e[current]&6/&e[max]'
+  ArmorWillBreak: '!actionbar!&eTeie [itemName] varsti puruneb!! &e[current]&6/&e[max]'
+  flyingToHigh: '&cSa ei saa lennata nii kõrgele, maksimaalne kõrgus on &6[max]&c!'
+  specializedItemFail: '&cEi saa kindlaks määrata spetsialiseeritud eseme nõuet väärtuse
+    järgi: &7[value]'
+  sunSpeeding: Magamine [count] / [total] [hour] tund [speed]X speed
+  sleepersRequired: '!actionbar!&f[sleeping] &7of &f[required] &7sleeping from required
+    for night time speedup'
+  sunSpeedingTitle: '&7[hour]'
+  skippingNight: '!title!&7Terve öö vahelejätmine'
+  sunSpeedingSubTitle: '&f[count]&7/&f[total] &7(&f[speed]X&7)'
+  repairConfirm: '&eKlõpsake, et kinnitada &7[items] &eeseme remont hinnaga &7[cost]'
+  bookDate: '&7Kirjutatud &f[date]'
+  maintenance: '&7Hooldusrežiim'
+  mapLimit: '&cEi saa minna üle 30 000 000 ploki'
+  startedEditingPainting: '&eSa hakkasid maali redigeerima. Klõpsake mõnele teisele
+    plokile tühistamiseks.'
+  canceledEditingPainting: '&eTe tühistasite maali redigeerimisrežiimi'
+  changedPainting: '!actionbar!&eMuutsin maali &6[name] &eID-ga &6[id]'
+  noSpam: '!title!&cSpämmimine ei ole lubatud!'
+  noCmdSpam: '!title!&cKäskude spämmimine ei ole lubatud  !'
+  spamConsoleInform: '&cMängija (&7[playerName]&c) vallandas (&7[rules]&c) vestlusfiltri
+    sõnumiga:&r [message]'
+  # This line can have extra variables: [totalUsers] [onlinePlayers]
+  FirstJoin: '&eTere tulemast &6[playerDisplayName] &emeie serverisse!'
+  LogoutCustom: ' &6[playerDisplayName] &elahkus mängust'
+  LoginCustom: ' &6[playerDisplayName] &eliitus mänguga'
+  deathlocation: '&eSa surid asukohas x:&6[x]&e, y:&6[y]&e, z:&6[z]&e in &6[world]'
+  book:
+    exploit: '&cSa ei saa luua raamatut, millel on rohkem kui [amount] lehekülgi'
+  combat:
+    CantUseShulkerBox: '&cSaab kasutada shulkeri kasti, kui oled mängijaga võitluses.
+      Oota: [time]'
+    CantUseCommand: '!actionbar!&cEi saa käsku kasutada, kui oled võitlusrežiimis.
+      Oodake: [time]'
+    bossBarPvp: '&cVõitlusrežiim [autoTimeLeft]'
+    bossBarPve: '&2Võitlusrežiim [autoTimeLeft]'
+  noSchedule: '&cSelle nimega ajakava ei leitud'
+  totem:
+    cooldown: '&eTotemi jahtumine: [time]'
+    warmup: '&eTotem efekt: [time]'
+    cantConsume: '&eTotemi kasutamine keelati selle jahtumisaja tõttu.'
+  InventorySave:
+    info: '&8Info: &8[playerDisplayName]'
+    saved: '&e[time] &eSeljakott salvestatud ID-ga: &e[id]'
+    NoSavedInv: '&eSellel mängijal ei ole ühtegi salvestatud seljakotti'
+    NoEntries: '&4Fail on olemas, kuid seljakotte ei leitud!'
+    CantFind: '&eEi leia seljakotti selle ID-ga'
+    TopLine: '&e----------- &6[playerDisplayName] salvestatud seljakott &e-----------'
+    List: '&eID: &6[id]&e. &6[time]'
+    KillerSymbol: '&c ☠'
+    Click: '&eKlõpsake, et kontrollida ([id]) salvestatud seljakotti'
+    IdDontExist: '&4Seda salvestus ID ei ole olemas!'
+    Deleted: '&eSalvestatud seljakott kustutati edukalt!'
+    Restored: '&eTe olete taastanud &e[sourcename] &eseljakoti &e[targetname] &ekasutajale.'
+    GotRestored: '&eSinu seljakott taastati &e[sourcename] poolt &eseljakott salvestatud
+      &e[time]'
+    LoadForSelf: '&eLaadige see seljakott enda jaoks'
+    LoadForOwner: '&eLaadige see seljakott omaniku jaoks'
+    NextInventory: '&eJärgmine seljakott'
+    PreviousInventory: '&eEelmine seljakott'
+    Editable: '&eRedigeerimisrežiim aktiveeritud'
+    NonEditable: '&eRedigeerimisrežiim on välja lülitatud'
+  vanishSymbolOn: '&8[&7V&8]&r'
+  vanishSymbolOff: ''
+  afkSymbolOn: '&8[&7Afk&8]&r'
+  afkSymbolOff: ''
+  beeinfo: '!actionbar!&7Mee tase: &e[level]&7/&e[maxlevel] &7Mesilasi sees: &e[count]&7/&e[maxcount]'
+  pvp:
+    noGodDamage: '!actionbar!&cSa ei saa mängijaid vigastada, kui oled surematu.'
+  pve:
+    noGodDamage: '!actionbar!&cSa ei saa kahjustada mobe, kui oled surematu'
+  InvEmpty:
+    armor: '&eTeie armori kohad peaksid olema tühjad!'
+    hand: '&eTeie käsi peaks olema tühi!'
+    maininv: '&eTeie peamine seljakott peaks olema tühi!'
+    maininvslots: '&eTeie peamine seljakott peaks olema vähemalt &6[count] &evaba
+      kohta!'
+    inv: '&eTeie seljakott peaks olema tühi!'
+    offhand: '&eTeie offhand peaks olema tühi!'
+    quickbar: '&eTeie kiirriba peaks olema tühi!'
+    quickbarslots: '&eTeie kiirribal peaks olema vähemalt &6[count] &evaba kohta!'
+    subinv: '&eTeie alam seljakott peaks olema tühi!'
+    subinvslots: '&eTeie alam seljakott peaks olema vähemalt &6[count] &evaba kohta!'
+  Relog: '&eMuudatuste jõustumiseks võib olla vaja uuesti sisse logida.'
+  IncorrectColor: '&4Color defined incorrectly!'
+  time:
+    # Mainly for placeholder playtime output
+    # Use + sign at the start of line to force include it even if specific and previous time values are 0
+    # Use - sign at the start of line if you want to include it only if its value isn't 0. If entire output results into empty line, then we will output seconds value
+    days: '&2[d]&7d:'
+    hours: '&2[h]&7h '
+    minutes: '&2[m]&7m '
+    seconds: '&2[s]&7s'
+  CommandFormat: '&cVale käsu vorming'
+  ServerSwitchOut: ' &6[playerDisplayName] &evahetas serveri &6[serverName]'
+  ServerSwitchIn: ' &6[playerDisplayName] &etuli &6[serverName] &eserverist'
+warp:
+  list: '&e[pos]. &6[warpName] &f- &7[worldName] ([x]:[y]:[z])'
+afk:
+  'off': '&7Mängib'
+  MayNotRespond: '&eMängija on AFK ja ei pruugi vastata'
+  MayNotRespondStaff: '&eTöötaja on AFK ja ei pruugi vastata. Proovige meiega ühendust
+    võtta discordi kaudu'
+BossBar:
+  hpBar: '&f[victim] &e[current]&f/&e[max] &f(&c-[damage]&f)'
+Potion:
+  Effects: '&8Võlujoogi efektid'
+  List: '&e[PotionName] [PotionAmplifier] &eKestus: &e[LeftDuration] &esek'
+  NoPotions: '&ePuudub'
+Information:
+  Title: '&8Mängija teave'
+  Health: '&eTervis: &6[Health]/[maxHealth]'
+  Hunger: '&eNälg: &6[Hunger]'
+  Saturation: '&eKüllastatus: &6[Saturation]'
+  Exp: '&eExp: &6[Exp]'
+  NotEnoughExp: '&eEi ole piisavalt exp: &6[Exp]'
+  NotEnoughExpNeed: '&Ei ole piisvalt exp: &6[Exp]/[need]'
+  tooMuchExp: '&eLiiga palju exp: &6[Exp]/[need]'
+  NotEnoughVotes: '&ePole piisavalt hääli: &6[votes]'
+  TooMuchVotes: '&eLiiga palju hääli: &6[votes]'
+  BadGameMode: '&cSa ei saa seda teha oma praeguses mängurežiimis'
+  BadArea: '&cSelles piirkonnas ei saa seda toimingut teha.'
+  GameMode: '&eMängurežiim: &6[GameMode]'
+  Flying: '&eLendab: &6[Flying]'
+  Uuid: '&6[uuid]'
+  FirstConnection: '&eEsimene ühendus: &6[time]'
+  Lastseen: '&eViimati nähtud: &6[time]'
+  Onlinesince: '&eVõrgus alates: &6[time]'
+  Money: '&eRaha: &6[money]'
+  Group: '&eGrupp: &6[group]'
+econ:
+  commandCost: '&7Selle käsu maksumus on &6[cost] &7korrake seda või kinnitamiseks
+    klõpsake siin'
+  disabled: '&cSeda käsku ei saa kasutada, kui economy tugi on välja lülitatud.'
+Elytra:
+  Speed: '&eKiirus: &6[speed]&ekm/h'
+  SpeedBoost: ' &a+ '
+  SpeedSuperBoost: ' &2+ '
+  CanUse: '&cIlma loata ei saa elytrat kasutada!'
+  CantGlide: '&cSiin ei saa kasutada elytrat!'
+  Charging: '&eLaadimine &f[percentage]&e%'
+NetherPortal:
+  ToHigh: '&cPortaal on liiga suur, maksimaalne kõrgus on &6[max]&c!'
+  ToWide: '&cPortaal on liiga lai, maksimaalne laius on &6[max]&c!'
+  Creation: '!actionbar!&7Loodud [height]x[width] nether portaal!'
+  Disabled: '&cPortaali loomine keelatud!'
+Ender:
+  Title: '&7Ava ender kirst'
+Chat:
+  localPrefix: ''
+  shoutPrefix: '&c[S]&r'
+  LocalNoOne: '!actionbar!&cKeegi ei kuule sind, kirjuta ! enne sõnumit globaalseks
+    vestluseks'
+  shoutDeduction: '!actionbar!&cMahaarvatud &e[amount] &ckarjumise pärast'
+  # Use \n to add new line
+  publicHover: '&eSaatmise aeg: &6%server_time_hh:mm:ss%'
+  privateHover: '&eSaatmise aeg: &6%server_time_hh:mm:ss%'
+  staffHover: '&eSaatmise aeg: &6%server_time_hh:mm:ss%'
+  helpopHover: '&eSaatmise aeg: &6%server_time_hh:mm:ss%'
+  link: '&l&4[&7LINK&4]'
+  item: '&7[%cmi_iteminhand_realname%[amount]&7]'
+  itemAmount: ' x[amount]'
+  itemEmpty: '&7[Vapper käsi]'
+Spy:
+  Chat:
+    msg: '&2Spy&7[&8[senderDisplayName] &7-> &8[playerDisplayName]&7]&f [message]'
+    custom: '&2Spy&8[senderDisplayName] &7-> &4|&8[place]&4|&f [message]'
+  Command:
+    msg: '&5C&2Spy&7[&8[senderDisplayName]&7]&7: &f[command]'
+  Sign:
+    msg: '&5Sign&2Spy&7[&8[senderDisplayName]&7]&7: &f[text]'
+command:
+  help:
+    output:
+      usage: '&eKasutus: &7%usage%'
+      cmdInfoFormat: '[command] &f- &e[description]'
+      cmdFormat: '&6/[command]&f[arguments]'
+      helpPageDescription: '&e* [description]'
+      explanation: '&e * [explanation]'
+      title: '&e------ ======= &6Abi&e &e======= ------'
+  nocmd:
+    help:
+      info: '&eNäitab kõiki olemasolevaid käske'
+      args: ''
+  actionbarmsg:
+    help:
+      info: '&eSaadab mängijale tegevusriba sõnumi'
+      args: '[playerName/all] (-s:[seconds]) [message]'
+    info:
+      message: '&f[message]'
+  afk:
+    help:
+      info: '&eAfk-režiimi ümberlülitamine. Põhjus võib olla lisatud'
+      args: (-p:playerName) (reason) (-s)
+    info:
+      # This only determines message in title message and not message shown in chat. For chat message check config.yml file
+      afkTitle: '&eSa oled nüüd AFK'
+      afkSubTitle:
+      - '&2Ootame sind ikka tagasi!'
+      - '&2Kus oled?'
+      - '&2Afk, jälle?'
+      - '&2Kus sa oled?'
+  afkcheck:
+    help:
+      info: '&eMängijate AFK staatuse kontrollimine'
+      args: '[playerName/all]'
+    info:
+      feedback: '&e[playerDisplayName]&e: &6[status]'
+      feedbackInactive: '&eMitteaktiivne viimased &6[time]'
+      feedbackAll: '&e[place]. &e[playerDisplayName]&e: &6[status]'
+      feedbackReason: '&7[reason]'
+  air:
+    help:
+      info: '&eMängija õhu seadistamine'
+      args: '[playerName] [amount] (-s)'
+    info:
+      feedback: '&eTe olete seadnud &3[amount]&e õhu mängiijale &3[playerName]&e (&3[offon]&e).'
+      targetFeedback: '&eTeie õhk on seatud &3[amount]&e &3[senderDisplayName]&e poolt.'
+      current: '&ePraegune &3[playerDisplayName] &eõhk: &3[amount]'
+  alert:
+    help:
+      info: '&eHoiatuste haldamine mängija sisselogimisel'
+      args: '[playerName] (reason)'
+      explanation:
+      - '&eÕigused:'
+      - '&6command.alert.info.inform &e- teadete nägemiseks mängija sisselogimise
+        kohta'
+    info:
+      inform:
+      - '&e!Alert!******** &6[name] &4just logis sisse! &e*******!Alert!'
+      reason: '&eHoiatuse põhjus: &6[reason]'
+      removed: '&6[playerDisplayName] &eeemaldatud hoiatuste nimekirjast'
+      added: '&eKõigile administraatoritele saadetakse hoiatussõnum, kui &6[playerDisplayName]
+        &eliitub järgmise 24 tunni jooksul'
+      online: '&6[playerDisplayName] &eon juba võrgus'
+      add: '&2Add extra day'
+      list: ' &e[place]. &6[playerDisplayName] &e[time] &7Reason: [reason]'
+  aliaseditor:
+    help:
+      info: '&eAliase redaktor'
+      args: (new) (alias-cmd)
+    info:
+      ListNumber: '&e[number].'
+      alias: '&6[alias]'
+      commandList: ' &e/[command]  '
+      commandListDelay: ' &6[command]  '
+      permRequirements: Õigus
+      permReqExplanation: '&7Vajab &6cmi.customalias.[alias] &7selle kasutamiseks'
+      tab: ' TabComplete'
+      tabCompleteExplanation: '&7Kui on välja lülitatud, tabcomplete ei tööta'
+      tabCompletes: '&2TabCompletes: '
+      cTab: ' CustomTab'
+      file: ' &2FailiNimi'
+      fileExplanation: '&7Praegune sihtfail: &e[file]'
+      addTabComplete: ' LisaTab'
+      addTabExplanation: '&6Kui see on lubatud, siis lisame olemasolevatele vahelehtedele
+        määratletud vahekaardid.'
+      newAliasInfo: '&eSisestage uue aliase käsu nimi ja vajutage enter'
+      addInfo: '&eSisestage uus käsk. Kirjuta &6cancel &e, et katkestada'
+      addInformationHover: "&eGlobal variables supported as of sender category \n\\\
+        \ &edelay! 5 &6to include delay in commands \n&e$1 &6will take provided variable\\\
+        \ \\ by new command and will place in that place \n&e$1- &6takes all variables\\\
+        \ \\ from this point and inserts into original commands \n&e? &6makes it valid\\\
+        \ \\ when using any last variable. For Help page usage\n&efromConsole! will\
+        \ perform\\ \\ command from console"
+      editInfo: '&eKlõpsake vana teksti kleepimiseks. Kirjuta &6cancel &e, et katkestada
+        tegevust. Kirjuta &6remove &e, et kustutada rida'
+  anvil:
+    help:
+      info: '&eAva alasi'
+      args: (playerName) (-s)
+    info:
+      feedback: '&eTe olete avanud alasi mängijale &3[playerDisplayName]&e (&3[offon]&e).'
+      targetfeedback: '&3[senderDisplayName]&e avasin teie jaoks alasi.'
+  anvilrepaircost:
+    help:
+      info: '&eMäära esemete parandushind'
+      args: (playerName) [amount]
+      explanation:
+      - 'Näide:'
+      - /repaircost 10
+      - /repaircost set 10
+      - /repaircost add 10
+      - /repaircost take 10
+      - /repaircost Zrips clear
+      - /repaircost Zrips add 10
+    info:
+      current: '&ePraeguste esemete baasremondi maksumus: &6[cost]&e.'
+      noitem: '&cEi hoia käes ühtegi eset.'
+      cantDetermineCost: '&cEi saa määrata selle eseme baasremondi maksumust..'
+      selffeedback: '&eBaasremondi maksumuseks määrati &3[amount] &emängijale &3[playerDisplayName]&e
+        käes olev ese (&3[offon]&e).'
+      targetfeedback: '&eTeie eseme remondikulu on seatud &3[amount]&e &3[senderDisplayName]&e
+        poolt.'
+  armoreffect:
+    help:
+      info: '&eMuudab armor efekte'
+      args: '[potionEffect]'
+  armorstand:
+    help:
+      info: '&eAva armor stand redaktor'
+      args: (last/near)
+    info:
+      cantClick: '&cCEi saa seda teha. Keegi juba redigeerib seda armor standi'
+      tooFar: '&cArmor stand on liiga kaugel'
+      title: Editor
+      coordX: '&cX'
+      coordY: '&2Y'
+      coordZ: '&eZ'
+      body: '&7Keha pööre: &f[amount]'
+      head: '&7Pea [coord]&7: &f[amount]'
+      torso: '&7Ülakeha [coord]&7: &f[amount]'
+      leftArm: '&7Vasak käsi [coord]&7: &f[amount]'
+      rightArm: '&7Parem käsi [coord]&7: &f[amount]'
+      leftLeg: '&7Vasak jalg [coord]&7: &f[amount]'
+      rightLeg: '&7Parem jalg [coord]&7: &f[amount]'
+      pos: '&7Asukoht [coord]&7: &f[amount]'
+      list: '&7[place]. &6[distance] [items]'
+      items: '&3[displayName]&e[type]'
+      plate: '&7Plaat'
+      size: '&7Väike'
+      visible: '&7Nähtav'
+      arms: '&7Nähtavad käed'
+      gravity: '&7Gravitatsioon'
+      glow: '&7Hõõguv'
+      invulnerable: '&7Haavatamatu'
+      name: '&7Nähtav nimi'
+      nameEdit: '&7Q klõpsa nime muutmiseks'
+      interactable: '&7Interaktiivne'
+      explanation: '&8Vasak või parem hiirenupp kohandab väärtust'
+      explanation2: '&8Hoidke shifti, et muuta see 10x kiiremaks'
+      disableGravity: '&eLülita gravitatsioon välja, kui soovid seda väärtust muuta'
+      copyLabel: '&7Avatud kloonide valija'
+      copyTitle: '&8Valige, mida soovite kloonida'
+      click: '&eKlõpsa armor standil selle paljundamiseks, või löö ükskõik millist
+        plokki, et tühistada protsess'
+      canceled: '&eArmorStand kopeerimisprotsess on tühistatud'
+      updated: '&eArmorStand värskendatud'
+      positionLabel: '&7Ava positsiooni valikud'
+      saveLabel: '&7Avatud malli salvestaja'
+      saveButton: '&7Salvesta'
+      saveTitle: '&8Valige, mida soovite salvestada'
+      receivedItem: '&eSaid erilise armor standi oma seljakotti'
+      armorStandItem: '&7ArmorStand Mall: &6[name]'
+      action:
+        helmet: '&7Kiiver'
+        chest: '&7Rindkere'
+        offhand: '&7Offhand'
+        mainhand: '&7Peamine käsi'
+        leggings: '&7Säärised'
+        boots: '&7Saapad'
+        name: '&7Nimi'
+        body: '&7Keha'
+        plate: '&7Plaat'
+        size: '&7Suurus'
+        visible: '&7Nähtav'
+        arms: '&7Käed'
+        gravity: '&7Gravitatsioon'
+        glow: '&7Hõõgumine'
+        invulnerable: '&7Haavamatu'
+        interactable: '&7Interaktiivne'
+        head: '&7Pea'
+        torso: '&7Ülakeha'
+        leftArm: '&7Vasak käsi'
+        rightArm: '&7Parem käsi'
+        leftLeg: '&7Vasak jalg'
+        rightLeg: '&7Parem jalg'
+  attachcommand:
+    help:
+      info: '&eKinnitab käsu esemele'
+      args: '[command/-clear]'
+      explanation:
+      - Eralda käsud semikoolonitega ;;
+      - Sa saad defineerida jooksutatava käsu vasaku või parema hiireklõpsuga
+      - '!left! käsu täitmiseks vasaku hiireklõpsuga'
+      - '!right! käsu täitmiseks parema hiireklõpsuga'
+      - '!limiteduse:[amount]! määrab, mitu korda saab seda eset kasutada.'
+      - '!safelimiteduse:[amount]! ei eemalda eset pärast kõigi kasutuskordade kasutamist'
+      - '!cc! täidab käsu konsoolist, nõuab cmi.command.attachcommand.cc õigust'
+      - '!cooldownn:[amount]! lisab eseme kasutamise jahutusaja.'
+      - '[interactedPlayer] lisab selle mängija nime, kellega sa eseme hoidmise ajal
+        suhtlesid.'
+      - Globaalseid muutujad töötavad lisamisega [itemUses]
+    info:
+      list: ' &e[id]. &6[cmd]'
+      uses: '&eEseme kasutuskorrad: &6[amount]'
+      usesLeft: '!actionbar!&eEseme kasutusi jäänud: &6[itemUses]'
+      cooldown: '&7Ese on jahtumas. Oodake [time]'
+  autorecharge:
+    help:
+      info: '&eLülita automaatne lennu uuestilaadimine'
+      args: (playerName) [exp/money/off] (-s)
+    info:
+      disabled: '&eAutomaatne laadimine väljalülitatud'
+      moneyEnabled: '&eAutomaatne lennu laadimine sisselülitatud kasutades &6raha'
+      expEnabled: '&eAutomaatne lennu taaslaadimine sisselülitatud kasutades &2exp'
+  back:
+    help:
+      info: '&eTelepordib tagasi viimasesse salvestatud kohta'
+      args: (playerName) (-s)
+    info:
+      noinfo: '&4Puudub salvestatud asukoht, kuhu naasta!'
+      feedback: '&eNaasen viimasesse salvestatud kohta (&6[worldName]&e,&6[x]&e,&6[y]&e,&6[z]&e)!'
+  balance:
+    help:
+      info: '&eKontrolli saldot'
+      args: (playerName)
+    info:
+      balance: '&eSaldo: &6[money]'
+      balanceOther: '&6[playerDisplayName] &esaldo: &6[money]'
+  baltop:
+    help:
+      info: '&eVaata kõige rikkamate nimekirja'
+      args: (playerName)
+    info:
+      topLine: '&e&m-----&6 TOP netoväärtus &e&m-----'
+      topLineHover: '&6Serveris kokku: &c[total]'
+      list: '&e[place]. &6[playerDisplayName]: &e[balance]'
+      ownLine: '&2[place]. &2[playerDisplayName]: &2[balance]'
+      # Set to empty field if you want to not show hover over message
+      hover: '&2[playerName]'
+      recalculating: '&2Baltop arvutatakse ümber, palun oodake natuke ja proovige
+        hiljem uuesti'
+  ban:
+    help:
+      info: '&eMängija keelamine'
+      args: '[playerName] (reason) (-s)'
+      explanation:
+      - cmi.command.ban.bypass - keelust möödahiilimiseks
+    info:
+      # Make sure that OverrideLoginMessage is enabled in config file
+      message: '&cSa oled sellest serverist keelatud!'
+      reason: '&6Põhjus: &e[reason]'
+      defaultReason: '&eRikkus serveri reegleid'
+      messageToAll: '&6[playerDisplayName] &ekeelati &6[senderDisplayName] poolt &eajaks:
+        &6[reason]'
+      banedSilent: '&7[&8Silent&7]&6[playerDisplayName] &egot banned by &6[senderDisplayName]
+        &efor: &6[reason]'
+      noSelfBan: '&cSa ei saa ennast keelata'
+      cantBan: '&cSa ei saa keelata seda mängijat'
+  banlist:
+    help:
+      info: '&eKeelunimekiri'
+      args: ''
+  bbroadcast:
+    help:
+      info: '&eSaadab spetsiaalse sõnumi kõigile mängijatele kõigis serverites'
+      args: (!) [message] (-s:[serverName,serverName])
+      explanation:
+      - Kui sõnum algab tähega !, siis kuvatakse puhas sõnum
+      - Serverid saab defineerida, et saata broadcast sõnumeid ainult nendes serverites
+    info:
+      format: '&e[&4Teade&e] &2[message]'
+  blockcycling:
+    help:
+      info: '&eVaheta ploki olekut'
+      args: ''
+  blockinfo:
+    help:
+      info: '&eKontrolli ploki olekut'
+      args: ''
+    info:
+      Id: ' &eId: &6[id][data]'
+      Material: ' &eMaterjal: &6[name][ndata]'
+      RealName: ' &ePäris nimi: &6[name]'
+      TempLight: ' &eTemperatuur: &6[temp]&e, Valgus - plokk: &6[blevel]&e, taevas:
+        &6[slevel]&e, üldine: &6[level]'
+      Resistance: ' &eVastupanu - Kaevandamine: &6[mining]&e, Plahvatus: &6[explosion]'
+      noteBlock: ' &eToon: &6[tone] &eOktaav: &6[octave] &6Instrument: &e[instrument]
+        &6Helikõrgus: &7[pitch]'
+      BlockState: ' &7[state]: &f[value]'
+      BlockHitBox: ' &7Height: &f[height] &7Length: &f[length] &7Width: &f[width]'
+      BlockHitBoxHover: '&7From Top: &f[top] &7From Bottom: &f[bottom]'
+      Books: ' &eBooks: &6[list]'
+      Enchant: '&6[name]:&e[level] '
+  blocknbt:
+    help:
+      info: '&eNäita ploki NBT infot'
+      args: ''
+    info:
+      noNbt: '&ePlokk ei sisalda NBT andmeid'
+  book:
+    help:
+      info: '&eRaamatu redigeerimine'
+      args: '[Author/Title/Unlock] [value]'
+    info:
+      noitem: '&cEi hoia ühtegi eset käes.'
+      notBook: '&cEse ei ole kirjutatud raamat.'
+      wrongValue: '&cEse ei ole suletud kirjutatud raamat.'
+      inccorectAction: '&eVale tegevuse nimi.'
+      authorChanged: '&eAutor muudetud väärtuseks: [author]'
+      titleChanged: '&ePealkiri muudetud väärtuseks: [title]'
+      unlocked: '&eRaamat avati'
+  bossbarmsg:
+    help:
+      info: '&eSaadab boss bar sõnumi mängijale'
+      args: '[playerName/all] (-sec:[seconds])(-t:[timeToKeepFor]) (-n:nameOfBar)
+        (-p:[maxValue/current]) (-c:[color]) (-s:[1,6,10,12,20]) (-cmd:"command;;command2")
+        (-pcmd:"command;;command2") (-a:[ticks]) [message] (-cancel:nameOfBar)'
+      explanation:
+      - PlaceholderAPI on toetatud progressiooni ja teksti jaoks ise
+      - - See määrab, kui kaua hoida riba näidatakse mängijale enne automaatset
+        - peitmist
+      - - uue informatsiooniga
+      - 'värvid saavad olla: red, green, pink, purple, white, yellow'
+      - - kasutatud dünaamilisteks uuendusteks
+      - 'Näited:'
+      - /cmi bossbar Zrips BossBarTitle
+      - - -c:red &2Title of bar %server_online%/%server_max_players% &e%cmi_user_name%
+      - - edasimineku riba nime järgi
+      - - edasimineku riba nime järgi
+      - - riba nime järgi
+      - /cmi bossbarmsg all -sec:5 - loeb 5 sekundit 0 kuni 5
+      - loeb 5 sekundit alates 5-st kuni 0-ni
+      - '-cmd: täidab käsud kas ühe mängija jaoks, kui sihtmärk on konkreetne mängija,
+        või ainult üks kord, kui see on mõeldud kõigile. See ei tõlgi muutujaid [playerName]
+        kui ei ole kasutatud ''all'' muutujat. Kasuta -pcmd: selle asemel'
+      - '-pcmd: täidab iga mängija käske, kui sihtmärk on ''all'''
+      - https://www.zrips.net/cmi/commands/bossbarmsg-handling/
+  broadcast:
+    help:
+      info: '&eSaadab erilise sõnumi kõigile mängijatele'
+      args: (!) [message] (-w:[worldName,worldName]) (-r:[range]) (-c:[world;x;y;z])
+      explanation:
+      - Kui sõnum algab tähega !, siis kuvatakse puhas sõnum
+      - Maailmad saab määratleda nii, et sõnumeid edastatakse ainult nendes maailmades,
+        kus
+    info:
+      format: '&e[&4Teade&e] &2[message]'
+  burn:
+    help:
+      info: '&ePõleta mängija'
+      args: (playerName) (time) (-s)
+    info:
+      feedback: '&eSa panid &3[playerDisplayName]&e põlema ajaks &6[time] &e(&3[offon]&e).'
+      targetfeedback: '&eSind pandi põlema &3[senderDisplayName]&e poolt &6[time]&e
+        ajaks.'
+  cartographytable:
+    help:
+      info: '&eAva cartography table'
+      args: (playerName) (-s)
+    info:
+      feedback: '&eTe avasite cartography table mängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      targetfeedback: '&3[senderDisplayName]&e avas cartography table sulle.'
+  charges:
+    help:
+      info: '&eShows jäänud spawneri laadimisi'
+      args: '[playerName] [add/set/take/clear/reset] (-f)'
+    info:
+      charges: '&e* Laeb: &6[current]&e/&6[max] [bypass]'
+      cd: '&e* CD: &6[cdtime] &eNext in: &6[time]'
+      bypass: '&6(Bypass)'
+      allUsed: '&eKõik laadimised kasutatud! Järgmine [time]'
+      noGroup: '&eEi ole määratud laadimisrühma'
+      cantBreak: Sa ei saa murda, kuni teil on määratud uuesti laadimise rühma
+      minusCd: '&e Miinus &6[sec]&esek on jäänud spawneri laadimise jahutusaega'
+      add: '&eLisatud &6[amount] &espawneri laadimist mängijale &6[playerDisplayName]'
+      set: '&eSeadista &6[amount] &espawner laadimised mängijale &6[playerDisplayName]'
+      clear: '&ePuhastatud kõik spawneri laadimised mängijalt &6[playerDisplayName]'
+      reset: '&eLähtesta spawneri laadimise rühm mängijale &6[playerDisplayName]'
+      take: '&eVõtsid &6[amount] &espawnerite laadimist mängijalt &6[playerDisplayName]'
+  chat:
+    help:
+      info: '&eLoo ja liitu jututubadega'
+      args: '[create/join/leave/list/invite/kick/listrooms] (chatName/playerName)
+        (-private) (-locked) (-persistent)'
+    info:
+      joined: '&eLiitusid jututoaga: &7[chatRoomName]'
+      joinedWatcher: '&eVaatad vestlustuba: &7[chatRoomName]'
+      stopeedWatching: '&ePeatasid jututoa vaatamise: &7[chatRoomName]'
+      watcherSymbol: ◕‿◕
+      watcherSymbolActive: '&2'
+      watcherSymbolInactive: '&7'
+      joinedInfo: '&e[playerDisplayName] &7liitus jututoaga'
+      alreadyIn: '&eSa oled juba &7[chatRoomName] jututoas'
+      left: '&eLahkusid &7[chatRoomName] &ejututoast'
+      leftInfo: '&e[playerDisplayName] &7lahkus jututoast'
+      invite: '&6[playerDisplayName] &ekutsub sind liituma jututoaga: &7[chatRoomName]'
+      sentInvite: '&eKutsusid &6[playerDisplayName] &eliituma jututoaga: &7[chatRoomName]'
+      format: '&3|&7[chatRoomName]&3| &6[playerDisplayName]: &r[message]'
+      nobody: '&4Kedagi ei ole jututoas'
+      notOwner: '&4Ainult jututoa omanik saab seda teha'
+      wrongName: '&4Vale jututoa nimi'
+      takenName: '&4Jututoa nimi on võetud, kasuta midagi muud'
+      notIn: '&4Kasutaja ei ole jututoas'
+      cantJoin: '&4Jututuba on privaatne ja sul ei ole kutset'
+      cantSee: '&4Jututuba on privaatne, sul ei ole õigust, et näha sõnumeid selles'
+      kicked: '&6[playerDisplayName] &evisati jututoast'
+      cantleave: '&6Ei saa lahkuda lukustatud jututoast'
+      gotKicked: '&4Sind visati jututoast &7[chatRoomName] &4välja'
+      list: '&e[chatRoomName]&e: &7[list]'
+      globalList: '&7[number]. [joined]&e[chatRoomName][private]&e: &7[count][expires]'
+      globalListPrivate: '&2(P)'
+      globalListJoined: '&2+'
+      globalListHover:
+        Owner: '&7Omanik: [playerDisplayName]'
+        Ends: ' &7Aegub: [time]'
+        Names: '&7[playerDisplayName]'
+  chatcolor:
+    help:
+      info: '&ePick chat color'
+      args: (playerName)
+    info:
+      reset: '&6Reset'
+  checkaccount:
+    help:
+      info: '&eOtsi mängijate teisi kontosid'
+      args: (playerName/ip)
+      explanation:
+      - 'Lisaluba: cmi.command.checkaccount.showip'
+    info:
+      place: '&e[place]. &6'
+      ip: '&6[ip]&e: '
+      name: '&6[name]&e(&6[times]&e)'
+      nonIpList: '&eKontod: &6'
+      nonIpName: '&6[name]'
+      click: '&eKlõpsa, et kontrollida &6[name] &ekasutajat'
+      noData: '&cSelle kasutaja kohta ei ole kirjeid'
+  checkban:
+    help:
+      info: '&eKontrollib mängija keelustaatust'
+      args: (playerName)
+    info:
+      list: '&6[place]&e. &e[playerDisplayName] &6[time]'
+      permanent: '&3Igavene'
+      bannedUntil: '&eKeelatud ajaks: &6[time]'
+      reason: '&ePõhjus: &6[reason]'
+      bannedBy: '&eKeelas: &6[sourceDisplayName]'
+      bannedWhen: '&eKeelu aeg: &6[date]'
+  checkcommand:
+    help:
+      info: '&eVõimalike käskude otsimine märksõna järgi'
+      args: (key word)
+    info:
+      list: '&e[place]. &f[command] &7[args]'
+      hover: '&e[desc]'
+      variableColor: '&f'
+      noCommandFound: '&7Selle märksõna järgi ei leitud ühtegi käsku'
+  checkexp:
+    help:
+      info: '&eKontrolli mängija EXP'
+      args: (playerName)
+    info:
+      current: '&eTase: &6[currentLevel] &eEXP: &6[levelExp] &eEXP kokku: &6[exp]'
+      need: '&eVaja EXP järgmise tasemeni: &6[missingExp]'
+  checkperm:
+    help:
+      info: '&eKontrolli võimalikke lubasid'
+      args: (key word)
+    info:
+      list: '&e[place]. [permission]'
+      hover: '&e[desc]'
+      others: |-
+        &4
+        ---->Kui käsku kasutatakse teise mängija kohta<----
+        &cVajalik baaskäsk
+      permissionColor: '&6'
+      cmdPermissionColor: '&2'
+      variableColor: '&f'
+      noPermissionFound: '&7Selle märksõna järgi ei leitud ühtegi käsku'
+  cheque:
+    help:
+      info: '&eRaha ümberarvestamine tšekiks'
+      args: (playerName) [amount]
+    info:
+      transferred: '&eÜle kantud &6[amount] &esinu kasutajale. Uus saldo: &6[balance]'
+      chequeName: '&eTsekk summale &6[amount]'
+      chequeLore:
+      - '&r&fVälja andnud &7[senderDisplayName]'
+      - '&r&fHoiustamiseks klõpsake paremal nupul'
+      holdPaper: '&eHoidke paberit käes'
+      cantUse: '&eSeda paberitükki ei saa kasutada. See on juba tšekk!'
+  clear:
+    help:
+      info: '&ePuhasta mängijate seljakott'
+      args: (playerName) (item(:amount)(;data)) (-s) (+clearType)
+      explanation:
+      - 'Võimalikud clearTypes: quickbar, backbag, partinventory, weapons, armorslots,
+        tools, armors, mainhand, offhand'
+      - Peab algama + märgiga
+      - Võib kasutada mitut tüüpi
+      - cmi clear +armors - eemaldab armori esemed
+      - cmi clear +armorslots - eemaldab esemed armori slotidest
+    info:
+      clearFeedback: '&eSa eemaldasid &6[amount] &eeset mängija &3[playerDisplayName]&e
+        seljakotist (&3[offon]&e).'
+      target: '&6[amount] &eeset eemaldati sinu seljakotist &3[senderDisplayName]
+        &epoolt.'
+      confirm: '&7Kliki, et kinnitada seljakoti puhastamine. &cKõik esemed eemaldatakse!'
+  clearchat:
+    help:
+      info: '&ePuhastab vestluse'
+      args: (self) (-s)
+      explanation:
+      - 'Õigus:'
+      - ' &6cmi.command.clearchat.bypass &e- vestluse puhastamise ignoreerimiseks'
+    info:
+      information: '&eVestluse puhastas &6[senderDisplayName]'
+  clearender:
+    help:
+      info: '&ePuhasta mängijate ender chest'
+      args: '[playerName] (-s)'
+    info:
+      feedback: '&eYou have cleared &3[playerDisplayName]&e ender chest (&3[offon]&e).'
+      targetfeedback: '&eSinu ender chest puhastati &3[senderDisplayName] &epoolt.'
+  colorlimits:
+    help:
+      info: '&eNäitab kõiki võimalikke värve'
+      args: (playerName)
+    info:
+      publicmessage: ' &eAvalik: '
+      privatemessage: ' &ePrivaatne: '
+      nickname: ' &eHüüdnimi: '
+      signs: ' &eSilte: '
+      books: ' &eRaamatuid: '
+      itemname: ' &eEsemeNimi: '
+      itemlore: ' &eEsemeLore: '
+      me: ' &eMina: '
+      None: '&e-'
+  colorpicker:
+    help:
+      info: '&eVali hex värv'
+      args: (hex/colorname)
+    info:
+      hovers:
+      - '[color]⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛'
+      - '&f#[hex]'
+      - '&7Closest match: '
+      - '[colorHex] - [colorName]'
+      - '[closeColor]⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛'
+      - Shift+Click
+  colors:
+    help:
+      info: '&eNäitab kõiki võimalikke värve'
+      args: (playerName)
+    info:
+      List:
+      - '&e***************************************'
+      - '     &0&%0  &1&%1  &2&%2  &3&%3  &4&%4  &5&%5  &6&%6  &7&%7'
+      - '     &8&%8  &9&%9  &a&%a  &b&%b  &c&%c  &d&%d  &e&%e  &f&%f'
+      - '       &%k - &kMagic&r      &%l - &lBold'
+      - '       &%m - &mStrike&r     &%n - &nUline'
+      - '       &%o - &oItalic&r      &%r - &rReset'
+      - '&e***************************************'
+  compass:
+    help:
+      info: '&eMäära mängijate kompassipunkt oma asukohale'
+      args: (targetName) (sourceName) (x) (z) (worldname) (reset) (-s)
+      explanation:
+      - 'Näide: /cmi compass Zhax'
+      - /cmi compass Zhax Zrips
+      - /cmi compass Zhax LT_Craft 0 0 -s
+      - /cmi compass reset Zhax
+    info:
+      wrongworld: '&cTeie määratletud maailma ei ole olemas!'
+      feedback: '&eSa seadistasid &3[playerDisplayName] &ekompassinoole mängijale
+        &3[sourceDisplayName] &easukohta.'
+      feedbackCustom: '&eSa seadistasid &3[playerDisplayName] &ekompassinoole &3[x]
+        [z] [world] &easukohta.'
+      targetFeedback: '&eSinu kompassinool seadistati &3[sourceDisplayName] &easukohta
+        &3[senderName] &epoolt.'
+      targetFeedbackCustom: '&eTeie kompassi sihtmärk seadistati &3[x] [z] [world]
+        &easukohta &3[sourceDisplayName]&e poolt.'
+      reset: '&eKompassi sihtmärk lähtestati'
+  condense:
+    help:
+      info: '&eKontsentreerige esemed plokkideks'
+      args: (itemName) (playerName) (-s)
+    info:
+      converted: '&eTeisendatud&7[items] &eeset &7[blocks] &eplokkideks'
+      nothing: '&cTeie seljakotis ei ole midagi, mida saaks tihendada.'
+  counter:
+    help:
+      info: '&cKäivitab ümbritsevatele mängijatele loenduri'
+      args: '[join/leave/start] (t:time) (r:[range/-1]) (c:[world:x:y:z]) (msg:custom_message)
+        (-f)'
+      explanation:
+      - '&eÕigused:'
+      - '&6cmi.command.counter.force &e- loenduri sundimiseks kõigile ulatuses '
+      - '&6cmi.command.counter.time &e- kohandatud ajavahemiku määramiseks '
+      - '&6cmi.command.counter.range &e- määra kohandatud vahemik'
+      - '&6cmi.command.counter.msg &e- kohandatud sõnumi määramiseks'
+      - '&6cmi.command.counter.autojoin &e- liitub loenduriga automaatselt'
+      - -f sunnib kõigile mängijatele loenduri vahemikus
+      - 'Näide: /cmi counter start r:30 t:7 msg:&eCustom_message -f'
+    info:
+      join: '&eLiitusid loenduriga'
+      leave: '&eLahkusid loendurist'
+      go: '&eLÄKS!'
+      tooFast: '&cEi saa korrata käsku nii kiiresti, oota: &6[sec]&esek'
+      noOne: '&cKeegi ei näe seda loendurit!'
+  cplaytime:
+    help:
+      info: '&eÜksikasjalik mänguaeg'
+      args: (playerName)
+    info:
+      moreDetails: '&7Klõpsake lisateabe saamiseks'
+      title: '&8[playerDisplayName] &7mänguaeg'
+      date: '&8[date]'
+      time: '&7[hour]:00&f-&7[nextHour]:00'
+      thishour: '&7Praegune tund'
+      hourback: '&7Eelmine tund'
+      today: '&7Täna'
+      yesterday: '&7Eile'
+      thisweek: '&7Praegune nädal'
+      week: '&77 päeva ulatuses'
+      thismonth: '&7Praegune kuu'
+      month: '&730 päeva ulatuses'
+      thisyear: '&7Praegune aasta'
+      year: '&7365 päeva ulatuses'
+      total: '&7Kokku'
+  ctellraw:
+    help:
+      info: '&eSaada tellraw type sõnum'
+      args: '[playerName/all] [formattedMessage]'
+      explanation:
+      - - command
+  ctext:
+    help:
+      info: '&eNäitab kohandatud teksti'
+      args: '[cText] (playerName/all) (sourcePlayer)'
+    info:
+      list: '&eKohandatud tekstid: &6'
+      check: '&eKontrolli: &6[text]'
+  cuff:
+    help:
+      info: '&ePeatab mängija tegevused'
+      args: '[playername] (true/false) (-s)'
+    info:
+      noChat: '&cKõik sinu tegevused on peatatud. Sa ei saa lobiseda.'
+      noCommand: '&cSa ei saa kasutada käske, kui sind on peatatud. &eLubatud: &6/msg,
+        /r, /tell'
+      cuffed: '&6[playerDisplayName] &ekäerauad lisatud'
+      unCuffed: '&6[playerDisplayName] &ekäerauad eemaldatud'
+      free: '&eSa oled nüüd vaba'
+      gotCuffed: '&eSinul pandi käed raudu'
+      cuffedInfo: '&eSinul pandi käed raudu'
+      cantCuff: '&cSa ei saa sellele mängijale panna käeraudu!'
+  customrecipe:
+    help:
+      info: '&eHaldab esemete kohandatud retsepte'
+      args: ''
+    info:
+      removed: '&eRetsept eemaldatud: [id]. Täieliku efekti saamiseks, server vajab
+        taaskäivitust.'
+      noRecipe: '&eSelle ID-ga retsepti ei ole'
+      edit: '&8Redigeeri retsepti (&6[type]&8)'
+      addNew: '&eLisa uus retsept (&6[type]&e)'
+      shapelessRecipe: '&6Tee uus vormitu retsept'
+      shapedRecipe: '&eTee uus vormitud retsept'
+      furnaceRecipe: '&2Tee uus ahju retsept'
+      campfireRecipe: '&2Tee uus lõkke retsept'
+      smithingRecipe: '&2Tee uus sepistamise retsept'
+      stonecuttingRecipe: '&2Tee uus kivilõikamise retsept'
+      blastingRecipe: '&2Tee uus kõrgahju retsept'
+      smokingRecipe: '&2Tee uus suitsutamise retsept'
+      exact: '&2Vajalik täpset koostisosa: [state]'
+      exists: '&4Tundub, et selline retsept juba eksisteerib'
+      mainTitle: '&8Kohandatud retseptid (&7[current]&8/&7[total]&8)'
+  dback:
+    help:
+      info: '&eSaabub surmakohta'
+      args: (playerName) (-s)
+    info:
+      noinfo: '&4Ei ole salvestatud kohta kuhu naasta!'
+      feedback: '&6Naasesin viimasesse salvestatud asukohta ([world],[x],[y],[z])!'
+  disableenchant:
+    help:
+      info: '&eKeela loits'
+      args: (enchant/id) (disable/enable)
+    info:
+      title: Loitsu keelaja
+      feedback: '&6[enchantName] &eon [state]'
+  dispose:
+    help:
+      info: '&eHävita ebavajalikud esemed'
+      args: (playerName)
+    info:
+      title: '&cAseta kõik esemed mida sa ei vaja'
+      cant: '&cSa ei saa seda eset hävitada'
+  distance:
+    help:
+      info: '&eKontrolli kaugust kahe punkti vahel'
+      args: (playerName) (playerName)
+    info:
+      feedback: '&7Kaugus: &e[dist] &7x:&e[x] &7y:&e[y] &7z:&e[z] &7Suund:&e[dir]'
+  donate:
+    help:
+      info: '&eAnneta ese, mida hoiad käes'
+      args: '[playerName] (amount)'
+    info:
+      donated: '&eAnnetatud &6[type]&eX&6[amount] &eeset mängijale &6[playerDisplayName]'
+      got: '&eSai &6[type]&eX&6[amount] &eannetuse mängijalt &6[playerDisplayName]'
+      sentOffer: '&eSaadetud annetus mängijale &6[playerDisplayName]&e. Ootan kuni
+        mängija selle vastu võtab'
+      gotOffer: '&eSaid &6[type]&eX&6[amount] &eannetuse mängijalt &6[sourceDisplayName]&e.
+        Klõpsa, et sellega nõustuda.'
+      doesnthave: '&eMängijal ei ole seda eset enam'
+      'no': '&eOotel annetused puuduvad'
+      list: '&7[number]. &e[playerDisplayName] &e- &7[material] &6x &e[amount]'
+  down:
+    help:
+      info: '&eTelepordi üks korrus allapoole'
+      args: '[playerName] (-s)'
+    info:
+      notFound: '&eSobiv asukoht puudub'
+  dsign:
+    help:
+      info: '&eHalda dünaamilisi silte'
+      args: (new)
+      explanation:
+      - Vaata silti ja kirjuta /cmi dsign new
+    info:
+      howTo: '&cSee ei ole dünaamiline silt, et luua uut kirjutage &e/cmi dsign new'
+      gui: '&7---- &f<Ava GUI> &7----'
+      guiHover: '&7Ava dünaamiliste siltide GUI'
+      individual: '&7Individuaal: [state]'
+      individualLore:
+      - '&2True &7- Silt reageerib igale mängijale erinevalt'
+      - '&2True &7- Uuendab mängija placeholdereid'
+      - '&2False &7- Silti peab füüsiliselt uuendama'
+      - '&2False &7- On efektiivsem, aga rohkem piiratud samal ajal'
+      interval: '&7Värskenda iga &6[second] &7sekundi pärast'
+      intervalLore:
+      - '&7Kui tihti, sekundites, informatsiooni sildil värskendatakse'
+      - '&7See määrab ka rea kerimise kiiruse'
+      range: '&7Aktiveerimise vahemik: &6[blocks]'
+      rangeLore:
+      - '&7Defineerib ala sildi lähedal, et käivitada värskendamine'
+  dye:
+    help:
+      info: '&eVärvi leather armor'
+      args: (playerName) (red,green,blue/hexCode/colorName/random/clear/rainbow/day/biome/health)
+        (-s)
+    info:
+      color: '&ePraegune värv - &c[red],&2[green],&9[blue] &eHex:&6#[hex]'
+      custom: '&eKohandatud värvi režiim sisselülitatud: &6[mode]'
+      bound: '&eSoulBound to: &6'
+      boundName: '[playerName]'
+  editctext:
+    help:
+      info: '&eKohandatud teksti redaktor'
+      args: ''
+    info:
+      noText: '&cEi leia kohandatud teksti selle nimega'
+      editInfo: '&eKlõpsake vana teksti kleepimiseks. Kirjutage &6cancel &etegevuse
+        katkestamiseks. Kirjutage &6remove &erea kustutamiseks'
+      addInfo: '&eLisab uue rea teksti. Kirjuta &6cancel &ekatkestamiseks'
+      addInformationHover: "&eGlobal variables supported as of sender category \n\\\
+        \ &eTo include clickable messages: \n&e<T>&rText&e</T><H>&rHover text&e</H><C>&rcommand&e</C><SC>&rSuggested\\\
+        \ \\ text&e</SC> \n&6<T> &eand &6</T> &erequired, other is optional \n&eUse\
+        \ \\\\ u005Cn to break line \n&eTo have more than one JSON message use <Next>\
+        \ \n\\ &6<SC> &eSuggests text when clicked \n&6<SI> &eSuggests text when shift\
+        \ clicked\\ \\ which doesnt everrite current text in chat \n&6<CC> &eperforms\
+        \ console command\\ \\ once \n&6<CCI> &eperforms console commands every time\
+        \ player clicks text\\ \\ \n&6<URL> &eallows to add url to redirect player\
+        \ into web page"
+      newInfo: '&eSisesta uue teksti nimi. Kirjuta &6cancel &ekatkestamiseks'
+      deleteInfo: '&eKirjuta &6confirm &eeemaldamise kinnitamiseks või &6cancel &ekatkestamiseks'
+      deleted: '&eKohandatud tekst (&6[ctext]&e) eemaldati'
+      createdNew: '&eKohandatud tekst (&6[ctext]&e) loodi'
+      hidden: '&ePeidetud: &6[state]'
+      autoPage: '&eAuto leht: &6[state]'
+      autoAlias: '&eAuto alias: &6[state]'
+      permReq: '&eVajab luba: &6[state]'
+      pageLabel: ' &e<PageLabel>'
+      pageLabelHover: '&e[value]'
+      listTitle: '&eCTekstid'
+      listFormat: '&6[name]&7: &r[extra]'
+  editlocale:
+    help:
+      info: '&eMuuda oma lokalisatsioonifaili'
+      args: (keyword(-s))
+    info:
+      found: '&7********* &eLeitud: [found] &7*********'
+  editplaytime:
+    help:
+      info: '&eMuuda mängijate mänguaega'
+      args: (playerName) [add/take/set] [amount] (-s)
+    info:
+      cantSet: '&cMänguaja muutmine ebaõnnestus'
+      set: '&eMänguaeg muudetud &6[old] &eajaks &6[new]'
+  editwarnings:
+    help:
+      info: '&eKontrolli mängija hoiatusi'
+      args: (playerName/clearall) (clear)
+    info:
+      list: '&7[place]. &e[time] &6by [warnedBy] &cfor: &7[warnedFor]'
+      hover: '&7Aegub: [time]'
+      cleared: '&eKõik hoiatused mängijalt eemaldatud'
+      allCleared: '&eKõik hoiatused kõigilt mängijatelt puhastatud'
+  editwarp:
+    help:
+      info: '&eRedigeeri lõimi'
+      args: (warpName) (newName)
+    info:
+      exists: '&cLõim selle nimega (&7[newName]&c) juba eksisteerib. Vali teistsugune'
+      updated: '&eLõimu nimi uuendatud &7[oldName]&e nimeks &7[newName]'
+      placeItem: '&2Aseta ese, et seadistada kohandatud ikooni'
+      placeOffItem: '&2Aseta ese, et seadistada kohandatud ikoon välja'
+      autoLore: '&2Auto lore genereerimine: [state]'
+      group: '&2Rühm: &7[group]'
+      newGroup: '&eSisesta uus rühma nimi'
+      displayName: '&2Nimi: &7[displayName]'
+      newDisplayName: '&eSisesta uus nimi'
+      randomizeYaw: '&2Suvaline suund: [state]'
+      permission: '&2Vajab luba: [state]'
+      reqPermission: '&2Näita ilma loata: [state]'
+      hidden: '&2Peidetud: [state]'
+      primaryLocation: '&2Peamine asukoht'
+      secondaryLocation: '&2Extra asukohad'
+      uniqueLocation: '&2Korduvad asukohad: [state]'
+      slot: '&2Slot: &6[slot]'
+      page: '&2Leht: &6[page]'
+      overllaps: '&2Kattub:'
+      notSet: '&eSeadistamata'
+  effect:
+    help:
+      info: '&eLisab võlujoogi efektid mängijale. kasuta clear efektide eemaldamiseks'
+      args: '[playername/all] [effect/clear] (duration) (multiplier) (-s) (-visual)'
+      explanation:
+      - -visual näitab mulle ja ikooni üleval paremas nurgas
+      - 'Näited:'
+      - /cmi effect zrips nightvision 60 1 - will give 60 sec night vision for Zrips
+      - - time
+      - - vision time
+      - /cmi effect all health_boost 60 1 - will boost hp by 1 for everyone online
+    info:
+      feedback: '&ePotion effect &6[effect] &eadded to &3[playerDisplayName]&e for
+        &6[sec]sec&e with power of &6[power] &e(&3[offon]&e).'
+      cleared: '&ePotion effects have been cleared for &3[playerDisplayName]&e (&3[offon]&e).'
+  enchant:
+    help:
+      info: '&eLoitsi esemeid'
+      args: (playerName) [enchant] [level] (-o) (-onlyvalid) (-keeponlyvalid) (-inform)
+        (-s) (-i:[itemName(:data)]) (clear)
+      explanation:
+      - -o will take item from offhand
+    info:
+      feedback: '&eSa loitsisid &3[enchant]:[level]&e eseme mängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      removed: '&eSa oled eemaldanud &3[enchant] &eloitsu esemelt mängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      clear: '&eCleared enchantments from item for &3[playerDisplayName]'
+      clearOne: '&eRemoved &3[enchant] &eenchantment from item for &3[playerDisplayName]'
+      noitem: '&cEi hoia ühtegi eset käes.'
+      invalidEnchant: '&c Sul pole kehtetu loitsu kasutamiseks luba'
+      clearedInvalid: '&eEemaldatud &6[amount] &ekehtetut loitsu esemelt'
+      inccorectId: '&eEbakorrektne loitsu nimi või ID.'
+      wrongItem: '&eSinu käes on vale ese'
+      enchantlimit: '&cSul pole ligipääsu sellele loitsule'
+      levellimit: '&cTase on liiga kõrge, maksimaalne lubatud tase on &e[level].'
+      conflict: '&cConflicting enchantment &7[enchant1] &c-> &7[enchant2]'
+      possible: '&eVõimalikud loitsud: '
+      possibleList: '&6[enchant]'
+  ender:
+    help:
+      info: '&eAvab mängija ender chesti'
+      args: (playerName) (playerName)
+      explanation:
+      - cmi.command.ender.preventmodify - takistab seljakoti muutmist
+      - cmi.enderedit - võimaldab redigeerida avatud seljakotti
+    info:
+      title: '&8[playerDisplayName] Ender Chest'
+      feedback: '&eSa redigeerid &3[playerDisplayName] &eenderchesti (&3[offon]&e).'
+  endgateway:
+    help:
+      info: '&eLülita end gateway kiir'
+      args: ''
+    info:
+      'off': '&7Kiir lülitati &eVälja'
+      'on': '&7Kiir lülitati&6Sisse'
+  entityinfo:
+    help:
+      info: '&ekontrolli olemi informatsiooni'
+      args: ''
+    info:
+      type: '&eOlemi Tüüp: &6[type]'
+      customName: '&eKohandatud nimi: &6[name]'
+      health: '&eTervis: &6[current]&e/&6[max]'
+      lastDamage: '&eViimase kahju põhjustaja: &6[cause]'
+      tamed: '&eTaltsutatud: &6[state]'
+      owner: '&eOmanik: &6[playerDisplayName]'
+      grows: '&eKasvab üles: &6[time] &epärast'
+      horse: '&eHobune: jump &6[jump] &eplokki, kiirus &6[speed] &eplokki/sekundis'
+      villager: '&eElukutse: &7[profession] &eTase: &7[lvl] &eTüüp: &7[type]'
+      subTypes: '&eAlamtüübid: &6[list]'
+  entitynbt:
+    help:
+      info: '&eKontrolli olemi NBT informatsiooni'
+      args: (-console)
+  exp:
+    help:
+      info: '&eSeadista mängijate EXP. Kasuta L tasemete seadistamiseks'
+      args: '[playerName] [add/set/take/clear] [amount][%rand/10-20%][1%[min-max]][playerName]]
+        (-s)'
+      explanation:
+      - 'Näide:'
+      - /exp 10
+      - /exp add 10
+      - /exp set 10L
+      - /exp take 10
+      - /exp Zrips clear
+      - /exp Zrips add 10
+      - /exp Zrips add 10%[10-50]
+    info:
+      current: '&e[playerDisplayName] &eon &6[lvl]&etasemel &6[currentExp]&eEXP-ga
+        või &6[exp]&eEXP-ga kokku.'
+      selfFeedback: '&eEXP määrati tasemele &3[exp] &emängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      targetFeedback: '&eSinu exp seati &3[exp]&e &3[senderDisplayName] &epoolt.'
+  ext:
+    help:
+      info: '&eKustuta tuli mängijalt'
+      args: (playerName) (-s)
+    info:
+      feedback: '&eSa kustutasid tule &3[playerDisplayName]&e (&3[offon]&e).'
+      targetfeedback: '&eTeie tuli kustutati &3[senderDisplayName] &epoolt.'
+  falldistance:
+    help:
+      info: '&eSeadista mängijate kukkumise kõrgus'
+      args: (playerName) (number) (-s)
+    info:
+      feedback: '&eSa seadistasid kukkumise kõrguse &3[amount] &emängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+  feed:
+    help:
+      info: '&eToida mängijat'
+      args: (playerName/all) (-s)
+    info:
+      feedback: '&eSa toitsid &3[playerDisplayName]&e (&3[offon]&e).'
+      feedbackMulti: '&eSa toitsid &3[count] &emängijat.'
+      targetfeedback: '&eTeid toideti &3[senderDisplayName] &epoolt.'
+  findbiome:
+    help:
+      info: '&eLeiab lähima bioomi nimega'
+      args: '&3(biomeName/stop/stopall)'
+    info:
+      infoShow: '&6TPS: &3[tps] &6Jäänud &e[left] &6(&e[time]&6) &6Kiirus: &e[speed]'
+      stopped: '&ePeatatud!'
+      cantFindBiome: '&eEi leia soovitud bioomi. Kontrollitud &6[amount] &etükki'
+      teleportedTo: '&eTeleporteeritud &6[biome] &ebioomi'
+  fixchunk:
+    help:
+      info: '&eSkännib vigaseid chunke'
+      args: '&ew &6[worldName]&e r &6[range in chunks]&e c &6[x:z]&e '
+      explanation:
+      - '&6Alamkäsklused:'
+      - - '&6stats &e- näitab praegust skännimise statistikat'
+      - - '&6pause &e- pausi skännimine'
+      - - '&6continue &e- jätka skännimist'
+      - - '&6stop &e- peata skännimine'
+      - - '&6stopall &e- peata kogu skännimine'
+      - - '&6speed [amount] &e- seadistab praeguse skännimise kiiruse'
+      - - '&6autospeed [true/false] &e- seadistab automaatse kiiruse sisse või välja'
+      - - '&6messages [true/false] &e- seadistab sõnumite saatmist sisse või välja'
+      - 'Näide:'
+      - /fixchunk w LT_Craft
+      - /fixchunk w LT_Craft r 50 c 1024:-2048
+      - /fixchunk w LT_Craft r g
+      - /fixchunk fix
+    info:
+      startScanning: '&eLeitud &6[amount] &etükki mida kontrollida. Alustan!'
+      paused: '&eSkännimine pausil, jätkamiseks kasuta &6/cmi fixchunk continue.'
+      continuing: '&eSkännimine jätkub'
+      stoped: '&eSkännimine peatatud. Sa saad vaadata tulemusi käsuga /cmi fixchunk
+        info'
+      speedChange: '&eKiirus muudetud väärtuseks [amount]'
+      autospeedChange: '&eAutoSpeed muudetud [state]'
+      messagesChange: '&eSõnumi saatus on lülitatud [state]'
+      NoInfo: '&eSiin ei ole infot'
+      InfoShow: '&6TPS: &3[tps] &6Jäänud &e[left] &6(&e[min]m:[sec]s&6) &6Kiirus:
+        &e[speed] &6Leitud: &e[found]'
+      scanList: '&2[number]. &7X:&f[x] &7Z:&f[z]'
+      finished: '&eSkännimine lõpetatud, kasuta &6/cmi fixchunk fix &eleitud vigade
+        parandamiseks. &cVigased tükid genereeritakse uuesti!'
+      fixed: '&2[number] &etükki parandatud'
+      total: '&eKontrollin [current]/[until] kõikidest tükkidest [total]'
+      stats:
+      - '&e************************************************************'
+      - '&e* &6Tükid: &e[checked]/[total]'
+      - '&e* &6Skännimise ulatus: &e[range]'
+      - '&e* &6Skännimise kiirus: &e[scanspeed] &6(&e[autospeed]&6)'
+      - '&e* &6Reaalne kiirus: &e[cps] &6CPS (&e[avgcps] avg&6)'
+      - '&e* &6Maailm: &e[world]'
+      - '&e* &6Leitud: &e[found]'
+      - '&e* &6Aeg: &e[min]min [sec]sec'
+      - '&e************************************************************'
+  flightcharge:
+    help:
+      info: '&eHalda ja kontrolli lennu laadimisi'
+      args: (add/take/set/show/expcharge/moneycharge/recharge) (playerName) (amount)
+        (-s)
+    info:
+      charge: '&ePraegune laadimine: &6[charge]&e/&6[max]'
+      changed: '&eTeie lennu laetuse tase muudeti väärtusele &6[charge]'
+      newCharge: '&eUus laadimise tase: &6[charge]'
+      bossbar: '&2>> &fLennu Laadimine [charge][changeAmount]&7/&f[max] &2<<'
+      guiTitle: '&8Lennu laadimine'
+      buttonExp: '&6Lae kasutades EXP'
+      buttonMoney: '&6Lae kasutades raha'
+      max: '&6Juba täielikult laetud'
+      amounts:
+      - '&eVasak klikk +1. Cost: &7[amount1]'
+      - '&6Shift left +10. Maksumus: &7[amount10]'
+      - '&eParem klikk +100. Hind: &7[amount100]'
+      - '&6Shift right +1000. Hind: &7[amount1000]'
+      - '&eKeskmine hiireklikk +10000. Hind: &7[amount10000]'
+      - ''
+      changeAmount: '&e([amount]&e)'
+      cost: '&eMakstud &6[amount] &6[charge] &elennu laadimise eest'
+  fly:
+    help:
+      info: '&eSeadistab mängijate lendamise sisse või välja'
+      args: '[playerName] (true/false) (-s)'
+    info:
+      feedback: '&eSa seadistasid lennurežiimi &3[boolean]&e mängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      targetFeedback: '&eTeie lennurežiim on &3[boolean] &3[senderDisplayName] &epoolt.'
+  flyc:
+    help:
+      info: '&eLülita lennu laadimise režiimi'
+      args: (playerName) (true/false) (-s)
+    info:
+      feedback: '&eSa seadistasid lennu laadimise režiimi &3[boolean]&e mängijale
+        &3[playerDisplayName]&e (&3[offon]&e).'
+      targetFeedback: '&eTeie lennu laadimiserežiim seati &3[boolean] &3[senderDisplayName]
+        &epoolt.'
+      targetFeedbackSelf: '&eTeie lennu laadimise režiimi seati &3[boolean]'
+      noCharge: '&eLennu laadimine on tühjaks saanud'
+  flyspeed:
+    help:
+      info: '&eSeadista mängijate lennukiirus 0 kuni 10'
+      args: (playerName) [amount] (-s)
+    info:
+      feedback: '&eSa seadistasid &3[amount]&e lendamise kiiruseks mängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      targetfeedback: '&eSinu lennukiirus seati &3[amount]&e &3[senderDisplayName]
+        &epoolt.'
+      max: '&eMaksimaalne lubatud lennukiirus sinule on &6[max]&e.'
+  gamerule:
+    help:
+      info: '&eHalda gamerules'
+      args: ''
+  generateworth:
+    help:
+      info: '&eGenereeri automaatselt kõikide võimalike esemete väärtused'
+      args: ''
+  getbook:
+    help:
+      info: '&eVõta raamat'
+      args: '[cTextName] (playerName)'
+    info:
+      list: '&eRaamatuid: &6'
+      check: '&eKontrolli: &6[text]'
+      title: '&7[title]'
+  give:
+    help:
+      info: '&eAnna ese mängijale'
+      args: (playerName) [itemname/hand] (amount/playerName) (-slot:[number])
+      explanation:
+      - Nimi ja lore toetab placeholdereid
+      - 'Näide: /give stone'
+      - /give Zrips stone 5 n Stonehenge
+      - /give stick e knockback:1
+      - /give diamondsword 3 unstack
+      - /give Zrips sponge l Got_item_on:_%date/YY/MM/dd-HH:mm:ss%
+      - /cmi give Zrips sponge 1 e Knockback:%rand/1-5%
+      - /cmi give Zrips sponge %rand/1-10%
+      - /cmi give Zrips sponge l line_one/nline_two
+      - /cmi give Zhax hand Zrips
+      - /give sponge a maxhealth:5:mainhand
+      - /give diamond_sword unbreakable
+      - /give mob_spawner:creeper
+      - /give minecraft:diamond_helmet 1 0 {ench:[{id:0,lvl:100},{id:2,lvl:100},{id:34,lvl:100}]}
+      - /give potion:speed-true-true
+    info:
+      feedback: '&6Annan &e[amount] &e[itemname] &6(&e[customitemname]&6) mängijale
+        &e[playerDisplayName]'
+      maxLimit: '&cSa ei saa anda rohkem kui &7[max] &ceset ühe korraga'
+      notItem: '&cMe ei saa anda sulle seda eset, see pole ese'
+      maxLimitResize: '&cSa ei saa anda rohkem kui &7[max] &ceset ühe korraga.'
+  giveall:
+    help:
+      info: '&eAnna ese mängijale'
+      args: '[itemname] (amount) (e|l|n|offline)'
+      explanation:
+      - '&e- anna ese nime või selle id koos andmeväärtusega'
+      - '&e- valikuliselt esita kogus mida tahad anda '
+      - '&e- &6n &e- eseme nime defineerimiseks '
+      - '&e- &6l &e- eseme lore defineerimiseks '
+      - '&e- &6e &e - eseme loitsude defineerimiseks '
+      - '&e- &6-s &e - ei näita tagasiside sõnumit '
+      - '&e- &6h &e - millele järgneb mängija nimi, annab eseme oma käest '
+      - '&e- &6inv &e - mängija nimele järgnevalt antakse mängijatele terve seljakott '
+      - '&e- &6offline &e- võrgust väljas olevate mängijate kaasamiseks'
+      - '&ecmi giveall stone 1 n &2Uber_stone l &3Stone_lore offline'
+      - '&ecmi giveall h Zrips'
+      - '&ecmi giveall inv Zrips'
+    info:
+      starting: '&6Alustan esemete andmist kõikidele mängijatele, see võib võtta pisut
+        aega.'
+      running: '&6[amount] sai juba asja, endiselt töös.'
+      feedback: '&6Lõpetatud. &e[amount] &6mängijat said eseme.'
+  glow:
+    help:
+      info: '&eSeadista mängijate helendamisrežiim'
+      args: (playerName) [true/false/color/gui]
+      explanation:
+      - 'Näide: /glow Zrips red'
+      - 'Load: cmi.command.glow.[color] - võimaldab määrata konkreetse helendusvärvuse'
+    info:
+      feedback: '&eSa seadsid [color]helendamise &e &3[boolean]&e mängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      targetfeedback: '&eTeie [color]helendamise &erežiim seati &3[boolean]&e &3[senderDisplayName]
+        &epoolt.'
+      title: Vali helendamise värv
+      incorrect: '&4Ebakorrektne värvi nimi'
+      lore: '&2Kliki värvi valimiseks'
+      noPerm: '&2Pole luba'
+  gm:
+    help:
+      info: '&eSeadista mängijate mängurežiim'
+      args: (playerName) [gamemode]
+    info:
+      feedback: '&eSa seadistasid &3[playerDisplayName]&e (&3[offon]&e) mängurežiimi
+        &3[gameMode]&e.'
+      targetfeedback: '&eTeie mängurežiim seati &3[gameMode]&e &3[senderDisplayName]
+        &epoolt.'
+  god:
+    help:
+      info: '&eSeadista mängijate jumalarežiim true või false'
+      args: '[playerName] (true/false) (-s)'
+    info:
+      feedback: '&eSa oled seadnud jumalarežiimi &3[boolean]&e mängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      targetfeedback: '&eTeie jumalarežiim seati &3[boolean]&e &3[senderDisplayName]
+        &epoolt.'
+  grindstone:
+    help:
+      info: '&eAva grindstone'
+      args: (playerName) (-s)
+    info:
+      feedback: '&eSa avasid grindstone mängijale &3[playerDisplayName]&e (&3[offon]&e).'
+      targetfeedback: '&3[senderDisplayName]&e avas grindstone sulle.'
+  groundclean:
+    help:
+      info: '&ePuhastab serveri ebavajalikest esemetest'
+      args: (+cb) (+cm) (+ci) (+b) (+sh) (+tnt) (+all) (+fl) (+named) (-w:[worldName])
+      explanation:
+      - +cm lisab minecartid puhastamisse
+      - +cb lisab paadid puhastamisse
+      - +sh lisab shulker boxid puhastamisse
+      - +ci defines määrab kas sa soovid kaasata relvi ja rüüsid
+      - +tnt kui sa tahad TNT kaasata
+      - +named eemaldab esemed kohandatud nime või lorega
+      - +b saadab kõigile teavituse puhastamise kohta
+    info:
+      removed: '&eEemaldatud -[list]'
+      items: ' &eEsemed: &6[items]'
+      arrows: ' &eNooled: &6[arrows]'
+      exporbs: ' &eExpOrbs: &6[exporbs]'
+      blocks: ' &eFallingBlocks: &6[blocks]'
+      projectiles: ' &eLõhkekehad: &6[projectiles]'
+      tnt: ' &ePrimedTnt: &6[tnt]'
+      boat: ' &ePaadid: &6[boat]'
+      minecart: ' &eMinecartid: &6[minecart]'
+      nothing: '&ePole midagi eemaldada.'
+  haspermission:
+    help:
+      info: '&eKontrollib kas mängijal on teatud õigus'
+      args: (playerName) [permissionNode]
+    info:
+      title: '&6[playerDisplayName] &e-> &6[permission]'
+      none: '&eLuba ei ole mängijal ja ta ei ole OP. Vastus &6[state]'
+      softSet: '&eSeadistatud plugin.yml poolt &6[state]'
+      hardSet: '&eHard set to &6[state] &eby some plugin'
+      notHardSet: '&eNot hard set, can result to &cFalse &ein some cases'
+      ops: '&eVastus &6[state] &esellepärast, et mängija on OP'
+      minMax: '&eMin: &6[min] &eMax: &6[max]'
+  hat:
+    help:
+      info: '&ePlace item like hat'
+      args: (playerName)
+    info:
+      feedback: '!actionbar!&6Sa muutsid edukalt mütsi!'
+      targetfeedback: '&6Sinu mütsi vahetas &3[senderDisplayName]&6!'
+      fullinv: '&3[playerDisplayName] &6seljakott on täis, ei saa vahetada mütsi!'
+      incorrect: '&3Ebakorrektne ese pea slotis, ei saa vahetada uue vastu. Eemalda
+        see käsitsi'
+      cantUse: '&3Seda eset ei saa mütsina kasutada'
+  head:
+    help:
+      info: '&eSaa mängijalt pead'
+      args: '[sourceName] (targetName) (-s) (amount)'
+    info:
+      Feedback: '&3[headName] &6head created!'
+      targetFeedback: '&eYou got &3[headName] &ehead from &3[senderDisplayName]&e!'
+  heal:
+    help:
+      info: '&eHeal player'
+      args: '[playerName/all] (healamount/healpercent) (-nofeed) (-ignoreffects) (-dontextinguish)'
+    info:
+      feedback: '&eYou have healed &3[playerDisplayName]&e (&3[offon]&e).'
+      feedbackMulti: '&eYou have healed &3[count] &eplayers.'
+      targetfeedback: '&eYou have been healed by &3[senderDisplayName]&e.'
+  helpop:
+    help:
+      info: '&eSends message for help to staff members'
+      args: '[message]'
+      explanation:
+      - Requires cmi.command.helpop.inform too see messages
+    info:
+      message: '&c[Help]&4[&7[senderDisplayName]&4]&r&c [message]'
+      feedback: '&c[Help]&7Sinu küsimus esitati võrgus olevale meeskonnale'
+      offline: '&c[Help]&7Meeskonnas ei ole hetkel mängijaid võrgus, proovige hiljem
+        uuesti'
+  hideflags:
+    help:
+      info: '&ePeidab eseme märgistused'
+      args: (playerName) [flagName/clear] (flagName)
+    info:
+      feedback: '&eSa lisasid uue märgistuse esemele mängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      cleared: '&ePuhastatud &3KÕIK &emärgistused esemelt mängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      noitem: '&cEi hoia ühtegi eset käes.'
+      inccorectId: '&eEbakorrektne märgistuse nimi.'
+  hologram:
+    help:
+      info: '&eHalda hologramme'
+      args: ''
+    info:
+      howTo: '&cUue hologrammi loomiseks kasutage &e/cmi hologram new &6[name]'
+      gui: '&7---- &f<Open settings gui> &7----'
+      guiHover: '&7Ava hologrammi sätete GUI'
+      interval: '&7Värskenda iga &6[second] &7sekundi pärast'
+      intervalLore:
+      - '&7Kui tihti, sekundites, informatsiooni hologrammil värskendatakse'
+      - '&7Kui tekst ei muutu, seadista see -1'
+      pageInterval: '&7Vaheta lehte iga &6[second] &7sekundi pärast'
+      pageIntervalLore:
+      - '&7Kui tihti, sekundites, hologrammi leht muutub automaatselt'
+      pageIntervalNoPages: '&4Sellel hologrammil ei ole veel lehti'
+      text: '&7Reavahe tekstile &6[space]'
+      usync: '&7Teksti vahetumine sünkroonis: &6[state]'
+      reqPermission: '&7Vajab luba, et näha: &6[state]'
+      teleport: '&7Teleporteeru hologrammi asukohta'
+      icon: '&7Reavahe ikoonidele &6[space]'
+      iconLore:
+      - '&7Määrab vahemaa objektide vahel'
+      range: '&7Näita vahemikku &6[blocks]'
+      rangeLore:
+      - '&7Määrab ala hologrammi ümber, et näidata või seda peita'
+      updateRange: '&7Värskendamise vahemik: &6[blocks]'
+      updateRangeLore:
+      - '&7Määrab ala, et vallandada värskendamine'
+      relocate: '&7Ümberpaigutamine'
+      relocateLore:
+      - '&7Liigutab hologrammi sinu praegusesse asukohta'
+      los: '&7Arvesta rea nähtavust: &6[state]'
+      losLore:
+      - '&7Kontrolli intervall: [interval]'
+      interact: '&7Interaktiivne: &6[state]'
+      particles: '&7Näita osakesi: &6[state]'
+      big: '&7Suur nupp: &6[state]'
+      bigLore:
+      - '&7Hoia meeles, et suure nupu režiim'
+      - '&7Takistab sind sellest edasi liikumast'
+      order: '&7Allapoole paigutamine &6[state]'
+      commands: '&7Käsud:'
+      newMethod: '&7Kasuta uut meetodit: &6[state]'
+      hoverParticles: '&7Näita hõljuvaid osakesi: &6[state]'
+      stabilizedParticles: '&7Stabiliseeritud osakesed: &6[state]'
+      particleCount: '&7Osakesed: &6[count]'
+      particleType: '&7Osakeste tüüp: &6[type]'
+      particleSpacing: '&7Osakeste vahe: &6[amount]'
+      particleHeight: '&7Osakeste ekstra kõrgus: &6[amount]'
+      particleWidth: '&7Osakeste ekstra laius: &6[amount]'
+      particleOffsetX: '&7Osakese nihe X: &6[amount]'
+      particleOffsetY: '&7Osakese nihe Y: &6[amount]'
+      locationRange: '&7Modify location and range'
+      interactions: '&7Modify interactions'
+      newDisplayMethod: '&7Use new display method: &6[state]'
+      enabled: '&7Activated: &6[state]'
+      followType: '&7Follow type: &6[type]'
+      doubleSided: '&7Double sided: &6[state]'
+      holoYaw: '&7Yaw: &6[angle]'
+      holoPitch: '&7Pitch: &6[angle]'
+      pitchLimits: |-
+        &4When pitch is not at 0 degrees
+        &4interactions with hologram support
+        will be disabled
+      alignment: '&7Text alignment: &6[type]'
+      shadow: '&7Text shadow: &6[state]'
+      textAlpha: '&7Text transparency: &6[alpha]'
+      bgAlpha: '&7Background transparency: &6[alpha]'
+      bgColor: '&7Background color: &6[color]'
+      scaleWidth: '&7Scale width: &6[scale]'
+      scaleHeight: '&7Scale height: &6[scale]'
+      lightLevels: '&7Light levels'
+      levels: |-
+        &7Sky: &6[sky]
+        &7Block: &6[block]
+      iconScale: '&7Icon scale: &6[scale]'
+      iconPitch: '&7Icon pitch: &6[angle]'
+      iconYaw: '&7Icon yaw: &6[angle]'
+      reset: '&7Press &6Q &7to reset'
+      autoButton: '&7Genereeri automaatselt lehtede nupud'
+      autoButtonLore:
+      - '&ePraegusel hologrammil pole ühtegi lehte luua'
+      - '&eKasuta &6!nextpage! &euue reana, et teha uut lehte'
+      autoButtonForward: '&2Sellel hologrammil on edasiliikumise nupp juba olemas'
+      autoButtonBackward: '&2Sellel hologrammil on tagasiliikumise nupp juba olemas'
+      moveX: '&7X:&e[x]'
+      moveY: '&7Y:&e[y]'
+      moveZ: '&7Z:&e[z]'
+      shift:
+      - '&eMuuda 0.01 or hoia shifti, et muuta seda 0.1'
+      listFormat: '&6[name]&7: &r[extra]'
+      addInfo: '&eEnter new line text. Type &6cancel &eto cancel. Extra variables:
+        &6ICON:&7[Value] &6SICON:&7[Value]&e where &7Value&e- &7[MaterialName-amount]%enchanted%&e,
+        &7%itemInHand%&e, &7Head:[headOwner]'
+  hologrampages:
+    help:
+      info: '&eChange hologram page'
+      args: '[holoName] (playerName) (next/prev/[pageNumber])'
+  home:
+    help:
+      info: '&eTelepordib koju'
+      args: (homeName) (playerName) (whoTeleport)
+    info:
+      list: '&eKodud: &6'
+      listNonePrivate: '&f'
+      listPrivate: '&2'
+      click: '&eKliki, et teleporteeruda asukohta &6[home]'
+      teleported: '&eTeleporteeritud koju: &6[home]'
+      noHomes: '&cPole ühtegi salvestatud kodu'
+      private: '&cSelle kodu asukoht on privaatne!'
+      remove: '&cShift+Parem klikk kodu eemaldamiseks'
+      missingBed: '&cPuudub voodi kodu jaoks'
+      notAccessible: '&cKodu asukoha maailm (&7[worldName]&c) ei eksisteeri!'
+      guiTitle: '&0[playerDisplayName] &8kodud [current]/[max]'
+  homes:
+    help:
+      info: '&eLoetelu kodudest, kuhu saab teleporteeruda'
+      args: (playerName/near:[range])
+    info:
+      nearList: '&7[number]. &e[playerDisplayName] &6[homeName] &7[distance] plokki
+        eemal &e[direction]'
+      closeButton: '&7Sulge'
+      infoButton: '&7Informatsioon'
+      bedButton: '&7Voodi asukoht'
+      homeButton: '&7Kodu asukoht'
+      deathButton: '&7Surma asukoht'
+      slot: '&7Slot: &e[slot]'
+      private: '&7Privaatne: &e[state]'
+      favorite: '&7Lemmik: &e[state]'
+      lore: |-
+        &7[world]
+        &f[x]&7:&f[y]&7:&f[z]
+      picker: '&7Kliki ikooni vahetamiseks'
+      edit: '&7Kliki Q redigeerimiseks'
+  hunger:
+    help:
+      info: '&eSet players hunger'
+      args: '[playerName] [amount] (-s)'
+    info:
+      feedback: '&eYou have set &3[hunger]&e hunger for &3[playerDisplayName]&e (&3[offon]&e).'
+      targetfeedback: '&eYour hunger was set to &3[hunger]&e by &3[senderDisplayName]&e.'
+  ic:
+    help:
+      info: '&eCreate interactive command'
+      args: (new) (name)
+    info:
+      public: ' &2[Public]'
+      notPublic: ' &7[NotPublic]'
+      reqPerm: ' &2[ReqPerm]'
+      noPerm: ' &7[ReqPerm]'
+      permHover: ' &eRequires &7[permission] &epermission to place this sign'
+      editSign: ' &e[EditSignLines]'
+      publicHover: "&eChange public status. \nSigns top line &7[ic:[name]]"
+      createdPublic: '&eCreated new interactive sign'
+      list: '&e[place]. &6[name]'
+      listType: ' &e[type]    '
+      editCommands: '&eEdit commands'
+      editBlocks: ' &eEdit blocks'
+      addBlock: '&eLisa plokk mida vaatad'
+      addEntity: ' &eLisa olem mida vaatad'
+      manageCommands: '&eLülita käsuredaktorisse'
+      manageBlockEnt: '&eLülita ploki/olemiredaktorisse'
+      locationList: '&6[type]'
+      entityList: '&2[type]'
+      notPublicIc: '&cSa ei saa kasutada seda, kui see pole avalik'
+      block: (Block)
+      entity: (Entity)
+      both: (Both)
+      none: (None)
+      addedNew: '&eLisatud uus plokk/olem nimele &6[name]'
+      dontExist: '&cInteraktiivset käsku ei eksisteeri selle nimega'
+      exists: '&cInteraktiivne käsk juba eksisteerib selle nimega'
+      blockExist: '&cSeda plokki juba kasutab &e[name]'
+      entityExist: '&cSeda olemit juba kasutab &e[name]'
+      cantUsePlayer: '&cSa ei saa kasutada tavalist mängijat käsu olemina'
+      addInfo: '&eSisesta uus käsk. Kirjuta &6cancel &ekatkestamiseks'
+      addInformationHover: "&eGlobal variables supported as of sender category \n\\\
+        \ &eTo include delay in commands: \n&edelay! 5 \n&eAdditional variables can\\\
+        \ \\ be used to insert variables by their place \n&e$1 will take provided\
+        \ variable\\ \\ by new command and will place in that place \n&e$1- takes\
+        \ all variables\\ \\ from this point and inserts into original commands"
+      editInfo: '&eKlõpsake vana teksti kleepimiseks. Kirjutage &6cancel &etegevuse
+        katkestamiseks. Kirjutage &6remove &erea kustutamiseks'
+  ifoffline:
+    help:
+      info: '&eTäida käsk ainult siis kui mängija on võrgust väljas'
+      args: '[playerName] (command)'
+  ifonline:
+    help:
+      info: '&eTäida käsk ainult siis kui mängija on võrgus'
+      args: '[playerName] (command)'
+  ignore:
+    help:
+      info: '&eIgnoreerib mängija'
+      args: (playerName/uuid/all) (-p:[playerName])
+      explanation:
+      - cmi.command.ignore.bypass - ignore nimekirjast kõrvale hiilimiseks
+    info:
+      self: '&cÄra ole taun, sa ei saa ennast ignoreerida'
+      added: '&eSa juba ignoreerid &6[playerDisplayName]'
+      addedAll: '&eSa ignoreerid nüüd kõiki'
+      all: '&eKõik'
+      removed: '&eSa ei ignoreeri enam mängijat &6[playerDisplayName]'
+      removedAll: '&eSa ei ignoreeri enam kõiki'
+      list: '&e[place]. [playerDisplayName]  '
+      ignoringYou: '&c[playerDisplayName] &eignoreerib sind'
+      empty: '&7Ignoreeritute nimekiri on tühi'
+  importfrom:
+    help:
+      info: '&eImpordi andmed teistest pluginatest'
+      args: '[essentials/hd] [home/warp/nick/logoutlocation/money/mail]'
+    info:
+      converted: '&eTeisendatud: &6[done]&e/&6[total] &emängijat'
+      convertedWarps: '&eTeisendatud &6[amount] &elõimu'
+      noInfo: '&cSa unustasid anda infot mida täpsemalt importida'
+      savingInProgress: '&eAndmed salvestatakse andmebaasi mõne minuti jooksul olenevalt
+        sellest kui palju kirjeid on vaja salvestada'
+      HDfile: '&cEi suutnud leida HolographicDisplays plugina andmebaasi faili. Katkestan.'
+      HDexist: '&cHologramm nimega &7[name] &cjuba eksisteerib. Jätan vahele.'
+      HDfailed: '&cEi õnnestunud laadida hologrammi (&7[name]&c)'
+      HDimported: '&eImporditud &7[amount] &ehologrammi'
+  importoldusers:
+    help:
+      info: '&eImpordib kasutajad playerdata kaustast põhimaailma kaustast. Server
+        võib aegulustuda selle käigus'
+      args: ''
+    info:
+      starting: '&eAlustan importimist'
+      feedback: '&eImporditud &6[amount] &euut kasutajat'
+  info:
+    help:
+      info: '&eNäita mängija infot'
+      args: '[playerName/uuid]'
+    info:
+      feedback:
+        uuid: '&eLeft click to paste uuid into chat box'
+        ouuid: '&eShift + left click to paste online uuid into chat box'
+      newName: '&6[playerName]'
+      newBalance: '&7(&e[balance]&7) '
+      newDisplayName: '&7Display name: &r[playerDisplayName]'
+      newNameHover:
+      - '[playerDisplayName]'
+      - '[nick]'
+      - '[group]'
+      - '[knownAs]'
+      - '[onlineoffline]'
+      - '[playtime]'
+      newIp: '&fIP '
+      newIpHover:
+      - '[ip][country]'
+      - '[ping]'
+      - '[firstLogin]'
+      newNameHoverNick: '&7Nick: &f[nick]'
+      newNameHoverGroup: '&7Group: &f[group]'
+      newNameHoverKnownAs: '&7Also known as: &f[nameList]'
+      newNameHoverIp: '&7Ip: &f[ip]'
+      newNameHoverPing: '&7Ping: &f[ping]'
+      newNameHoverCountry: ' &7[country] &f(&2[countryCode]&f) [city]'
+      newFirstLogin: '&7First login: &6[firstLogin]'
+      newPlaytime: '&7PlayTime: &6[time]'
+      newOnline: '[state] for: &6[logoff]'
+      newOnlineStateOn: '&2Online'
+      newOnlineStateOff: '&7Offline'
+      newUUID: '&fUUID '
+      newUUIDHover: '&7UUID: &6[UUID]'
+      newOUUIDHover: '&7OnlineUUID: &6[OUUID]'
+      newTurnedOnColor: '&a'
+      newTurnedOffColor: '&7'
+      newOp: 'OP '
+      newGod: 'God '
+      newFly: 'CanFly&6([flying]&6) '
+      newFlying: Flying
+      newFlyHover: '&7Fly speed: &6[flyspeed]'
+      newFlyTemp: '&7Temporary fly: &6[time]'
+      newFlyCharge: '&7Lennu laadimine: &6[charge]'
+      newElytraFlyHover: '&7Lendab Elytraga'
+      newGodHover: '&7Ajutine god ajaks: &e[time]'
+      newNoDamageHover: '&7Mitte ühtegi kahju tiksu: &e[time]'
+      newSneaking: Hiilib
+      newSprint: Jookseb
+      newWalkSpeed: '&7Kõndimiskiirus: &6[walkspeed]'
+      newGameMode: '&fRežiim: &6[gameMode] '
+      newGameModeHover:
+      - '[sprint]'
+      - '[sneaking]'
+      - '[walkspeed]'
+      - '[hp]'
+      - '[air]'
+      - '[hunger]'
+      - '[saturation]'
+      - '[exp]'
+      newHp: '&7HP: &6[hp]&e/&6[maxhp]'
+      newAir: '&7Õhk: &6[leftAir]&e/&6[totalAir]'
+      newHunger: '&7Nälg: &6[food]&e/&620'
+      newSaturation: '&7Küllastatus +&6[saturation]&e'
+      newExp: '&7EXP: &6[totalexp]&7exp -> &6[currentexp]&e/&6[needexp] &e(&6[level]&7lvl&e)'
+      newPos: '&fPos '
+      newPosHover: '&6[world] (&e[x]&6:&e[y]&6:&e[z]&6)'
+      newAfk: 'AFK '
+      newAfkHover: '&6AFK viimased: [time]'
+      AfkInHover: '&6AFK: [time]'
+      newBed: '&fVoodi '
+      newBedHover: '&6[world] (&e[x]&6:&e[y]&6:&e[z]&6)'
+      newDeath: '&fSurm '
+      newDeathHover: '&6[world] (&e[x]&6:&e[y]&6:&e[z]&6)'
+      newBack: '&fTagasi '
+      newBackHover: '&6[world] (&e[x]&6:&e[y]&6:&e[z]&6)'
+      newRespawn: '&fTaassünd '
+      newRespawnHover: '&6[world] (&e[x]&6:&e[y]&6:&e[z]&6)'
+      inv: '&fInv '
+      ender: '&fEnder '
+      newSee: '◕‿◕ '
+      newSeeHover: '&6Saab sind näha'
+      newSeeHoverNot: '&2Ei saa sind näha'
+      vanished: '(V) '
+      vanishedHover: '&6Haihtunud'
+      newBanned: 'Keelatud '
+      newBannedHover:
+      - '&7Keelas: &e[name]'
+      - '&7Jäänud: &e[left]'
+      - '&7Põhjus: &e[reason]'
+      newMuted: 'Vaigistatud '
+      newMutedHover:
+      - '&7Jäänud: &e[left]'
+      - '&7Põhjus: &e[reason]'
+      newShadowMutedHover: '&4Varivaigistus'
+      newCuffed: 'Käeraudadega '
+      newJailed: 'Jailed '
+      newJailedHover:
+      - '&7Jail: &e[jail]'
+      - '&7Cell: &e[id]'
+      - '&7Left: &e[time]'
+      - '&7Reason: &e[reason]'
+      newHomes: '&fHomes: &e[count] '
+      newMail: '&fMail: &e[count] '
+      newWarnings: '&fWarnings: &e[count] '
+      newAlert: 'Alert '
+      newAlertHover:
+      - '&7Left: &e[left]'
+      - '&7For: &e[reason]'
+      newChatRoom: 'ChatRoom '
+      newChatRoomHover:
+      - '&7ChatRoom: &e[name]'
+      - '&7Users in: &e[count]'
+      List:
+      - '&e------------- [enableColor]Enabled [disableColor]Disabled&e -------------'
+      - '&e| [name][balance][UUID][ip]'
+      - '&e| [OP][god][fly][gameMode][afk][see]'
+      - '&e| [banned][muted][cuffed][jailed][alert][chatroom]'
+      - '&e| [pos][bed][respawn][death][back][ender][inv]'
+      - '&e| [homes][mail][warnings]'
+      - '&e-----------------------------------------'
+  inv:
+    help:
+      info: '&eOpens players backbag'
+      args: '[playerName]'
+      explanation:
+      - cmi.command.inv.preventmodify - prevents backbag editing
+      - cmi.invedit - allows to edit backbag
+      - cmi.command.inv.location - shows players location
+    info:
+      feedback: '&eYou are editing &3[playerDisplayName] &ebackbag (&3[offon]&e).'
+  invcheck:
+    help:
+      info: '&eOpen saved backbag in preview mode'
+      args: (playerName) [id] (-e) (last)
+  invlist:
+    help:
+      info: '&eShow saved inventories list'
+      args: (playerName)
+  invload:
+    help:
+      info: '&eLaadi salvestatud seljakott'
+      args: (sourceName) (targetName) [id/last]
+  invremove:
+    help:
+      info: '&eEemalda salvestatud inventuurid mängija jaoks'
+      args: (playerName) [id/all/last]
+  invremoveall:
+    help:
+      info: '&eEemaldab kõik salvestatud inventuurid'
+      args: '[confirmed]'
+    info:
+      removed: '&eKõik salvestatud invetuurid eemaldatud ([count])'
+  invsave:
+    help:
+      info: '&eSalvesta seljakott'
+      args: (playerName) (id) (-s)
+  ipban:
+    help:
+      info: '&eKeela ip'
+      args: '[ip/playerName] (reason) (-s)'
+      explanation:
+      - cmi.command.banip.bypass - keelust kõrvale hiilimiseks
+    info:
+      message: '&cSinu IP on siit serverist keelustatud!'
+      messageToAll: '&6[playerDisplayName] &esai IP keelu mängijalt &6[senderDisplayName]
+        &epõhjusega: &6[reason]'
+      banedSilent: '&7[&8Silent&7]&6[playerDisplayName] &esai IP keelu mängijalt &6[senderDisplayName]
+        &epõhjusega: &6[reason]'
+      replacer: '*'
+  ipbanlist:
+    help:
+      info: '&eKeelatud IP-de nimekiri'
+      args: ''
+    info:
+      banList: '&7[ip] &e- &6[reason]  '
+      bannedBy: '&7Keelas: &e[source]'
+      ends: '&7Lõpeb: &f[time]'
+      related: |-
+        &7Seotud kontod:
+        &f[list]
+  item:
+    help:
+      info: '&eAnna ese endale'
+      args: '[itemname] (amount)'
+      explanation:
+      - Nimi ja lore toetab placeholdereid
+      - 'Näide: /give stone'
+      - /give stone 5 n Stonehenge
+      - /give stick e knockback:1
+      - /give sponge l Got_item_on:_%date/YY/MM/dd-HH:mm:ss%
+      - /cmi give sponge 1 e Knockback:%rand/1-5%
+      - /cmi give sponge %rand/1-10%
+      - /give sponge a maxhealth:5:mainhand
+      - /give diamond_sword unbreakable
+      - /give mob_spawner:creeper
+      - /give minecraft:diamond_helmet 1 0 {ench:[{id:0,lvl:100},{id:2,lvl:100},{id:34,lvl:100}]}
+  itemcmdata:
+    help:
+      info: '&eCheck or modify items custom model data'
+      args: '[set/delete/list] (playerName) (integerId) (-s)'
+    info:
+      nothing: '&eEi sisalda mudeli andmeid'
+      set: '&eSeadistatud mudeli andmed: &6[value]'
+      current: '&ePraegused mudeli andmed: &6[value]'
+      deleted: '&eEemaldatud mudeli andmed: &6[value]'
+  itemframe:
+    help:
+      info: '&eHalda eseme raame'
+      args: (invisible/fixed/invulnerable/all)
+    info:
+      enabled: Lubatud
+      disabled: Keelatud
+      feedback: '&e[count] &6nähtamatut raami on sinu ümber'
+  iteminfo:
+    help:
+      info: '&eNäita eseme informatsiooni'
+      args: (playerName)
+    info:
+      nameMat: ' &eNimi: &7[name] &eMaterjal: &7[material]'
+      mojangHover: '&eMojangi Nimi: &7[name]'
+      display: ' &eDisplay Name: &7[display]'
+      lore: ' &eLore:'
+      loreLine: '   &5[loreLine]'
+      enchants: ' &eEnchants: &7[enchants]'
+      entityType: ' &eEntity Type: &6[type]'
+      customModel: ' &eCustom Model Data: &6[data]'
+      durability: ' &eDurability: &6[current]&e/&6[max]'
+      stackSize: ' &eMax stack size: &6[size]'
+  itemlore:
+    help:
+      info: '&eChange items lore'
+      args: (-p:[playerName]) [linenumber/*] [remove/insert/ new lore line]
+    info:
+      feedback: '&eYou have changed lore line to ''&r&5[loreLine]&e'' for &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      noitem: '&cNot holding any item in hand.'
+      removed: '&eItem lore line &6[line] &ewas removed for &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      inserted: '&eItem lore line &6[line] &ewas inserted for &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      maxLines: '&eThere is only &6[lines] &elines of lore.'
+      blocked: '&eThis item is blocked from re-loring.'
+  itemname:
+    help:
+      info: '&eRename items'
+      args: (-p:[playerName]) [remove/your new item name]
+    info:
+      feedback: '&eYou have renamed item to [itemname]&e for &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      noitem: '&cNot holding any item in hand.'
+      removed: '&eItem name was removed for &3[playerDisplayName]&e (&3[offon]&e).'
+      blocked: '&eThis item is blocked from renaming'
+      maxLength: '&cNew value is to long. Max length &e[length] &ccharacters'
+  itemnbt:
+    help:
+      info: '&eShow item NBT information'
+      args: (playerName)
+    info:
+      jump: '&6[key][type]'
+      type: ' &6(&e[type]&6)'
+      value: ': &e[value]'
+      list: '&e- &r[value]'
+      noNbt: '&eEse ei sisalda NBT andmeid'
+  jail:
+    help:
+      info: '&eVangista mängija ajaperioodiks'
+      args: '[playerName] (time) (jailName) (cellId) (-s) (r:jail_reason)'
+    info:
+      jailed: '&eSa panid &6[playerDisplayName] &evangi järgmiseks [time]'
+      jailedPlayer: '&6[playerDisplayName] &evangistatud järgmiseks [time]'
+      reason: ' &ePõhjus: &c[reason]'
+      leftTime: '!title!&7Jail time:!subtitle![time]'
+      jailedTarget: '&eSa oled vangistatud! [time]'
+      cantTalk: '&cSa ei saa lobiseda, kui oled vangis'
+      cantTalkRange: '!actionbar!&fSinu vestluse raadius on piiratud &c[range] &fplokki'
+      failed: '&cMängija vangistamine ebaõnnestus. Kontrolli vangla nime, kongi ID
+        või ajaformaati'
+      bossbar: '&7Vanglaaeg: [autoTimeLeft]'
+      noCommand: '&cSa ei saa seda käsku kasutada, kui oled vangis!'
+  jailedit:
+    help:
+      info: '&eRedigeeri vanglaid'
+      args: ''
+    info:
+      notInArea: '&cSa ei seisa vanglaalaas'
+      noName: '&cSelle nimega vanglat ei ole'
+      noCell: '&cSelle ID-ga kongi ei ole'
+      exist: '&cVangla selle nimega juba eksisteerib'
+      createdJail: '&eEdukalt loodud uus vangla (&6[jail]&e)'
+      createdCell: '&eEdukalt loodud uus vangla kong (&6[jail]&e:&6[cellId]&e)'
+      collides: '&cPõrkub kokku &6[jailName] &evanglaga'
+      editCells: '&eRedigeeri kongide nimekirja'
+      cList: '&eID: &6[id] &eVangistatud: &6[amount]'
+      jailListTpHover: '&eSeadista väljumise teleporteerumise asukoht'
+      jailListAreaHover: '&eDefineeri ala uuesti'
+      jailRemoved: '&eEemaldatud (&6[jail]&e) vangla'
+      jailOutside: '&eSeadista uus väljamineku asukoht'
+      jailArea: '&eDefineeritud uus alga vanglale &6[jail]'
+      cellRemoved: '&eEemaldatud (&6[cellId]&e) kong vanglast &6[jail]'
+      list: '&eKongid: &6[cells] &eVangistatud: &6[amount] &2[jail]'
+      listTp: '[tp] '
+      listArea: '&7[area] '
+      areaShow: '&7[S] '
+  jaillist:
+    help:
+      info: '&eLoetle vanglad'
+      args: (jailName) (cellId)
+    info:
+      jailList: '&6[place]. &e[jailName] &7Kongi:&e[cellCount] &7Vangistatud:&6[count]'
+      cellList: '&6[place]. &7ID:&e[cellId] &7Vangistatud:&6[count]'
+      jailedBy: '&6Jailed by: &e[playerDisplayName]'
+      cellJailedList: '&6[place]. &e[playerDisplayName] &7vabastatakse &e[time] &7pärast'
+      Release: '&7Kliki vabastamiseks'
+  jump:
+    help:
+      info: '&eHüppa sihtplokini'
+      args: ''
+    info:
+      tooFar: '&cÜhtegi plokki pole nähtavuses või see on liiga kaugel (max [max]
+        plokki)'
+  kick:
+    help:
+      info: '&eViska mängija välja kohandatud sõnumiga'
+      args: '[playerName/all] (message) (-s)'
+      explanation:
+      - cmi.command.kick.bypass - hiilib kõrvale välja viskamisest
+    info:
+      defaultMessage: '&eServerist välja visatud'
+      cantKick: '&eSeda mängijat ei saa välja visata'
+      messageToAll: '&6[playerDisplayName] &evisati serverist välja.'
+      kickReason: ' &ePõhjus: &6[reason]'
+      all: '&eVisatud &6[amount] &emängijat serverist'
+  kill:
+    help:
+      info: '&eKill player'
+      args: '[playerName] (-forced) (damageCause) (-s) (-lightning)'
+    info:
+      cantKill: '&6Can''t kill, protected by another plugin, game/god mode. Use -forced
+        variable'
+      lackOfAccess: '&6Can''t use force kill without permission.'
+      killed: '&6Killed [playerDisplayName]'
+  killall:
+    help:
+      info: '&eKill mobs around you'
+      args: (-monsters/-pets/-npc/-animals/-ambient/-named/-f/-lightning/-list/-m:[mobType])
+        (-r:range) (-s) (-w:[worldName])
+    info:
+      infoList: '&2[category]&e: &7[amount] &e([list]&e)'
+      removedList: '&6[type]&e: &7[amount]'
+      total: '&eRemoved a total of: &7[amount] &e([list]&e)'
+      noRemove: '&eNothing to remove'
+      monsters: Monsters
+      pets: Pets
+      npc: NPCs
+      animals: Animals
+      ambient: Ambient
+      vehicles: Vehicles
+      named: With custom name
+  kit:
+    help:
+      info: '&eGives predefined kit.'
+      args: '[kitName] (playerName) (-s) (-open) (-preview)'
+      explanation:
+      - '&ePermissions:'
+      - '&6cmi.kit.[kitName] &e- allows to use particular kit'
+      - '&6cmi.kit.bypass.money &e- bypass money requirement'
+      - '&6cmi.kit.bypass.exp &e- bypass exp requirement'
+      - '&6cmi.kit.bypass.onetimeuse &e- bypass one time use'
+      - '&6/cmi kit [kitName] [playerName] &e- will give kit to another player'
+    info:
+      noMoney: '&eNot enough money. Cost: &6[cost] &eyou have &6[balance]'
+      noExp: '&eNot enough exp. Cost: &6[cost] &eyou have &6[balance]'
+      noCondition: '&eYou dont have special condition permission to use this kit:
+        &6[condition]'
+      oneTime: '&cThis is a one time use kit and you have already used it!'
+      cantUseNow: '&cYou can''t use this kit for the next [time]'
+      limitedTimeUseError: '&eCan''t use more than &6[times] &etimes'
+      limitedTimeUse: '&7Can use for &c[times] &7times'
+      limitedTimeAllUsed: '&cYou can''t get another one'
+      canUseIn: "&eCan use again in: \n[time]"
+      cooldown: "&eCooldown: \n[time]"
+      noKit: '&eCan''t find kit by this name'
+      kitDoesntExist: '&eCan''t find kit ([kitName])'
+      noKitAccess: '&cYou don''t have access to this kit'
+      noFoundKit: '&eCan''t find any kits'
+      givenKit: '&eYou have given &6[kit] &eto &6[playerDisplayName]'
+      title: '&8Kits'
+      nameCanUse: '&6[kitName]'
+      nameCantUse: '&7[kitName]'
+      group: '&2Rühm: &6[group]'
+      left: '&6Vasak &eklikk võtmiseks'
+      right: '&6Right &eklikk eelvaateks'
+      take: '&6Võta see komplekt!'
+      open: '&7Esemed &8[kitName] &7komplektist!'
+      eye: ' &e☬'
+      use: '&2'
+      cantuse: '&7'
+      list: '&7[number]. &e[kitName] &6- [description]'
+  kitcdreset:
+    help:
+      info: '&eLähtesta komplekti taimer'
+      args: (kitName) (playerName/all)
+    info:
+      notCd: '&eKomplekt ei ole jahtumise etapis'
+      reset: '&eKomplekti (&6[kit]&e) jahtumise aeg lähtestati mängijale &6[playerDisplayName]'
+      resetAll: '&eKomplekti (&6[kit]&e) jahtumisaeg lähtestati &6[count] &emängijale'
+      list: '&e[place]. &6[kit] &e[time]'
+      listHover: '&eKliki lähtestamiseks'
+      noCd: '&eÜhtegi komplekti ei ole jahtumas'
+  kiteditor:
+    help:
+      info: '&eKomplekti redaktor.'
+      args: ''
+      explanation:
+      - '&eLoad:'
+      - '&6cmi.kit.[kitName] &e- lubab kasutada teatud komplekti'
+      - '&6cmi.kit.bypass.money &e- hiili raha nõudest eemale'
+      - '&6cmi.kit.bypass.exp &e- hiilib EXP nõudest kõrvale'
+      - '&6/cmi kiteditor &e- näitab komplektide nimekirja'
+    info:
+      kits: '&eKomplektid: '
+      iconSet: '&eUus ikoon seadistatud &6[kitname] &ekomplektile'
+      kitExists: '&cKomplekt selle nimega juba eksisteerib!'
+      deleteConfirm: '&eKliki mind kui sa tõesti tahad kustutada (&6[kitname]&e) komplekti!'
+      deleteConfirmFinal: '&cSee tegevus on pöördumatu!'
+      kitRemoved: '&eKomplekt (&6[kitname]&e) eemaldatud'
+      kitNotRemoved: '&cKomplekt (&6[kitname]&c) ei saa eemaldada'
+      addNewInfo: '&eKirjuta komplekti nimi vestlusaknasse ja vajuta enter. Kirjuta
+        ''&6cancel&e'' katkestamiseks.'
+      renameCommandInfo: '&eKirjuta uue komplekti &6command &ename vestlusaknasse
+        ja vajuta enter. Kirjuta ''&6cancel&e'' tegevuse katkestamiseks.'
+      renameConfigInfo: '&eKirjuta uus &6config &ename vestluaknasse ja vajuta enter.
+        Kirjuta ''&6cancel&e'' tegevuse katkestamiseks.'
+      groupInfo: '&eKirjuta uue grupi nimi vestlusaknasse ja vajuta enter. Kirjuta
+        ''&6none&e'' grupi kustutamiseks. Kirjuta ''&6cancel&e'' katkestamiseks.'
+      commandInfo: '&eKirjuta uus käsk vestlusesse ja vajuta enter. Kirjuta ''&6cancel&e''
+        katkestamiseks. Võimalikud placeholderid: &6{USERNAME} {DISPLAYNAME} {WORLDNAME}
+        {KITNAME} {RANDOMPLAYER}'
+      conditionsInfo: '&eKirjuta uus vajalik loaharu vestlusesse ja vajuta enter.
+        Kirjuta ''&6cancel&e'' tegevuse katkestamiseks'
+      descInfo: '&eKirjuta uus kirjeldus vestlusaknasse ja vajuta enter. Kirjuta ''&6cancel&e''
+        tegevuse katkestamiseks'
+      renamed: '&eÜmber nimetatud &6[kitname] &euus nimi: &6[newkitname]&e.'
+      groupSet: '&eUus rühm (&6[groupname]&e) seatud komplektile &6[kitname]'
+      commandsListTitle: '&e✎&6Käsud:'
+      conditionsListTitle: '&e✎&6Tingimused:'
+      descListTitle: '&e✎&6Kirjeldus:'
+      ListTitleHover: '&eKliki GUI avamiseks'
+      ListEditKitHover: '&cRedigeeri &6[kitname]'
+      ListAdd: ' &2+'
+      ListAddHover: '&2Lisa uus'
+      guiClickery:
+      - '&eVasak hiireklikk suurendamiseks ja parem hiireklikk vähendamiseks'
+      - '&eHoia &6Shift &eprotsessi kiirendamiseks 10 korda'
+      - '&eRepeating fast clicks will speed amount change'
+      - '&eStop clicking for 1 sec to go back to default amount'
+      OffHand: '&ePlace offHand item over here'
+      Helmet: '&ePlace helmet item over here'
+      Chest: '&ePlace chest item over here'
+      Legs: '&ePlace leggings over here'
+      Boots: '&ePlace boots over here'
+      Weight: '&eWeight: &6[Weight]'
+      WeightExtra:
+      - '&eHigher value have bigger priority'
+      - '&eKits should be in same group'
+      despiteWeight: '&eShow despite weight: &6[Weight]'
+      despiteWeightExtra:
+      - '&ePLayer is not getting access to kit, but can preview it'
+      Slot: '&eSlot: &6[slot]'
+      Page: '&ePage: &6[page]'
+      SlotAuto: '&6Auto'
+      Clone: '&eClone items from backbag'
+      CloneExtra:
+      - '&eUse right mouse button to include armors'
+      - '&eClick again to revert changes'
+      timeDelay: '&eDelay: &6[time]'
+      usages: '&eCan be used for &6[times] &etimes'
+      withoutUsage: '&eShow without usages left: &6[state]'
+      usagesUnlimited: '&6Unlimited'
+      ignoreWeight: '&eShow despite weight: &6[state]'
+      timeDelaySeconds: '&eIn seconds: &6[time]'
+      moneyCost: '&eMoney cost: [cost]'
+      expCost: '&eExp cost: [cost]'
+      enabled: '&eEnabled'
+      disabled: '&6Disabled'
+      delete: '&6Delete kit'
+      clickToSwitch: '&eClick to switch state'
+      clickToEdit: '&eClick to start editing'
+      editConfigName:
+      - '&eClick to rename config name'
+      - '&eThis only determines permission node'
+      editCommandName:
+      - '&eClick to rename command name'
+      - '&eThis sets command you need to use to get this kit'
+      displayName: '&7DisplayName: &r&f[name]'
+      editDisplayName:
+      - '&eClick to change display name'
+      - '&eThis only used for visual purposes'
+      kitGroup: '&eKit group: &6[group]'
+      dropItems: '&eDrop item if full: &6[state]'
+      commands: '&eCommands:'
+      conditions: '&eTingimused:'
+      desc: '&eKirjeldused:'
+      mainMenu: '&ePeamenüü'
+      settings: '&eSätted'
+      icon: '&eIkoon kasutusel kui komplekt on &2saadaval'
+      iconCd: '&eIkoon kasutusel kui komplekt &cei ole saadaval'
+  kitusagereset:
+    help:
+      info: '&eLähtesta komplekti kasutuse loendur'
+      args: (kitName) (playerName)
+    info:
+      notLimited: '&eKomplektil ei ole piiratud kasutuskordi'
+      reset: '&eKit (&6[kit]&e) kasutuskorrad lähtestati mängijale &6[playerDisplayName]'
+      list: '&e[place]. &6[kit] &e[used]/[usages]'
+      listHover: '&eKliki lähtestamiseks'
+      noCd: '&eSiin ei ole ühtegi komplekti mida oleks rohkem kasutatud kui 0 korda'
+  lastonline:
+    help:
+      info: '&eNäita mänginud mängijaid viimased x minutit'
+      args: (-p:[page])
+    info:
+      searching: '&eOtsin &6[checked]&e/&6[total] &e(&6[found]&e)'
+      List: ' &6[place]&e. &2[name] &e-> &6[time]'
+      timeFrame: '&eLast hour (&6[time1]&e), 24 hours (&6[time2]&e), 7 days (&6[time3]&e),
+        30 days (&6[time4]&e)'
+  launch:
+    help:
+      info: '&eKäivitage vaadeldavas suunas või nurga all'
+      args: (playerName) (p:[power]) (a:[angle]) (d:[direction]) (loc:[x]:[y]:[z])
+        (-nodamage)
+      explanation:
+      - cmi launch - käivitab vaadeldavas suunas
+      - cmi launch -nodamage - käivitab ja väldib kukkumise vigastust
+      - cmi launch p:3.2 - käivitub jõuga 3.2
+      - - 25-kraadise nurga all võimsusega 2.5
+      - - looking
+      - - sa vaatad
+      - - 2 jõud
+      - cmi launch loc:150:120:123 - käiviab mängija sihtkohta
+    info:
+      feedback: '!actionbar!&6[&fReeeee!&6]'
+  lfix:
+    help:
+      info: '&eParanda valgus sind ümbritsevates tükkides'
+      args: (range) (playerName) (stop/stopall)
+    info:
+      NoMore: '&eUlatus ei saa olla suurem kui serveri nägemiskaugus. Muudetud maksimaalselt
+        lubatavale väärtusele.'
+      startFixing: '&eLeitud &6[amount] &etükki mida parandada. Alustan!'
+      InfoShow: '&6TPS: &3[tps] &6Jäänud &e[left] &6(&e[min]m:[sec]s&6) &6Kiirus:
+        &e[speed]'
+      Finished: '&eValguse parandamine lõpetati'
+      Stopped: '&ePeatatud'
+  list:
+    help:
+      info: '&eNäitab võrgus olevate mängijate nimekiri'
+      args: ''
+      explanation:
+      - 'Luba: '
+      - cmi.command.list.admin
+      - cmi.command.list.staff
+      - cmi.command.list.hidden
+      - cmi.command.list.group.[number]
+    info:
+      # [groupLine] can be replaced with specific grouped names like [group1] and [group2] and so on, you can have as many of those as you want and order them by your own liking
+      List:
+      - '&7========================'
+      - '&eMängijaid võrgus &6[amount][hidden]&e/&6[maxamount]'
+      - '[adminLine]'
+      - '[staffLine]'
+      - '[groupLine]'
+      - '&7========================'
+      staffL: '&7Meeskond: &f[list]'
+      adminL: '&8Administraator: &f[list]'
+      hiddenPref: '&e&7[H]'
+      hiddenCount: '&e&7([amount])'
+      groupL: '&6[groupName]: &f[list]'
+      player: '%cmi_user_afk_symbol%&f[playerDisplayName]'
+      # Add as many groups as you wish, by default there is only 10, to create new one, just copy paste one line and add increment into lines name, like group11 or group12 and so on.
+      # ATTENTION! group names should be in 'group[number]' format, where you have word 'group' followed by number. This is required and you cant have custom names as they are not required, but we are using number provided to determine which group goes after which
+      # Player need to have appropriate permission node to be placed in group cmi.command.list.group.[groupnumber], bigger number have bigger priority
+      groups:
+        group1: '&eGroup1: &f[list]'
+        group2: '&eGroup2: &f[list]'
+        group3: '&eGroup3: &f[list]'
+        group4: '&eGroup4: &f[list]'
+        group5: '&eGroup5: &f[list]'
+        group6: '&eGroup6: &f[list]'
+        group7: '&eGroup7: &f[list]'
+        group8: '&eGroup8: &f[list]'
+        group9: '&eGroup9: &f[list]'
+        group10: '&eGroup10: &f[list]'
+      noGroupLine: '&eList'
+  lockip:
+    help:
+      info: '&ePrevents logging into account from different ip'
+      args: (playername) [add/remove/list/clear] [ip]
+    info:
+      CantLogin: '&cYou can''t login from this ip address'
+      add: '&eNew ip (&6[ip]&e) added for &6[playerDisplayName]'
+      remove: '&eIp (&6[ip]&e) removed from &6[playerDisplayName]'
+      clear: '&eAll ip''s removed from &6[playerDisplayName]'
+      ipNotFound: '&cIp not found'
+      empty: '&cList is empty'
+      list: '&6[place]&e. &6[ip]'
+  loom:
+    help:
+      info: '&eOpen loom'
+      args: (playerName)
+    info:
+      feedback: '&eYou have opened loom for &3[playerDisplayName]&e (&3[offon]&e).'
+      targetfeedback: '&3[senderDisplayName]&e opened loom for you.'
+  mail:
+    help:
+      info: '&eSend and receive mail'
+      args: '[send/clear/read/sendtemp] [playerName] (time) (message)'
+    info:
+      sentMail: '&eMail sent to &6[playerDisplayName]'
+      gotMail: '!actionbar!&eYou received mail from &6[senderDisplayName]'
+      clearMail: '&eAll mail has been cleared!'
+      removedMail: '&eRemoved mail'
+      noMailsById: '&eEi ole meili selle ID-ga sellele mängijale'
+      noMails: '&eSul ei ole uusi kirju'
+      mailHover: '&e[senderName] /n &e[time]'
+      mailHoverExpires: '/n &eAegub: &6[time]'
+      mailList: ' &7[senderDisplayName]&e: [mail] '
+      waitingMail: '&eSul on &6[amount] &euut meili. Kliki, et neid vaadata.'
+  mailall:
+    help:
+      info: '&eKontrolli või saada meil kõikidele mängijatele'
+      args: '[send/clear/remove] [message]'
+    info:
+      sentMail: '&eSaadetud &6[amount] &emeili'
+      clearMail: '&6[amount] &emeili eemaldati'
+      removedMail: '&eEemaldatud &6[amount] &emeili'
+  maintenance:
+    help:
+      info: '&eSeadista server hooldusrežiimi'
+      args: (true/false) (message)
+      explanation:
+      - cmi.command.maintenance.bypass - serveri hooldustöödest kõrvale hiilimiseks
+    info:
+      feedback: '&eServer on hooldusrežiimis. Tule hiljem tagasi.'
+      set: '&eServeri hooldusrežiim seati &6[state] &esõnumiga: [message]'
+  maxhp:
+    help:
+      info: '&eSeadista mängija maksimaalne HP'
+      args: set/add/take/clear [playerName] [amount] (-s)
+    info:
+      feedback: '&eSa seadistasid &3[maxHp] &emax HP mängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      targetfeedback: '&eSinu max HP seadistati &3[maxHp] &3[senderDisplayName] &epoolt.'
+  maxplayers:
+    help:
+      info: '&eMuudab maksimaalset mängijate arvu, kes saavad serveriga liituda'
+      args: '[amount]'
+      explanation:
+      - '&eLoad: '
+      - '&6cmi.fullserver.bypass &e- täis serveriga liitumiseks'
+    info:
+      changed: '&eMuudetud maksimaalselt lubatud mängijad &6[old] &eväärtusele &6[new]&e.
+        Võrgus: &6[current]'
+  me:
+    help:
+      info: '&eSaadab erilise sõnumi kõigile mängijatele'
+      args: '[message]'
+    info:
+      format: '&5* [senderDisplayName] &5[message]'
+  merchant:
+    help:
+      info: '&eAvab kaupmehe vahetuse akna'
+      args: '[type] (playerName) (level)'
+    info:
+      incorrect: '&cEbakorrektne elukutse.'
+      feedback: '&eSa avasid &6[type] &ekaupmehe mängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      targetfeedback: '&3[senderDisplayName]&e avas &6[type] &ekaupmehe sulle.'
+  migratedatabase:
+    help:
+      info: '&eMuudab andmebaasi süsteemi ja kolib kõik andmed'
+      args: ''
+  mirror:
+    help:
+      info: '&eAlustab ploki asetamise/lõhkumise peegeldamist.'
+      args: (start/stop)
+    info:
+      started: '&ePeegeldamine alsutatud'
+      stopped: '&6Peegeldamine peatatud'
+      tooFar: '&cSa oled liiga kaugel peegeldamise keskpunktist (max &6[blocks] &cplokki).
+        Omadus on pausil!'
+      title: Peegelda
+      notSet: '&cKeskpunkt ei ole seatud'
+      set: '&2Keskpunkt seatud'
+      noBlocks: '&cPole piisavalt plokke'
+      used: '&7Kasutatud: &7[blocks]'
+      Action:
+        Name:
+          X: X
+          Y: Y
+          Z: Z
+          XY: XY
+          ZY: ZY
+          XZ: XZ
+          ZX: ZX
+          Rotate90V: Rotate90V
+          Rotate90H: Rotate90H
+          Rotate90HC: Rotate90HC
+          Rotate180H: Rotate180H
+          Pause: Pause
+          Location: Location
+        Desc:
+          X: '&eMirrors by &6X &eaxis'
+          Y: '&eMirrors by &6Y &eaxis'
+          Z: '&eMirrors by &6Z &eaxis'
+          XY: '&eMirrors by &6X &eto &6Y &eaxis'
+          ZY: '&eMirrors by &6Z &eto &6Y &eaxis'
+          XZ: '&eMirrors by &6X &eto &6Z &eaxis'
+          ZX: '&eMirrors by &6Z &eto &6Y &eaxis'
+          Rotate90V: '&eRotates up'
+          Rotate90H: '&eRotates &690 &edegrees clock wise'
+          Rotate90HC: '&eRotates &690 &edegrees counter clock wise'
+          Rotate180H: '&eRotates &6180 &edegrees'
+          Pause: '&ePauses mirroring'
+          Location: '&eSets mirroring center location'
+  mobhead:
+    help:
+      info: '&eGet mob head'
+      args: '[mobType] (entryNumber) (playerName) (-s)'
+    info:
+      got: '&eGot &6[type] &emob head'
+      base: '&7Base drop chance: &f[chance]%'
+      personal: '&7Drop chance for you: &f[chance]%'
+      headSpecific: '&7Head specific drop chance: &f[chance]%'
+      criteria: '&7Criteria: &f[criteria]'
+      title: '&7[current]&8/&7[total]'
+  money:
+    help:
+      info: '&eManage money balance'
+      args: '[pay/give/take/set] [playerName/all/alloffline] [amount][%rand/1-1000%][1%[min-max]][playerName]]
+        (-s)'
+    info:
+      newBalance: '&6[playerDisplayName] &enew balance: &6[money]'
+      paid: '&eYou have sent &6[amount] &eto &6[playerDisplayName]'
+      gotMoney: '&eYou got &6[amount] &efrom &6[senderDisplayName]&e. Balance: &6[money]'
+      gotMoneyGive: '&eYou received &6[amount]&e. Balance: &6[money]'
+      lostMoney: '&6[amount]&e has been removed from your balance. Remaining: &6[money]'
+      worldGroups: '&cSa ei saa saata raha erinevatesse maailma rühmadesse'
+      self: '&cSa ei saa endale raha saata!'
+      confirm: '&eKliki &6[money] &eülekande kinnitamiseks mängijale &6[playerDisplayName]
+        &a&l[✔]'
+      notAccepting: '&eSee mängija ei võta makseid vastu teistelt mängijatelt'
+      giveAll: '&eMakstud välja&6[totalAmount] &6[playerCount] &emängijale'
+      takeAll: '&eVõetud &6[totalAmount] &6[playerCount] &emängijalt'
+      overLimit: '&e[playerDisplayName] &eei saa sinu raha vastu võtta korraga käeshoitava
+        summa piirangu pärast'
+  more:
+    help:
+      info: '&eTäidab eseme virna maksimaalse koguseni'
+      args: (playerName) (-clone/[amount])
+      explanation:
+      - '&eLoad:'
+      - ' &6cmi.command.more.oversize &e- virna piirangu ületamiseks'
+    info:
+      feedback: '&eTäidetud virn &3[amount]&e mängijale &3[playerDisplayName]&e (&3[offon]&e).'
+  msg:
+    help:
+      info: '&eSaadab sõnumi mängijale'
+      args: '[playerName] [message]'
+      explanation:
+      - Kui sõnum algab tähega !, siis kuvatakse puhas sõnum ilma saatja nimeta
+      - Vajalik cmi.command.msg.clean luba
+      - - ja ilma valikuta vastamiseks
+      - Vajalik cmi.command.msg.noreply luba
+    info:
+      TargetMsg: '&7[&8[senderDisplayName] &7-> &8me&7]&r&f [message]'
+      SenderMsg: '&7[&8me &7-> &8[playerDisplayName]&7]&r&f [message]'
+      noPM: '&cMängija ei võta privaatsõnumeid hetkel vastu'
+      badGroup: '&cSa ei saa saada privaatseid sõnumeid sellele mängijarühmale'
+  mute:
+    help:
+      info: '&eVaigista mängija'
+      args: '[playerName] (time) (-s) (reason)'
+      explanation:
+      - 'Näited: '
+      - /cmi mute zrips 1m
+      - /cmi mute zrips 1h
+      - /cmi mute zrips 1h Ropendamine
+    info:
+      mutedFor: '&e[playerDisplayName] vaigistatud ajaks &6[time]'
+      muted: '&eSind vaigistati ajaks &6[time]'
+      reason: '&ePõhjus: &7[reason]'
+      badTimeRanges: '&cSa ei saa vaigistada kauemaks kui [time] &6([seconds])'
+  mutechat:
+    help:
+      info: '&eVäldib avalikke sõnumeid'
+      args: (time) (-s) (reason)
+      explanation:
+      - 'Näited: '
+      - /cmi mutechat 1m
+      - '/cmi mutechat 1h '
+    info:
+      mutedFor: '&eAvalik vestlus vaigistatud ajaks &6[time]'
+      isMuted: '!actionbar!&eAvalik vestlus vaigistatud ajaks &6[time]'
+      muteReason: '&4Vaigistamise põhjus: &7[reason]'
+  nameplate:
+    help:
+      info: '&eSeadista mängija nimeplaadi prefiks, suffiks või selle värv'
+      args: (playerName) (-pref:[some_prefix]) (-suf:[some_suffix]) (-c:[colorCode])
+        (reset)
+      explanation:
+      - Kasuta _ tühiku lisamiseks ja __ et joonida alla placeholderit või sarnast
+    info:
+      feedback: '&eSa värskendasid nimeplaati mängijale &3[playerDisplayName]&e (&3[offon]&e).'
+      targetfeedback: '&eSinu nimeplaat värskendati'
+      namePlate: '&e[playerDisplayName] nimeplaat: &f[namePlate]'
+  near:
+    help:
+      info: '&eKontrolli enda läheduses olevaid mängijaid'
+      args: (distance)
+    info:
+      nope: '&eKeegi ei ole sinu lähedal'
+      list: '&e[place]. &6[playerDisplayName] &e- &7[distance]m'
+      aproxList: '&e[place]. &6[playerDisplayName] &e- &6[dir] &7~[distance]m'
+  nick:
+    help:
+      info: '&eChanges player name'
+      args: '[newNickName/off] (playerName) (-s)'
+      explanation:
+      - 'To change into different nick name: cmi.command.nick.different'
+      - To bypass length protection use cmi.command.nick.bypass.length
+    info:
+      changed: '&eNickName changed to &r[newNickName] &efrom &r[oldNickName]'
+      changedTarget: '&eYour nickName changed to &r[newNickName] &eby &r[senderDisplayName]'
+      reset: '&eNick name set to default one'
+      sameNick: '&cYou dont have permission to change into different nick. You can
+        change only colors'
+      blockedNick: '&cYou can''t use this nick name'
+      blockedNickLength: '&eNick name is to long. Max &6[amount] &esymbols'
+      blockedNickLengthMin: '&eNick name is to short. Min &6[amount] &esymbols'
+      inUse: '&cNick name is already being used by another player'
+  notarget:
+    help:
+      info: '&eToggle no-mob target mode'
+      args: (playerName) (true/false) (-s)
+    info:
+      enabled: '&eMonsters will no longer attack you!'
+      disabled: '&eMonsters will now attack you!'
+  note:
+    help:
+      info: '&eManage players notes'
+      args: (playerName) [add/remove/clear/list] (id/note)
+    info:
+      newNote: '&eAdded new note for player'
+      clearNote: '&eAll notes cleared for player'
+      removedNote: '&eRemoved note for player'
+      noNotesById: '&eThere is no saved notes by this id for player'
+      noNotes: '&eThere is no saved notes for player'
+      listNotes: '&7[note]'
+  openbook:
+    help:
+      info: '&eOpen book gui'
+      args: (cText) (playerName) (fileName.txt)
+  oplist:
+    help:
+      info: '&eCheck operator player list'
+      args: ''
+    info:
+      feedback: '&e* &6[number]. &e[playerName]'
+  options:
+    help:
+      info: '&eModify personal options'
+      args: (playerName) (option) (enable/disable/toggle/status) (-s)
+      explanation:
+      - 'Posible actions: visibleHolograms, shiftSignEdit, totemBossBar, bassBarCompass,
+        tagSound, chatSpy, cmdSpy, signSpy, acceptingPM, acceptingTPA, acceptingMoney'
+    info:
+      title: '&8Options'
+      state: '&2State: [state]'
+      feedback: '&2[description]: [state]'
+      option:
+        visibleHolograms: '&eVisible holograms'
+        shiftSignEdit: '&eSign shift edit'
+        totemBossBar: '&eTotem BossBar'
+        bassBarCompass: '&eKompass BossBar'
+        tagSound: '&eVestluses märkimise heli'
+        chatSpy: '&eVestluse spioneerimine'
+        cmdSpy: '&eKäskude spioneerimine'
+        signSpy: '&eSiltide spioneerimine'
+        acceptingPM: '&eVõtab privaatseid sõnumeid vastu'
+        acceptingTPA: '&eVõtab teleportatsioone sinult vastu'
+        acceptingMoney: '&eVõtab makseid sinult vastu'
+        chatbubble: '&eChat bubbles'
+        pmSound: '&ePrivate messages sounds'
+        rideMe: '&ePlayers can ride you'
+  panimation:
+    help:
+      info: '&eTaasesita kohandatud osakese animatsioon'
+      args: (variable/playerName/stopAll) (stop)
+      explanation:
+      - 'Informatsiooni kasutamise kohta leiad: https://www.zrips.net/cmi/extra/particles/'
+  patrol:
+    help:
+      info: '&ePatrull'
+      args: ''
+    info:
+      noPatrol: '&eHetkel ei ole mängijaid, keda saaksid patrullida'
+      Patroling: '&eHetkel patrullin: &6[playerDisplayName]'
+      lastPatrol: '&eViimane kord patrullitud &6[time]&etagasi'
+      notes: '&eOmab &6[amount] &ekirja'
+  pay:
+    help:
+      info: '&eTeosta rahaline tehing'
+      args: '[playerName] [amount] (-s)'
+  ping:
+    help:
+      info: '&eNäita mängija pingi'
+      args: (playerName/message)
+    info:
+      feedback: '&ePing: &6[ping]ms'
+      selffeedback: '&eSinu ping on &6[ping]ms'
+      customMessage: '[message]'
+  placeholders:
+    help:
+      info: '&eLoetle kõik placeholderid'
+      args: (parse) (placeholder) (playerName)
+    info:
+      list: '&e[place]. &6[placeholder]'
+      outputResult: ' &etulemus: &6[result]'
+      parse: '&6[placeholder] &eby [source] &6result &8|&f[result]&8|'
+  playercollision:
+    help:
+      info: '&eSeadista mängijate põrkamise režiim'
+      args: (playerName) [true/false] (-s)
+    info:
+      feedback: '&eSa seadistasid põrkamise režiimi &3[boolean] &emängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      targetfeedback: '&eSinu põrkamise režiim muudeti &3[boolean]'
+  playtime:
+    help:
+      info: '&eNäitab mängija kogu mänguaega'
+      args: (playername)
+    info:
+      total: '&e* Mängu aeg kokku: [time]'
+      joined: '&e* Liitus: &6[time]'
+  playtimetop:
+    help:
+      info: '&eNäitab mängijate kogu mänguaja edetabelit'
+      args: '[page]'
+    info:
+      topLine: '&e----- Top mänguaeg &e-----'
+      scanning: '&eAndmeid skännitakse praegu, palun oota minut ja proovi uuesti'
+      loading: '&eAndmed ei ole veel laaditud. Skännimise protsess algab ja saad tulemuse
+        kui see on lõpetatud'
+      list: '&e[number]. [playerDisplayName] &e- &6[time]'
+      place: '&6[playerDisplayName] &eis in &6[place] &eplace'
+      ownLine: '&2[number]. &2[playerDisplayName] &2- &2[time]'
+  point:
+    help:
+      info: '&ePoint to block'
+      args: (particleName) (playerName) (-self) (time) (-s:[speed])
+  portals:
+    help:
+      info: '&eSeadista portaalid'
+      args: (new/nearest/forceupdate/setlocation/enabled) (portalName) (world:x:y:z:yaw:pitch)
+    info:
+      collides: '&cCollides with &6[portalName] &cportal'
+      exist: '&cPortal with this name already exist'
+      notExist: '&cPortal with this name doesn''t exist'
+      locationSet: '&ePortal location set to your position for &6[portalName]'
+      removed: '&ePortal &6[portalName] &eremoved'
+      click: '&eClick to set tp location for &6[portalName] &eto your current position'
+      bungeeSet: '&eTravel to position and click on this message to set teleport location'
+      bungeeSetConfirmed: '&eBungee portal (&6[portal]&e) location set from &6[sourceServer]
+        &eserver to &e[location]'
+      bungeeSetEmpty: '&eInitiated portal location set at &6[serverName] &eserver,
+        but no one is online in this server. This action will not complete until some
+        one joins it'
+      List: '&e[color][portalName]'
+      redefine: '&eRedefine area from current selection'
+      particles: '&eParticles: &6[state]'
+      particleType: '&eParticle type: &6[type]'
+      particleColor: '&eParticle color: &6[color]'
+      particleSize: '&eParticle size: &6[size]'
+      particleAmount: '&eParticle amount: &6[amount]'
+      particlePercent: '&ePercentage of sides shrinked particles: &6[amount]%'
+      activationRange: '&eActivation range: &6[amount]'
+      particlePermission: '&eShow particles without permission: &6[state]'
+      bungeeTeleport: '&eTeleport to exact bungee location: [state]'
+      requiresPermission: '&eRequires &7[perm] &epermission to use: [state]'
+      kickBack: '&ePrevent enter without permission: [state]'
+      informPermission: '&eInform on missing permission: [state]'
+      teleportToLocation: '&eTeleport to portal location'
+      teleportToTarget: '&eTeleport to portal target location'
+      performCommandsWithoutTp: '&ePerform commands without valid teleport location'
+      editCommands: '&eEdit portal commands'
+      setTeleportLocation: '&eSet teleport location'
+      setSafeLocation: '&eSet safe outside location'
+      save: '&eSave changes to file'
+      removePortal: '&eREMOVE PORTAL'
+      cantUsePortal: '&cYou can''t use this portal'
+  pos:
+    help:
+      info: '&eShow current position of a player'
+      args: (playerName)
+    info:
+      feedback: '&e[playerDisplayName] &e(&3[offon]&e) ([world]&e,&6[x]&e:&6[y]&e:&6[z]&e)'
+      feedbackRegion: '&eTükk &6[chunkx]&e:&6[chunkz]&eAla &6[regionx]&e:&6[regionz]'
+      feedbackDirection: '&eSuund &6[direction] &e(&6[degrees] &edegrees)'
+      feedbackBiome: '&eBioom &6[biome]'
+      feedbackLight: '&eValguse tase &6[lightLevel]'
+      netherCoord: '&eNether maailma koordinaadid: &e(&6[x]&e:&6[y]&e:&6[z]&e)'
+      normalCoord: '&eNormaalse maailma koordinaadid: &e(&6[x]&e:&6[y]&e:&6[z]&e)'
+  preview:
+    help:
+      info: '&eLaadi tükid antud ulatuses'
+      args: '[range] (innerrange)'
+    info:
+      NoMore: '&eUlatus ei saa olla suurem kui32 tükki. Muudetud maksimaalselt lubatavale
+        väärtusele.'
+      startSending: '&eLeitud &6[amount] &etükki mida saata. Alustan!'
+      InfoShow: '&6TPS: &3[tps] &6Jäänud &e[left] &6(&e[min]m:[sec]s&6) &6Kiirus:
+        &e[speed]'
+      Finished: '&eLõpetatud. See võib võtta lisaaega, et laadida kõik tükid sinu
+        kõrval.'
+  prewards:
+    help:
+      info: '&eVaata mänguaja auhindu'
+      args: (playerName)
+    info:
+      list: '&e[place]. &6[rewardName] &eauhind &6[time]'
+      listNoStack: '&e[place]. &6[rewardName]'
+      listOneTime: '&e[place]. &6[rewardName]'
+      claim: ' &2Võta!'
+      claimAmount: ' &2Võta(x[amount])!'
+      claimHover: '&2Kliki auhinna võtmiseks!'
+      inform: '!actionbar!&2Sul on vastu võtmata auhindu ootel! /prewards'
+  ptime:
+    help:
+      info: '&eKontrollib mängija aega'
+      args: (freeze/unfreeze/day/night/dusk/morning/realtime/reset) (playerName) (-s)
+      explanation:
+      - 'Näide:'
+      - /ptime 13:00:00
+      - /ptime 1pm
+      - /ptime 13
+      - /ptime 7000ticks
+      - /ptime Zrips 1pm
+      - /ptime freeze
+      - /ptime unfreeze
+      - /ptime realtime
+      - /ptime reset
+    info:
+      check: '&eIsiklik aeg: &6[24h] &evõi &6[12h] &evõi &6[ticks]tiksu'
+      frozen: ' &c(-)'
+      gotreseted: '&6[playerDisplayName] &eaeg lähtestati'
+      gotfrozen: '&6[playerDisplayName] &eaeg külmutati'
+      gotunfrozen: '&6[playerDisplayName] &eaeg ei ole enam külmutatud'
+      setto: '&eAeg seatud &6[24h] &evõi &6[12h] &evõi &6[ticks]tiksu &emängijale
+        &6[playerDisplayName]'
+  purge:
+    help:
+      info: '&ePuhastab mängijate andmed maailma kaustast ebaaktiivsete päeva järgi'
+      args: (stop)
+    info:
+      stopped: Puhastus peatatud.
+  pweather:
+    help:
+      info: '&eKontrollib mängija ilma'
+      args: (playerName) [sun/rain/reset] (-s)
+    info:
+      check: '&eIsiklik ilm: &6[weather]'
+      gotreseted: '&6[playerDisplayName] &eilm lähtestati'
+      setto: '&eIsiklik ilm seatud &6[weather] &emängijale &6[playerDisplayName]'
+      gotset: '&eSinu isiklik ilm seati &6[weather]'
+      reset: '&eIlm lähtestatud'
+  rankdown:
+    help:
+      info: '&eDecrease your rank'
+      args: (playerName) (rankName) (confirm) (-cmd) (-cost)
+      explanation:
+      - -cmd will perform command defined for previous rank rankup
+      - - rank rankup
+    info:
+      noPrev: '&eCan''t find any previous ranks'
+      list: '&ePick one rank you want to &crankdown &eto: '
+      confirm: '&eClick me to confirm &crankdown &eto &6[rank]'
+      downranked: '&eRanked down to &6[rank]'
+  rankinfo:
+    help:
+      info: '&eYour rank information'
+      args: (playerName) (rankName)
+    info:
+      distanceCM: '[value]cm'
+      distanceM: '[value]m'
+      distanceKm: '[value]km'
+      requiredMoney: ' &eMoney: [color][current]&e/&6[needed]'
+      requiredExp: ' &eExp: [color][current]&e/&6[needed]'
+      requiredVotes: ' &eVotes: [color][current]&e/&6[needed]'
+      requiredPerm: ' &ePerm: '
+      requiredMcmmo: ' &eMcmmo: '
+      requiredMcmmoList: '&e[color][name] '
+      requiredMcmmoListHover: ' &e[color][current]&e/&6[needed]'
+      requiredMcmmoPower: Power
+      requiredAurelium: ' &eAurelium: '
+      requiredAureliumList: '&e[color][name] '
+      requiredAureliumListHover: ' &e[color][current]&e/&6[needed]'
+      requiredJobs: ' &eJobs: '
+      requiredJobsList: ' &e[color][name]'
+      requiredJobsListHover: ' &e[color][current]&e/&6[needed]'
+      requiredJobsTotalLevel: TotalLevel
+      requiredItem: ' &eItems: '
+      requiredItemsList: '&e[color][name]'
+      requiredItemListHover: '&e[color][current]&e/&6[needed]'
+      currentRank: ' &eYour current rank: &6[rankName]'
+      elseCurrentRank: ' &6[playerDisplayName] &epraegune auaste: &6[rankName]'
+      rankNameLine: ' &e------ &6[rankName] &e[rankupState] &e------'
+      canRankup: ' &2Saab kõrgendust!'
+      cantRankup: ''
+      requiredStats: ' &e[name][extra]&e: [color][current]&e/&6[needed]'
+      requiredStatsExtra: ' (&6[type]&e)'
+      nextRanks: ' &eJärgmised auastmed: &6'
+      finalRank: ' &eSee on viimane auaste'
+      noRank: ' &eEi leia auastet'
+      check: '&eKontrolli &6[rank] &eauastet'
+      progressBarHover: '&eEdenemine [percent]%'
+  ranklist:
+    help:
+      info: '&eNäita võimalikke auastmeid'
+      args: ''
+    info:
+      list: '&e[place]. [currentRankMarker]&6[rankName][currentRankMarker]'
+      currentRankMarker: '&6+'
+      hoverNext: "&6Järgmine: \n[rankList]"
+      hoverLast: '&2Viimane auasta'
+  rankset:
+    help:
+      info: '&eSeadista mängija auaste'
+      args: (playerName) [rankName] (-cmd) (-cost)
+      explanation:
+      - -cmd käivitab käsu defineeritud selle auastme kõrgendamisele
+      - - rankup
+      - - items
+    info:
+      set: '&eAuaste muudetud &6[playerDisplayName] &eauastmeks &6[rankName]'
+  rankup:
+    help:
+      info: '&eSuurenda oma auastet'
+      args: (playerName) (rankName) (confirm)
+    info:
+      noRank: ' &eSinuga ei ole seotud ühtegi auastet'
+      requiresPrevious: ' &eSa ei saa kõrgendada selle auastmeni. See vajab sulle
+        &6[rank] &eauastmeid'
+      list: '&eVali üks auaste milleni tahad tõusta: '
+      confirm: '&eKliki mind auastme kõrgendamise kinnitamiseks &6[ranks]'
+  realname:
+    help:
+      info: '&eKontrolli mängija päris nime'
+      args: (playerName/nickName)
+    info:
+      feedback: '&r[playerDisplayName] &ereal name &r[playerName]'
+  recipe:
+    help:
+      info: '&eKontrolli eseme retsepti'
+      args: (itemName) (-c)
+    info:
+      type: '&0[type]'
+      types:
+        Shaped: Shaped
+        Shapeless: Shapeless
+        Furnace: Furnace
+        Blasting: Blasting
+        Campfire: Campfire
+        Cooking: Cooking
+        Merchant: Merchant
+        Smoking: Smoking
+        Stonecutting: Stonecutting
+        Smithing: Smithing
+        Complex: Complex
+        Unknown: Unknown
+      page: ' &0[current]&7/&0[total]'
+      noRecipes: '&cEi leia retsepte sellele esemele'
+  reload:
+    help:
+      info: '&eLaadib plugina konfiguratsioonid ja lokalisatsiooni failid uuesti'
+      args: ''
+    info:
+      feedback: '&6CMI Konfiguratsiooni- ja lokalisatsioonifailid taaslaaditud. See
+        võttis aega [ms]ms'
+      failedConfig: '&4Konfiguratsioonifaili laadimine ebaõnnestus! Kontrolli õigekirja!'
+      failedLocale: '&4Lokalisatsioonifaili laadimine ebaõnnestus! Kontrolli õigekirja!'
+  removehome:
+    help:
+      info: '&eEemalda kodu'
+      args: (homeName) (playerName)
+    info:
+      remove: '&cKliki eemaldamiseks'
+      removed: '&eKodu (&6[home]&e) eemaldatud'
+      list: '&c[home]'
+  removeuser:
+    help:
+      info: '&eEemaldab kasutaja ja selle andmed'
+      args: '[uuid/duplicates]'
+    info:
+      removed: '&eKasutaja (&6[uuid]&e) eemaldatud'
+      removedDuplicate: '&6[amount]/[max] &eduplikaati kustutatud'
+  removewarp:
+    help:
+      info: '&eEemalda lõim'
+      args: (warpName)
+    info:
+      remove: '&cClick to remove'
+      removed: '&eWarp (&6[warp]&e) removed'
+      notYours: '&cThis warp doesn''t belong to you!'
+  repair:
+    help:
+      info: '&eRepair items'
+      args: '[hand/armor/all] (playerName)'
+      explanation:
+      - cmi.command.repair.hand - allows a user to repair items in their hand
+      - cmi.command.repair.armor - allows a user to repair items in armor slots
+      - cmi.command.repair.all - allows a user to repair their whole backbag
+      - - adding repair share protection
+    info:
+      feedback: '&eYou have repaired &3[amount]&e items for &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      nothing: '&eNothing to repair'
+      cant: '&eCan''t repair this item'
+      feedbackMoney: '&eYou have repaired &3[amount]&e items for &3[playerDisplayName]&e
+        (&3[offon]&e). Cost: &7[cost]'
+      itemOwner: '&eLast repaired by: &6[owner]'
+      cantUse: '!title!&cCan''t use this item!!subtitle!&eRepair it your self!'
+  repaircost:
+    help:
+      info: '&eCheck items repair cost'
+      args: (hand/armor/all) (playerName)
+    info:
+      feedback: '&eRepair cost: &6[amount]'
+      noNeed: '&eNo need to repair'
+  replaceblock:
+    help:
+      info: '&eReplaces blocks in current world around you'
+      args: '&eid &6[blockName:data/id:data]&e w &6[blockName:data/id:data] &er &6[range
+        in chunks/g]&e y &6[max height]'
+      explanation:
+      - '&6SubCommands:'
+      - '&e- &6pause &e- pause replacing'
+      - - '&6continue &e- continue replacing'
+      - - '&6stop &e- stop replacing'
+      - - '&6speed [amount] &e- set current replace speed'
+      - - '&6autospeed [true/false] &e- set autospeed turned off or on'
+      - - '&6messages [true/false] &e- set message output to off or on'
+      - 'Example:'
+      - /cmi replaceblock id 52 w stone r 10
+      - /cmi replaceblock id 52,gold_block w stone r 15 y 100
+      - /cmi replaceblock id 52 w air r g y 100
+      - /cmi replaceblock id iron_ore%75 w stone%90,dirt%5 r g
+    info:
+      startScanning: '&eLeitud &6[amount] &etükki mida kontrollida. Alustan!'
+      paused: '&eAsendamine pausil, jätkamiseks kasuta &6/cmi blockreplace continue.'
+      continuing: '&eAsendamine jätkub'
+      stoped: '&eAsendamine peatatud.'
+      speedChange: '&eKiirus muudetud väärtuseks [amount]'
+      autospeedChange: '&eAutoSpeed muudetud [state]'
+      messagesChange: '&eSõnumi saatus on lülitatud [state]'
+      infoShow: '&6TPS: &3[tps] &6Jäänud &e[left] &6(&e[time]&6) &6Kiirus: &e[speed]
+        &6Asendatud: &e[found]'
+      finished: '&eLõpetatud! Asendatud: &6[amount] &eplokki! Ajaga &6[time]&e.'
+  reply:
+    help:
+      info: '&eVasta viimasele sõnumi saatjale'
+      args: '[message]'
+    info:
+      noOneToReply: '&eKellelegi pole vastata'
+  resetback:
+    help:
+      info: '&eLähtestab mängija tagasimineku asukohta'
+      args: (playerName) (reason) (-death) (-s)
+    info:
+      feedback: '&eTgasimineku asukoht lähtestati!'
+  resetdbfields:
+    help:
+      info: '&eLähtestab teatud andmebaasi veerud vaikimisi väärtustele'
+      args: '[collumnName] (-w:[worldName]) (-p:[playerName])'
+    info:
+      feedback: '&eVärskendatud &7[amount] &emängijat'
+      nofield: '&cEi leia välja teksti selle nimega'
+  ride:
+    help:
+      info: '&eSõida sihtolemi peal'
+      args: ''
+      explanation:
+      - ' cmi.command.ride.[entityType] - olemiga sõitmise ligipääsu jaoks'
+    info:
+      riding: '&eSa sõidad olemiga &6[entityName]'
+      cantRide: '&cSa ei saa sõita (&6[entityName]&c) olemiga'
+      someOneElse: '&cKeegi juba sõidab selle olemiga'
+      ridingYou: '&6[playerDisplayName] &esõidab sinuga, kirjuta &6/shakeitoff &emaharaputamiseks'
+  rt:
+    help:
+      info: '&7Teleporteeru suvalisse asukohta'
+      args: (playerName) (worldName) (-s)
+    info:
+      possible: '&eVõimalikud maailmad: &6[worlds]'
+      tpLimit: '&eSa ei saa teleporteeruda nii kiiresti, palun oota &6[time] &eja
+        proovi uuesti'
+      IncorrectLocation: '&6Ei suutnud leida korrektset teleporeerumise asukohta,
+        palun oota &e[time] &6ja proovi uuesti.'
+      teleported: '!actionbar!&aReee!'
+      waiting: '!actionbar!&6Otsin sobivat kohta. Palun oota'
+  sameip:
+    help:
+      info: '&eLoetle sama IP-ga sisselogitud mängijad'
+      args: ''
+    info:
+      list: '&e[place]. &6'
+  saturation:
+    help:
+      info: '&eSeadista mängija küllastatus'
+      args: (playerName) [amount]
+    info:
+      feedback: '&eSa seadistasid &3[amount]&e küllastatuse mängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      targetfeedback: '&eTeie küllastatus seati &3[amount]&e &3[senderDisplayName]
+        &epoolt.'
+  saveall:
+    help:
+      info: '&eSalvestab iga mängija seljakoti'
+      args: (daysRange/-online)
+      explanation:
+      - -online muutujat saab kasutada ainult võrgus olevate mängijate inventuuri
+        salvestamiseks
+    info:
+      saving: '[symbol] &2kontrollitud: &e[checked]&2 / &e[total]&2 salvestatud: &e[saved]
+        &2vahele jäetud: &e[skipped] [simbol]'
+      saved: '&eSalvestamine lõpetatud. Salvestatud: &6[saved] &eVahele jäetud: &6[skipped]'
+  saveditems:
+    help:
+      info: '&eSalvesta või halda salvestatud esemeid'
+      args: '[save/get/remove/list] (savedItemName) (-t:playerName) (-a:amount) (-c:category/all)
+        (-s)'
+    info:
+      info:
+      - '&fVasak klikk eseme saamiseks'
+      - '&fKeskmine klikk kustutamiseks'
+      got: '&eSaid &6[name] &eseme'
+      give: '&eGive &6[name] &eitem'
+      removed: '&eRemoved &6[name] &eitem'
+      saved: '&eSaved &6[name] &eitem'
+      uiTitle: 'Category: [category] &8[current]&7/&8[total]'
+      name: '&7Name: &f[name]'
+      category: '&7Category: &f[category]'
+  sc:
+    help:
+      info: '&eStarts sign copy process'
+      args: (playerName)
+    info:
+      punch: '&ePunch sign to paste text into it, or punch any non-sign block to cancel
+        process'
+      canceled: '&eSign copy process cancelled'
+      updated: '&eSign updated'
+  scan:
+    help:
+      info: '&eScans for items in current world'
+      args: ''
+      explanation:
+      - '&6SubCommands:'
+      - '&e- &6stats &e- show current scanning stats '
+      - '&e- &6pause &e- pause scanning '
+      - - '&6continue &e- continue scanning'
+      - - '&6stop &e- stop scanning'
+      - - '&6stopall &e- stops all active scans'
+      - - '&6speed [amount] &e- set current scan speed'
+      - - '&6autospeed [true/false] &e- set AutoSpeed turned off or on'
+      - - '&6messages [true/false] &e- set message output to off or on'
+      - 'Variables:'
+      - '&eid &6[id:data]'
+      - '&eq &6[minimum quantity]'
+      - '&er &6[range in chunks] &e- option to use &6g &einstead of number to scan
+        entire map'
+      - '&en &6[item name]'
+      - '&el &6[item lore]'
+      - '&eh &6uses info from item in hand'
+      - '&ee &6[enchantname]'
+      - '&eelvl &6[enchantminlevel]'
+      - '&eoversize'
+      - '&epurge - removed found items, this feature should be enabled in config file'
+      - 'Example:'
+      - /scan id 52 r 30
+      - scan id diamond_block r g q 32
+    info:
+      loadingChunkInfo: '&eLoading chunk information!'
+      startScanning: '&eFound &6[amount] &echunks to check. Starting!'
+      paused: '&eScanning paused, to continue use &6/cmi scan continue.'
+      continuing: '&eScanning continuing'
+      stoped: '&eSkännimine peatatud. Sa saad vaadata tulemusi käsuga /cmi scan info'
+      speedChange: '&eKiirus muudetud väärtuseks [amount]'
+      autospeedChange: '&eAutoSpeed muudetud [state]'
+      messagesChange: '&eSõnumi saatus on lülitatud [state]'
+      NoInfo: '&eSiin ei ole infot'
+      infoShow: '&6TPS: &3[tps] &6Jäänud &e[left] &6(&e[time]&6) &6Kiirus: &e[speed]
+        &6Leitud: &e[found]'
+      Teleport: '&eVajuta teleporeerumiseks'
+      scanList: '&2[number]. &e[place] &6[amount] &8(&7X:&f[x] &7Y:&f[y] &7Z:&f[z]&8)'
+      scanListChecked: '&7[number]. [place] [amount] (X:[x] Y:[y] Z:[z])'
+      edit: ' &e(Edit)'
+      total: '&eKontrollin [current]/[until] kõikidest tükkidest [total]'
+      Stats:
+      - '&e************************************************************'
+      - '&e* &6Tükid: &e[checked]/[total]'
+      - '&e* &6Skännimise ulatus: &e[range]'
+      - '&e* &6Skännimise kiirus: &e[scanspeed] &6(&e[autospeed]&6)'
+      - '&e* &6Maailm: &e[world]'
+      - '&e* &6Leitud: &e[found]'
+      - '&e* &6Aeg: &e[time]'
+      - '&e* &6ID: &e[id]'
+      - '&e* &6Hulk: &e[qty] ja üles'
+      - '&e* &6Nimi: &e[name]'
+      - '&e* &6Lore: &e[lore]'
+      - '&e************************************************************'
+  scavenge:
+    help:
+      info: '&eTaaskäitle ese ja selle loitsud'
+      args: (playerName)
+    info:
+      enchantWorth: '&eLoitsu väärtus: &7[price]'
+      enchantFailChance: '&4Ebaõnnestumise tõenäosus: &7[chance]%'
+      enchantFailed: '&cEbaõnnestus. &7[enchant]&c tase &7[level] &7[chance]% &cebaõnnestumise
+        võimalusega'
+      enchantLevelChance: '&cTaseme vähenemise võimalus: &7[chance]%'
+      gotIngredients: '&eSa said [itemList]'
+      gotIngredientsFormat: '&6[material]&7-&6[amount]'
+      itemBroke: '&cEse purunes [chance]% purunemise tõenäosusega'
+      confirm: '&2Kinnita kolamine. Hind: &c[price]'
+      itemBreakChance: '&cEseme purunemise võimalus: [chance]%'
+      itemBreakChanceExtra: '&c[durability]% vastupidavus lisab [chance]% purunemise
+        võimaluse'
+      itemBreak: '&cEse puruneb klikkimisel!'
+      ingredientReturnChance: '&7Koostisosade tagastamise tõenäosus: [chance]%'
+      cantScavenge: '&cEi saa kolada'
+      insertItem: '&2Sisesta ese oma kohtta üleval'
+      scavengeCost: '&8Kolamise hind: [cost]'
+      moreTitle: 'Ebakorrektne kogus: [input]/[required]'
+      moreLore:
+      - '&bSul on veel seda eset vaja.'
+      - '&bVajab vähemalt &e[amount]'
+      title: '&2Kolamine'
+  schedule:
+    help:
+      info: '&eVallanda ajakava'
+      args: '[scheduleName]'
+  se:
+    help:
+      info: '&eMuudab sildi teksti rida.'
+      args: (SignLine) [Text]
+      explanation:
+      - Kasuta \n lisarea jaoks
+  search:
+    help:
+      info: '&eOtsi esemeid/loitse/lendamist/maxhp/gm/oversize režiime ja teisi asju
+        kõikidelt mängijatelt'
+      args: ''
+      explanation:
+      - '&eid &6[id:data] '
+      - '&ename &6[some_custom_itemname] '
+      - '&elore &6[some_custom_lore] '
+      - '&eenchant &6[lowest enchant level] '
+      - '&epotion &6[lowest custom potion effect level] '
+      - '&efly &6[true or false] '
+      - '&egm &6[0/1/2/3 or survival/creative/adventure/spectator] '
+      - '&emaxhp &6[lowest hp player have] '
+      - '&egod &6[true/false]'
+      - '&eoversize'
+      - 'Example:'
+      - /search gm 1
+      - /search id 52
+      - /search lore Uber_lore
+    info:
+      started: '&eSearching '
+      current: '&eCurrently found &3[amount] &efrom &3[files] &echecked files'
+      nothingfound: '&eNothing found by your criteria'
+      totalfound: '&eTotally found &3[amount] &efrom possible &3[files] &echecked
+        users'
+      location:
+        ender: '&3Ender'
+        inv: '&eInv'
+        invS: '&eShulkerBox'
+        PlayerVault: '&ePlayerVault'
+      localsearch: '&e (L search)'
+      localsearchhover: |-
+        &eWill open inv from local files
+        &eThis will take longer
+      reglist: '&e[number]. &e[name]'
+      list: '&2[number]. [location] &6[name]'
+      listhover: '&eClick to open inv'
+  seen:
+    help:
+      info: '&eCheck when player was last seen'
+      args: '[playerName/uuid]'
+    info:
+      feedback: '&6[playerDisplayName] &ehas been &6[offon] &esince &6[time]&eago!'
+  select:
+    help:
+      info: '&eManage selection area'
+      args: (pos1/pos2/shift/expand/contract/clear) (amount)
+  sell:
+    help:
+      info: '&eSell items from backbag'
+      args: (all/blocks/hand/same/gui/material) (playerName) (-s)
+    info:
+      total: '&eEarned &6[total] &eby selling &6[amount] &eitems. New balance &6[balance]'
+      close: '&8Place items you want to sell'
+      sellInfo: '&8Sell for: &2[price]'
+  sendall:
+    help:
+      info: '&eSend all online players to target server'
+      args: '[serverName]'
+  server:
+    help:
+      info: '&eConnect to bungeecord server'
+      args: '[serverName] (playerName) (-f)'
+  serverlist:
+    help:
+      info: '&eNäita serveri nimekirja'
+      args: ''
+    info:
+      listOnline: '&7[place]. &2[serverName] &6[count]&7/&6[max]'
+      listOffline: '&7[place]. &c[serverName] &60&7/&60'
+      consoleInfo: ' &f(&2[ip]&f:&2[port]&f)'
+  servertime:
+    help:
+      info: '&eNäita serveri aega'
+      args: ''
+    info:
+      time: '&eServeri aeg: [time]'
+      format: MM/dd/YYYY HH:mm:ss
+      timeZone: '&eAjatsooni nimi: &6[name]'
+      timeZoneId: '&eAjatsooni ID: &6[id]'
+      timeZoneOffset: '&eAjatsooni nihe: &6[offset]'
+  setenchantworth:
+    help:
+      info: '&eMuuda loitsu väärtust'
+      args: ''
+  setfirstspawn:
+    help:
+      info: '&eSeadista esimene tekkekoht'
+      args: (playerName)
+    info:
+      feedback: '&eEsimene tekkekoht seatud asukohta (&6[world]&e,&6[x]&e,&6[y]&e,&6[z]&e)!'
+  sethome:
+    help:
+      info: '&eSeadistab kodu asukoha'
+      args: (homeName) (playerName) (-p) (-l:worldName;x;y;z) (block/Material) (slotNumber)
+        (-overwrite)
+      explanation:
+      - cmi.command.sethome.unlimited
+      - - loaharu
+    info:
+      set: '&eSa lõid korrektselt kodu nimega &6[homeName]&e!'
+      setBed: '&eLoodud voodi taassünni asukoht'
+      private: ' &2(private)'
+      maxFavorites: '&cYou can only have &e[amount] &cfavorite homes at one time'
+      noMore: '&cSa oled jõudnud maksimaalse sethome limiidini'
+      exist: "&cKodu asukoht nimega (&6[name]&c) juba eksisteerib! \n&eKliki\\ \\\
+        \ ülekirjutamise kinnitamiseks."
+      noOverwrite: '&cSul ei ole luba, et üle kirjutada oma praeguse kodu asukohta.
+        Eemalda vana või vali erinev kodu nimi.'
+      slotTaken: '!actionbar!&cKodu koht on juba võetud &7[homeName]&cpoolt, vali
+        midagi muud'
+      setIcon: '!actionbar:3!&7Seadsid kodu ikooniks &6[material] &7materjali'
+      tooManyInWorld: '&cSa ei saa selles maailmas rohkem kodusid omada. Max &6[max]&c
+        lubatud, sul on &6[current]'
+  setmotd:
+    help:
+      info: Seadista server motd
+      args: '[newMotd] (-s)'
+      explanation:
+      - kasuta \n teise rea tegemiseks
+      - kasuta _tühiku loomiseks, kui sul on vaja rohkem, kasuta _ tühikule järgnevalt
+    info:
+      changed: '&eMuudetud motd:'
+  setrt:
+    help:
+      info: '&eSeadista suvalise teleporteerumise piirid'
+      args: (worldName) (center:[x]:[z]) (min:[range]) (max:[range]) (square/circle)
+        (enabled/disabled)
+    info:
+      list: '&6[place]. [world] [enabled] &7[centerX]:[centerZ] &e[maxDist]/[minDist]
+        [type]'
+  setspawn:
+    help:
+      info: '&eSeadista spawni käsu teleporteerumise punkt'
+      args: (playerName) (true/false) (-g:[groupName]) (-rng:[range]) (-w:world,world_nether)
+        (-loc:[world;x;y;z;yaw;pitch])
+      explanation:
+      - Rohkem infot käsu kasutuse kohta https://www.zrips.net/cmi/commands/spawn/
+    info:
+      feedback: '&6Sündimise punkt seatud ([world],[x],[y],[z])!'
+      group: ' &e([group])'
+      rng: ' &e(Rng: [rng])'
+      respawn: '&7Kliki, et seadistada sündimiskoht võimaliku uuestisünni asukohana'
+  setwarp:
+    help:
+      info: '&eSeadistab lõimu asukoha'
+      args: '[warpName] (reqPermission) (hand/head/head:[playerName]) (slot) (autoLore)
+        (-g:[groupName]) (world;x;y;z;yaw;pitch) (-confirm)'
+      explanation:
+      - 'Näited:'
+      - /cmi setwarp spawn - simple warp to spawn
+      - - loaharu selle kasutamiseks
+      - - GUI-s selle lõimu jaoks
+      - /cmi setwarp spawn 13 - loo lõim ja lisa gui koht mida kasutada guis (1-54)
+      - - ja vajab luba
+      - - lore
+    info:
+      newSet: '&eNew warp (&6[warp]&e) set'
+      noSet: '&cWarp with this name already exists'
+      noMore: '&cYou have reached max allowed warp limit. ([max])'
+  setworth:
+    help:
+      info: '&eChange item worth'
+      args: (itemname) -s:(sellPrice)
+    info:
+      setSell: '&eSet item sell price &7[amount]'
+      setBuy: '&eSet item buy price &7[amount]'
+      notInUse: '&eMainly used for possible exploit detection'
+      sellPrice: '&fSell price: &e[amount]'
+      buyPrice: '&fBuy price: &2[amount]'
+      exploit: '&4Possible EXPLOIT!'
+      ingredient: '&2Ingredients'
+      ingredients: '&7[ingredient]&f(&7[amount]&f) = &e[price]'
+      notSet: '&eprice not set'
+      notSetBuy: '&7Buy price not set'
+      result: '&2Crafts into &7[result]&f(&7[amount]&f)'
+      ingredientsPrice: '&cIngredient price: &7[price]'
+      resultPrice: '&cCan be sold for: &7[price]'
+      explanation: '&2Buy price is only used in detecting possible exploits'
+  shadowmute:
+    help:
+      info: '&eMute player without telling him that he is muted'
+      args: '[playerName] (time) (-s) (reason)'
+  shakeitoff:
+    help:
+      info: '&eDismount any entity riding you or target player'
+      args: (playerName) (-s)
+    info:
+      shaked: '&eYou have shaken off: &6[entity]'
+      nothing: '&eNothing to shake off'
+  shoot:
+    help:
+      info: '&eShoot projectile'
+      args: (playerName) (-t:targetPlayer) (type) (speed)
+  silence:
+    help:
+      info: '&eBlocks public messages'
+      args: ''
+      explanation:
+      - cmi.command.silence.bypass - to bypass silence
+    info:
+      enabled: '&eSilence mode &2Enabled'
+      disabled: '&eSilence mode &cDisabled'
+      inMode: '&ePlayer is in silence mode'
+  silentchest:
+    help:
+      info: '&eToggles silent chest'
+      args: ''
+      explanation:
+      - '&eMängijad ümber sinu ei näe kirstu avamise animatsiooni kui sa avad kirstu'
+      - '&eProtocolLib on vajalik selle töötamiseks.'
+    info:
+      feedback: '&eSa lülitasid vaikse kirstu režiimi &3[offon].'
+      onOpen: '&eAvan kirstu, vaikselt.'
+      cantOpen: '&cEi saa avada. Saak ei ole veel genereeritud.'
+  sit:
+    help:
+      info: '&eIstu omas asukohas'
+      args: (playerName) (-persistent) (-s) (location) (on/off)
+    info:
+      onSit: '!actionbar!&eSa istud praegu'
+      onStandUp: '!actionbar!&eSa ei istu enam'
+      accupied: '!actionbar!&cKeegi istub juba siin!'
+  skin:
+    help:
+      info: '&eVaheta mängija skinni'
+      args: '[skinName/off/update] (playerName) (-s)'
+    info:
+      changed: '&eVahetatud skin &6[skinOwner] &ejärgi'
+      failed: '&eSkinni paigaldamine ebaõnnestus'
+      resetSteve: '&eEemaldatud skin'
+      reset: '&eKinnitatud lähteskin'
+      update: '&eVärskendatud skin'
+  smite:
+    help:
+      info: '&eLöö välgunoolega maad või mängijat'
+      args: (playerName/location) (-s)
+    info:
+      gotSmited: '&eSa said välguga pihta!'
+      targetSmited: '&eLöön välgu sihtmärki!'
+  smithingtable:
+    help:
+      info: '&eAva smithing table'
+      args: (playerName)
+    info:
+      feedback: '&eTe avasite smithing table mängijale &3[playerDisplayName]&e (&3[offon]&e).'
+      targetfeedback: '&3[senderDisplayName]&e avas smithing table sulle.'
+  solve:
+    help:
+      info: '&eLahenda võrrand'
+      args: '[equation]'
+    info:
+      result: '&7Tulemus: &e[res]'
+      incorrect: '&cEbakorrektne sisend: &e[input]'
+  sound:
+    help:
+      info: '&eTaasesita heli sihtkohas'
+      args: '[sound] (-p:[pitch]) (-v:[volume]) (playerName/-all) (world;x;y;z) (-r:[radius])
+        (-s)'
+    info:
+      playing: "&eTaasesitan &6[sound] &easukohas [world] [x]:[y]:[z] \n&eHelikõrgus:\
+        \ &6[pitch]\\ \\ &eHelitugevus: &6[volume]"
+      playingMultiple: "&eTaasesitan &6[sound] &e &6[amount] &emängijale \n&eHelikõ\
+        rgus:\\ \\ &6[pitch] &eHelitugevus: &6[volume]"
+  spawn:
+    help:
+      info: '&eTeleporteerib tagasi sünnikohta'
+      args: (playerName) (-s)
+    info:
+      notset: '&4Sünnikoht ei ole seatud!'
+      feedback: '&6Saabusite sünnikohta.'
+      feedbackother: '&e[playerDisplayName] &6liikus Sünnikohta.'
+  spawner:
+    help:
+      info: '&eSeadista spawner'
+      args: '[EntityType]'
+    info:
+      feedback: '&eSpawner on seadistatud &6[type] &etüübiks'
+      wrongEntityIdName: '&cVale olemi ID või nimi'
+      cantSet: '&cSa ei saa seadistada seda tüüpi spawnerit'
+      cantDetect: '&cEi tuvasta spawneri plokki'
+      pickOne: '&8Vali sawneri tüüp'
+  spawnereditor:
+    help:
+      info: '&eRedigeeri spawnerit'
+      args: ''
+    info:
+      type: '&7Muuda tüüpi: &e[type]'
+      nextIn: '&7Järgmine sünnitamine: &e[time]'
+      nearby: '&7MaxNearBy olemit: &e[count]'
+      maxdelay: '&7Max Sündimise Ooteaeg: &e[count]'
+      mindelay: '&7Min Spawn Delay: &e[count]'
+      prange: '&7Required player range: &e[range]'
+      spawncount: '&7Spawn Count: &e[count]'
+      spawnrange: '&7Spawn Range: &e[range]'
+  spawnmob:
+    help:
+      info: '&eSpawns entity at your location'
+      args: '[EntityType]'
+      explanation:
+      - ' &e- First argument always is main entities name'
+      - ' &e- You can define entities states: baby, adult, dumb, immortal, tamed,
+        n-[name], upwards, glow, skull-[name], helmet-[itemname], chest-[itemname],
+        legs-[itemname], boots-[itemname], mhand-[itemname], ohand-[itemname], effect-levitation/10/1-speed/10/2.
+        /n Example: horse:baby:tamed:n-Horsy, zombie:skull-Zrips:n-AngryZombie:mhand-Diamond_Sword'
+      - ' &e- some entities have special variables: '
+      - '    &6Sheep &e- white, brown, red, rainbow and so on... &6primed_tnt &e-
+        [ticks], incendiary'
+      - '    &6Horse &e- white, chestnut, creamy, darkbrown, gray, black'
+      - '    &6Ocelot &e- red, siamese, wild, black &6experience_orb &e- [number]'
+      - '    &6Skeleton &e- wither, &6Creeper &e- charged &6Wolf &e- angry'
+      - '    &6Zombie &e- villager, blacksmith, butcher, farmer, priest, librarian'
+      - '    &6Villager &e- blacksmith, butcher, farmer, priest, librarian'
+      - '    &6Slime, MagmaCube &e- size by giving number from 1. slime:3'
+      - '    &6ArmorStands &e- nogravity, noplate, arms, noarms, small'
+      - '    &6ShulkerBullet &e- [target], bounce'
+      - ' &e- Extra variables:'
+      - '     &6ps:zombie:priest:baby-1 &e- passanger with amount'
+      - '     &6hp:20 &e- health'
+      - '     &6sp:3 &e- spreads randomly entities in range'
+      - '     &6s:4 &e- entities speed'
+      - '     &6t:[playername] &e- target which one entities will atack'
+      - '     &6q:10 &e- amount you want to spawn'
+      - '     &6[playername] &e- spawns entities at players location'
+      - '     &6loc:123/13.0/-15/World &e- spawn location. World name is optional
+        if used as player'
+      - 'Example: /cmi spawnmob sheep:adult:rainbow ps:chicken:baby:n-Chick_on_Sheep
+        q:10 sp:10 hp:50 s:2'
+    info:
+      wrongEntityName: '&eIncorrect entity name'
+      spawnedEntities: '&eSpawned &6[entities] &eentities '
+      spawnedPasangers: '&eand &6[passengers] &epassengers'
+      nothingSpawned: '&eNo entities spawned'
+      cantSpawn: '&eCan''t spawn this type of entity'
+  speed:
+    help:
+      info: '&eSet players walk or fly speed'
+      args: (playerName) [amount] (-s)
+  staffmsg:
+    help:
+      info: '&eSends message to staff channel'
+      args: '[message/toggle/on/off]'
+    info:
+      message: '&2[Staff]&4[&7[senderDisplayName]&4]&r&c [message]'
+      toggledOn: '&eA persistent staff chat has been started. You can now write messages
+        in public chat.'
+      toggledOff: '&eToggled off Persistent staff chat'
+  stats:
+    help:
+      info: '&eCheck players stats'
+      args: (playerName)
+    info:
+      distanceCM: '&e[value]&6cm'
+      distanceM: '&e[value]&6m'
+      distanceKm: '&e[value]&6km'
+      list: '&e[name]:&6[amount]'
+      listCover: '&e([list]&e)'
+      Quit: '&eMängust lahkunud: &6[value]'
+      PlayTime: '&eAega mänginud: &6[value]'
+      SneakTime: '&eHiilimise aeg: &6[value]'
+      Sleep: '&eMaganud voodis: &6[value]'
+      Joined: '&eLiitus on: &6[time]'
+      Jumps: '&eHüppeid: &6[value]'
+      SinceDeath: '&eViimasest surmast: &6[value]'
+      Deaths: '&eSurmade arv: &6[value]'
+      DeathsByMonsters: '&eTapetud koletiste poolt: &6[value]'
+      TotalDistance: '&eLäbitud vahemaa (läbisõit u know): &6[value]'
+      Walk: '&eKõndinud: &6[value]'
+      Crouch: '&eRoomanud: &6[value]'
+      Sprint: '&eJooksnud: &6[value]'
+      Swim: '&eUjunud: &6[value]'
+      Fall: '&eKukkunud: &6[value]'
+      Climb: '&eRoninud: &6[value]'
+      Fly: '&eLennanud: &6[value]'
+      Dive: '&eSukeldunud: &6[value]'
+      Minecart: '&eKäru: &6[value]'
+      Boat: '&ePaat: &6[value]'
+      Pig: '&eSiga: &6[value]'
+      Horse: '&eHobune: &6[value]'
+      Elytra: '&eElytra: &6[value]'
+      Damage: '&eKahju &6[dealt] [taken]'
+      DamageDealt: '&eKahju tekitatud: &6[value]'
+      DamageTaken: '&eKahju saadud: &6[value]'
+      JUMP: '&eHüpet: &6[value]'
+      Kills: '&eTapmised &6'
+      KillsMob: '&eLoomi: &6[value]'
+      KillsPlayer: ' &eMängija: &6[value]'
+      Blocks: '&ePlokid &6'
+      BlocksMined: '&eKaevandatud: &6[value]'
+      BlocksPlaced: ' &eAsetatud: &6[value]'
+      Items: '&eEsemed &6'
+      ItemsUsed: '&eKasutatud:&6[value]'
+      ItemsDrop: '&eVisatud:&6[value]'
+      ItemsPicked: '&eKorjatud:&6[value]'
+      ItemsBroken: '&eLõhutud:&6[value]'
+      ItemsCrafted: ' &eMeisterdatud:&6[value]'
+      ItemsEnchanted: ' &eLoitsud:&6[value]'
+      Opened: '&eAvatud &6[list]'
+      OpenChest: '&eChest:&6[value]'
+      OpenEnder: '&eEnderChest:&6[value]'
+      OpenShulker: '&eShulkerBox:&6[value]'
+      Interacted: '&eKasutanud &6[list]'
+      InteractBeacon: '&eBeacon:&6[value]'
+      InteractBrewingStand: '&eBrewStand:&6[value]'
+      InteractCraftTable: '&eCraftTable:&6[value]'
+      InteractFurnace: '&eFurnace:&6[value]'
+      Inspected: '&eInspected &6[list]'
+      InspectDispenser: '&eDispenser:&6[value]'
+      InspectDropper: '&eDropper:&6[value]'
+      InspectHopper: '&eHopper:&6[value]'
+      Statistics:
+        LEAVE_GAME: Game quit
+        PLAY_ONE_TICK: Play time
+        TIME_SINCE_DEATH: From last death
+        TIME_SINCE_REST: From last rest
+        SNEAK_TIME: Sneak time
+        ACOUNT_AGE: Account age
+        TRAVEL: Travel
+        WALK_ONE_CM: Walk
+        CROUCH_ONE_CM: Sneak
+        SPRINT_ONE_CM: Sprint
+        SWIM_ONE_CM: Swim
+        FALL_ONE_CM: Fall
+        CLIMB_ONE_CM: Climb
+        FLY_ONE_CM: Fly
+        DIVE_ONE_CM: Dive
+        WALK_UNDER_WATER_ONE_CM: Walk under water
+        WALK_ON_WATER_ONE_CM: Walk on water
+        MINECART_ONE_CM: Minecart travel
+        BOAT_ONE_CM: Boat travel
+        PIG_ONE_CM: Pig travel
+        HORSE_ONE_CM: Horse travel
+        AVIATE_ONE_CM: Elytra travel
+        JUMP: Jump
+        DAMAGE_DEALT: Damage dealt
+        DAMAGE_TAKEN: Damage taken
+        DAMAGE_DEALT_ABSORBED: Damage dealt absorbed
+        DAMAGE_DEALT_RESISTED: Damage dealt resisted
+        DAMAGE_BLOCKED_BY_SHIELD: Damage blocked by shield
+        DAMAGE_ABSORBED: Damage absorbed
+        DAMAGE_RESISTED: Damage resisted
+        DEATHS: Deaths
+        ENTITY_KILLED_BY: Killed by
+        MOB_KILLS: Mob kills
+        PLAYER_KILLS: Player kills
+        ITEM_ENCHANTED: Esemeid loitsitud
+        ANIMALS_BRED: Loomi paljundatud
+        FISH_CAUGHT: Kalu püütud
+        TALKED_TO_VILLAGER: Külaelanikuga räägitud
+        TRADED_WITH_VILLAGER: Külaelanikuga tehinguid tehtud
+        CAKE_SLICES_EATEN: Koogiviile söödud
+        CAULDRON_FILLED: Cauldron täidetud
+        CAULDRON_USED: Cauldron kasutatud
+        ARMOR_CLEANED: Armor puhastatud
+        BANNER_CLEANED: Banner puhastatud
+        BREWINGSTAND_INTERACTION: Pruulimisaluse tegevused
+        BEACON_INTERACTION: Beacon tegevused
+        CRAFTING_TABLE_INTERACTION: Töölaua tegevused
+        FURNACE_INTERACTION: Furnace tegevused
+        DISPENSER_INSPECTED: Dispenserit vaadatud
+        DROPPER_INSPECTED: Dropperit vaadatud
+        HOPPER_INSPECTED: Hopperit vaadatud
+        CHEST_OPENED: Kirstu avatud
+        TRAPPED_CHEST_TRIGGERED: Trapped kirstu aktiveeritud
+        ENDERCHEST_OPENED: Ender chest avatud
+        NOTEBLOCK_PLAYED: Noteblock mängitud
+        NOTEBLOCK_TUNED: Noteblock muudetud
+        FLOWER_POTTED: Lilli potti pandud
+        RECORD_PLAYED: Rekord mänguaeg
+        SLEEP_IN_BED: Magatud voodis
+        SHULKER_BOX_OPENED: Shulker box avatud
+        CLEAN_SHULKER_BOX: Shulker box puhastatud
+        DROP: Eset kukutatud
+        MINE_BLOCK: Plokki lõhutud
+        PLACE_BLOCK: Plokki asetatud
+        BREAK_ITEM: Eset lõhutud
+        CRAFT_ITEM: Eset meisterdatud
+        USE_ITEM: Eset kasutatud
+        PICKUP: Eset korjatud
+        KILL_ENTITY: Koletiste tapmisi
+        STRIDER_ONE_CM: Strider travel
+        INTERACT_WITH_BLAST_FURNACE: Tegevused blast furnace
+        INTERACT_WITH_SMOKER: Tegevused smoker
+        INTERACT_WITH_LECTERN: Tegevused lectern
+        INTERACT_WITH_CAMPFIRE: Tegevused campfire
+        INTERACT_WITH_CARTOGRAPHY_TABLE: Tegevused cartography table
+        INTERACT_WITH_LOOM: Tegevused loom
+        INTERACT_WITH_STONECUTTER: Tegevused stonecutter
+        INTERACT_WITH_ANVIL: Tegevused anvil
+        INTERACT_WITH_GRINDSTONE: Tegevused grindstone
+        INTERACT_WITH_SMITHING_TABLE: Tegevused smithing table
+        BELL_RING: Kella helistatud
+        RAID_TRIGGER: Raid vallandatud
+        RAID_WIN: Raid võidud
+        TARGET_HIT: Sihtmärke pihta saadud
+        OPEN_BARREL: Opened barrels
+        DROP_COUNT: Drop count
+        TOTAL_WORLD_TIME: Time in world
+  statsedit:
+    help:
+      info: '&eEdit players statistics'
+      args: (playerName) [add/take/set] [statistic] (subType) [amount] (-s)
+    info:
+      cantSet: '&cCan''t set this type of statistics'
+      reqSubType: '&cThis statistic requires defined &6[type] &csubtype'
+      set: '&eChanged from &6[old] &eto &6[new] &evalue for &6[statistic] &e(&6[extra]&e)'
+  status:
+    help:
+      info: '&eShow server status'
+      args: ''
+    info:
+      Platform: ' &ePlatform: &6[platform] &e(&6[os]&e) &eRunning threads: &6[threads]'
+      Tps: ' &eTPS: &6[tps]'
+      CpuUsage: ' &eCpu usage: &6[cpuusage]% &e(&6[cores] cores&e)'
+      Uptime:
+        main: ' &eUptime: '
+        weeks: '&e[weeks] &6weeks '
+        days: '&e[days] &6days '
+        hours: '&e[hours] &6hours '
+        mins: '&e[mins] &6mins '
+        secs: '&e[secs] &6secs '
+      MemoryUsage: ' &eMemory usage: &6[percent]% &e(&6[current]&e/&6[max] MB&e)'
+      MemoryUsageHover: "&fFree: &7[free] \n&fAllocated: &7[allocated] \n&fMax: &7[max]\\\
+        \ \\ \n&fTotal: &7[total]"
+      Java: ' &eJava version: &6[mainV].[majorV].[minorV]&e(&6[update]&e) Build: &6[build]'
+      DiskUsage: ' &eDisk usage: &6[percent]% &e(&6[current]&e/&6[max] GB&e)'
+      Worlds: '&e [number]. &6[world] &e[chunks] Chunks &6[entities] Entities &e[tiles]
+        tiles &6[players] players'
+  stonecutter:
+    help:
+      info: '&eOpen stonecutter'
+      args: (playerName) (-s)
+    info:
+      feedback: '&eYou have opened stonecutter for &3[playerDisplayName]&e (&3[offon]&e).'
+      targetfeedback: '&3[senderDisplayName]&e opened stonecutter for you.'
+  sudo:
+    help:
+      info: '&eForce another player to perform command'
+      args: '[playerName] (command/c:[text])'
+      explanation:
+      - cmi.command.sudo.bypass - protects player from being 'trolled'
+    info:
+      performed: '&ePerformed ''&6[command]&e'' command as &6[playerDisplayName] &eplayer'
+  suicide:
+    help:
+      info: '&eKill your self'
+      args: '[playerName] (-s)'
+    info:
+      feedback: '&eGoodbye cruel world...'
+      message: '&6[playerDisplayName] &etook their own life'
+      totem: '&6Can''t use while holding totem'
+  switchplayerdata:
+    help:
+      info: '&eSwitch all data from one player to another'
+      args: '[sourcePlayerName/uuid] [targetPlayerName/uuid]'
+      explanation:
+      - - other
+    info:
+      same: '&eProvided target and source users are same already'
+      transferred: '&6[sourceName] &edata got switched with &6[Name]'
+      failed: '&cFailed to switch player data'
+  tablistupdate:
+    help:
+      info: '&eForce tablist update for all or specific player'
+      args: (playerName)
+    info:
+      updated: '&eTablist updated'
+  tempban:
+    help:
+      info: '&eTempBan player'
+      args: '[playerName] [timeValue] (reason) (-s)'
+      explanation:
+      - Ban max range depends on cmi.command.tempban.max.[amount]
+      - cmi.command.tempban.max.unlimited - allows to ban for as much as you want
+      - In case player doesn't have any, 60 sec will be max value
+      - 'Näide: '
+      - /cmi tempban zrips 5m For swearing
+    info:
+      message: '&cAjutiselt keelustatud!'
+      messageToAll: '&6[playerDisplayName] &esai ajutise keelu &6[senderDisplayName]
+        &eajaks: &6[time] &epõhjusega: &6[reason]'
+      banedSilent: '&7[&8Silent&7]&6[playerDisplayName] &esai ajutise keelu &6[senderDisplayName]
+        &eajaks: &6[time] &epõhjusega: &6[reason]'
+      time: '&eSinu keeld eemaldatakse pärast &6[time]'
+      badTime: '&cAeg defineeritud ebakorrektselt'
+      badTimeRanges: '&cSa ei saa keelata kauemaks kui [time] &6([seconds])'
+  tempipban:
+    help:
+      info: '&eKeela ajutiselt IP'
+      args: '[ip/playerName] [time] (reason) (-s)'
+      explanation:
+      - cmi.command.banip.bypass - keelust kõrvale hiilimiseks
+    info:
+      message: '&cAjutiselt IP keelustatud!'
+      messageToAll: '&6[playerDisplayName] &7sai ajutise IP keelu ajaks &7[time]&7mängijalt
+        &6[senderDisplayName]&7: &6[reason]'
+      banedSilent: '&7[&8Silent&7]&6[playerDisplayName] &7sai ajutise IP keelu ajaks
+        &7[time]&7: &6[reason]'
+  tfly:
+    help:
+      info: '&eSeadista ajutine mängija lennurežiim uuesti logimiseni või aja lõpuni'
+      args: (playerName) (timeInSec) (-s)
+      explanation:
+      - 'Näited:'
+      - tfly Zrips 30 - lennurežiim 30-sekundiks
+      - tfly Zrips +30 - lisab veel 30 sekundit lendamisele juurde
+      - tfly Zrips 0 - lennurežiim kuni lahkumiseni
+      - tfly Zrips - kontrolli, kas mängijal on tfly režiim sisselülitatud ja kuni
+    info:
+      setTimedFly: '&eSa seadistasid &6[playerDisplayName]&e ajutise lendamise järgmiseks
+        [time]'
+      addTimedFly: '&eSa lisasid täiendavad [addTime] ([time]) mängijale &6[playerDisplayName]&e'
+      takeTimedFly: '&eYou have taken [addTime] ([time]) for &6[playerDisplayName]&e'
+      setUntilRelogFly: '&eSa seadistasid &6[playerDisplayName]&e ajutise lendamise
+        kuni uuesti logimiseni.'
+      targetTimedEnabled: '&eTeie lendamine lülitati sisse &3[senderDisplayName]&e
+        poolt ajaks [time].'
+      targetTimedEnabledAdd: '&eSinu lendamise aega suurendati [addTime] ([time]).'
+      targetTimedEnabledTake: '&eYour flight time was decreased by [addTime] ([time]).'
+      targetUntilRelogEnabled: '&eSinu lendamine lubati &3[senderDisplayName]&e kuni
+        uuesti logimiseni.'
+      setFor: '&eAjutine lennurežiim sees järgmised [time]'
+      setForRelog: '&eAjutine lennurežiim lubatud kuni uuesti logimiseni'
+      notSet: '&eAjutine lennurežiim ei ole lubatud mängijale'
+      willBeDisabled: '&eLennurežiim keelatakse [time]'
+      disabled: '&eAjutine lennurežiim keelatud!'
+  tgod:
+    help:
+      info: '&eSeadistab mängija ajutise jumalarežiimi uuesti logimiseni või aja lõpuni'
+      args: '[playerName] &3(timeInSec) (-s)'
+      explanation:
+      - 'Näited:'
+      - tgod Zrips 30 - jumalarežiim 30-sekundiks
+      - tgod Zrips 0 - jumalarežiim kuni lahkumiseni
+      - tgod Zrips - kontrolli kui kaua mängijal on tgod, kui üldse on.
+    info:
+      setTimedGod: '&eSa seadistasid &6[playerDisplayName]&e ajutise jumalarežiimi
+        järgmiseks [time]'
+      setUntilRelogGod: '&eSa seadistasid &6[playerDisplayName]&e ajutise jumalarežiimi
+        kuni uuesti logimiseni.'
+      targetTimedEnabled: '&eTeie ajutine lennurežiim lülitati sisse &3[senderDisplayName]&e
+        poolt ajaks [time].'
+      targetUntilRelogEnabled: '&eSinu ajutine jumalarežiim lubati &3[senderDisplayName]&e
+        kuni uuesti logimiseni'
+      setFor: '&eAjutine lennurežiim sees järgmised [time]'
+      setForRelog: '&eAjutine jumalarežiim lubatud kuni uuesti logimiseni'
+      notSet: '&eAjutine jumalarežiim ei ole lubatud mängijale'
+      willBeDisabled: '&eJumalarežiim keelatakse [time]'
+      disabled: '&eAjutine jumalarežiim keelatud!'
+  time:
+    help:
+      info: '&eJuhib serveri aega'
+      args: (time) (world) (alter [value]) (-smooth)
+      explanation:
+      - 'Näide:'
+      - /day
+      - /night
+      - /time 13:00:00
+      - /time 1pm
+      - /time 13
+      - /time 7000ticks
+      - /time 1pm Lt_Craft
+      - /time 1pm all
+      - /time add 0:30
+      - /time take 0:30
+      - /time freeze
+      - /time unfreeze
+      - /time realtime
+      - /time autorealtime start/stop
+    info:
+      check: '&eTime: &6[24h] &eor &6[12h] &eor &6[ticks]ticks &ein &6[world]'
+      frozen: ' &c(-)'
+      frozenTime: '&eFrozen time'
+      real: ' &6(+)'
+      realTime: '&eAutomatic real time'
+      autorealstart: '&eAutomatic time adjustment for &6[world] &estarted'
+      autorealstop: '&eAutomatic time adjustment for &6[world] &estopped'
+      gotfrozen: '&6[world] &etime have has been frozen'
+      gotunfrozen: '&6[world] &etime have has been unfrozen'
+      cantset: '&eCan''t set time to this value'
+      setto: '&eTime set to &6[24h] &eor &6[12h] &eor &6[ticks]ticks &efor &6[world]'
+  titlemsg:
+    help:
+      info: '&eSends title message to player'
+      args: "[playerName/all] [title \n subtitle] (-in:[ticks]) (-out:[ticks]) (-keep:[ticks])"
+    info:
+      message: '&f[message]'
+  toast:
+    help:
+      info: '&eSends toast message to player'
+      args: '[playerName/all] (-t:[advType]) (-icon:[material]) [message]'
+    info:
+      message: '&f[message]'
+  top:
+    help:
+      info: '&eTeleport to highest point at your location'
+      args: '[playerName] (-s)'
+  tp:
+    help:
+      info: '&eTeleports to player''s location'
+      args: '[playerName] (playerName)'
+    info:
+      feedback: '&eYou have been teleported to &3[sourceDisplayName] &elocation (&3[offon]&e).'
+      bad:
+        msg: '&cTeleport location is unsafe. [reason]'
+        extraMsg: '&eUse &6/tpbypass &eto bypass this. You have [time]'
+        lava: '&cLava'
+        void: '&cVoid'
+        suffocation: '&cSuffocation'
+        unknown: '&cUnknown'
+        plugin: '&c3rd party plugin'
+      notAllowed: '&cCan''t teleport to this player'
+      prevented: '&cTeleportation has been prevented by another plugin'
+  tpa:
+    help:
+      info: '&eKüsi mängijalt, kas sa saad tema juurde teleporteeruda'
+      args: '[playerName] (playerName) (-c)'
+    info:
+      requestSent: '&eSooviavaldus saadetud mängijale &6[playerDisplayName]'
+      gotRequest: '&6[senderDisplayName] &esoovib teie juurde teleporteeruda!'
+      time: '&eSul on &6[time]&esooviavaldusega nõustumiseks'
+      canceled: '&eTeleporteerumise avaldus on katkestatud'
+      # This line cant contain anything else then default variables ([message][cancelButton]), you can switch them around to your liking tho
+      senderFeedbackMessageFormat: '[message][cancelButton]'
+      alreadyRequesting: '&eSa juba taotled &6[playerDisplayName] &ejuurde teleporteerumist'
+      banned: '&eSa ei saa saata teleporteerumise sooviavaldust mängijale &6[playerDisplayName]
+        &ejärgmised &6[time]'
+  tpaall:
+    help:
+      info: '&eKüsi kõikidelt võrgus olevatelt mängijatelt teleporteerumist sinu juurde'
+      args: ''
+    info:
+      requestSent: '&eTaotlus saadetud kõikidele mängijatele'
+  tpaccept:
+    help:
+      info: '&eNõustu teleporteerumise taotlusega'
+      args: (playerName)
+    info:
+      noRequest: '&eTeleporteerumise taotlusi ei ole'
+      NotOnline: '&eMängija ei ole enam võrgus'
+      accepted: '&6[playerDisplayName] &evõttis taotluse vastu'
+      youAccepted: '&eTeleporteerumisega nõustutud'
+  tpahere:
+    help:
+      info: '&eKüsib mängijalt luba teleporteerumiseks sinu asukohta'
+      args: '[playerName] (playerName) (-c)'
+    info:
+      requestSent: '&eSooviavaldus saadetud mängijale &6[playerDisplayName]'
+      gotRequest: '&6[senderDisplayName] &esoovib teid teleporteerida enda juurde!'
+      accept: '&6Kliki, et nõustuda teleporteerumise taotlusega!'
+  tpall:
+    help:
+      info: '&eTeleporteerib kõik võrgusolevad mängijad asukohta'
+      args: (playerName)
+    info:
+      feedback: '&eSa teleporteerusid ([world],[x],[y],[z]) to &3[playerDisplayName]
+        &easukohta.'
+  tpallworld:
+    help:
+      info: '&eTeleporteerib kõik mängijad teatud maailmast'
+      args: '[worldName] (worldName;x;y;z(;yaw;pitch)) (-a)'
+      explanation:
+      - - sihtkoht
+    info:
+      started: '&eTeleporteerumised alustatud!'
+      current: '&ePraegu teleporteeritud &7[amount] &eja &7[files] &ekontrollitud
+        faili'
+      total: '&eTeleporteeritud kõik &7[amount] &7[files] &ekasutajast kontrollitud'
+      WorldNotFound: '&eMaailm antud nimega &7[name] &eei ole laaditud. Tee kindlaks,
+        et see on korrektne. Me kasutame seda nii nagu see on.'
+  tpbypass:
+    help:
+      info: '&eHiili teleporteerumise piirangust mööda ebaturvalisse asukohta'
+      args: (playername)
+    info:
+      noSavedTp: '&cEi ole salvestatud halbu teleporteerumise asukohti'
+      feedback: '&7Teleporteeritud ebaturvalisse asukohta'
+  tpdeny:
+    help:
+      info: '&eLükka tagasi teleporteerumise taotlus'
+      args: (playerName)
+    info:
+      noRequest: '&eSul ei ole aktiivseid teleporteerumise taotlusi!'
+      youDenied: '&eTeie teleporteerumise taotlus lükati tagasi!'
+      denied: '&e[senderDisplayName] &elükkas su taotluse tagasi.'
+  tphere:
+    help:
+      info: '&eTeleporteerib mängija sinu asukohta'
+      args: '[playerName] (playerName)'
+    info:
+      feedback:
+        offline: '&eSa seadistasid ([world],[x],[y],[z]) sünnikoha mängijale &3[playerDisplayName]&e
+          (&3[offon]&e).'
+        online: '&eSa teleporteerisid &6[playerDisplayName] &esinu asukohta'
+        player: '&eSind teleporteeriti tagasi &6[sourceDisplayName] &easukohta'
+      notAllowed: '&eSeda mängijat ei saa välja teleporteerida'
+  tpo:
+    help:
+      info: '&eTeleporteerib mängija asukohta jõuliselt'
+      args: '[playerName] (playerName)'
+  tpohere:
+    help:
+      info: '&eTeleporteerib mängija sinu asukohta jõuliselt'
+      args: '[playerName] (playerName)'
+  tpopos:
+    help:
+      info: '&eTeleports to location by force'
+      args: (-p:playerName) [x] [y] [z] (world) (pitch) (yaw) (-rng:[range])
+    info:
+      feedback: '&eYou have been teleported ([world],[x],[y],[z]).'
+      feedbackOther: '&e[playerDisplayName] have been teleported ([world],[x],[y],[z]).'
+  tppos:
+    help:
+      info: '&eTeleports to location'
+      args: (-p:playerName) [x] [y] [z] (world) (pitch) (yaw) (-rng:[range])
+    info:
+      feedback: '&eYou have been teleported ([world],[x],[y],[z]).'
+      feedbackOther: '&e[playerDisplayName] have been teleported ([world],[x],[y],[z]).'
+  tps:
+    help:
+      info: '&eCheck servers tps status'
+      args: (-spikes)
+    info:
+      tps: '&eTPS: '
+      # Custom tps range can be defined and you can have as many of them as you want
+      tpsList: '&e[3] [10] [30] [60] [600]'
+      explanation: '&7One block &e60 &7seconds. Max &e600 &7seconds'
+      minMax: '&7Max: [max] &7Min: [min]'
+      hover:
+      - '[tpscolor][tps]'
+      - '&7[time]'
+  tree:
+    help:
+      info: '&eSpawn tree where you are looking'
+      args: (TreeType) (-p:[playerName])
+    info:
+      feedback: '&6[tree] &espawned.'
+      cantSpawn: '&cCant spawn (&e[tree]&c) on this block.'
+  unban:
+    help:
+      info: '&eUnban player or ip'
+      args: '[playerName/ip] (-s)'
+    info:
+      unBaned: '!broadcast!&6[playerDisplayName] &eunbanned'
+      unBanedSilent: '&7[&8Silent&7]&6[playerDisplayName] &eunbanned'
+      notBanned: '&6[playerDisplayName] &enot banned'
+  unbreakable:
+    help:
+      info: '&eMakes item unbreakable'
+      args: (playerName) (true/false)
+    info:
+      feedback: '&eYou made item [state] &efor &3[playerDisplayName]&e (&3[offon]&e).'
+      breakable: '&6breakable'
+      unbreakable: '&6unbreakable'
+  uncondense:
+    help:
+      info: '&eUncondense items into smaller parts'
+      args: (itemName) (playerName) (-s)
+    info:
+      converted: '&eConverted &7[blocks] &eblocks into &7[items] &eitems'
+      nothing: '&cThere is nothing in your backbag that can be uncondensed.'
+  unjail:
+    help:
+      info: '&eRelease player from jail'
+      args: '[playerName]'
+    info:
+      notInJail: '&cTarget player is not in jail'
+      unjailed: '&eYou have released &6[playerDisplayName] &efrom jail'
+      unjailedTarget: '&eYou have been released from jail!'
+  unloadchunks:
+    help:
+      info: '&eLaeb tükid maha serveri mälust'
+      args: (-f)
+      explanation:
+      - -f muutuja sunnib kõik tükid maha laadima ühe korraga.
+    info:
+      removed: '&eEemaldatud -[list]'
+      startScanning: '&eLeitud &6[amount] &etükki mida maha laadida. Alustan!'
+      InfoShow: '&6TPS: &3[tps] &6Jäänud &e[left] &6(&e[min]m:[sec]s&6) &6Kiirus:
+        &e[speed] &6Maha laaditud: &e[found]'
+      Finished: '&eLõpetatud! Maha laaditud: &6[amount] &etükki! Ajaga &6[minutes]
+        &emin &6[seconds] &esek.'
+  unmute:
+    help:
+      info: '&eEemalda vaigistus mängijalt'
+      args: '[playerName] (-s)'
+    info:
+      notMuted: '&eMängija ei ole vaigistatud'
+      unmuted: '&eMängija saab nüüd lobiseda'
+      unmutedTarget: '&eSa saad nüüd lobiseda'
+  unmutechat:
+    help:
+      info: '&eEemalda vaigistus avalikult vestluselt'
+      args: (-s)
+    info:
+      unmuted: '&eVaigistus eemaldatud avalikult vestluselt'
+  usermeta:
+    help:
+      info: '&eHalda mängija metaandmeid'
+      args: '[playerName] [add/remove/clear/list/increment] (key) (value) (-s)'
+      explanation:
+      - - plugin
+    info:
+      added: '&eLisatud meta &6[playerDisplayName] &emängijale võtmega &6[key] &eja
+        väärtusega &6[value]'
+      cleared: '&ePuhastatud meta mängijalt &6[playerDisplayName]'
+      removed: '&eEemaldatud &6[key] &emeta mängijalt &6[playerDisplayName]'
+      changed: '&eMuudetud &6[key] &emeta vanalt väärtuselt &6[oldValue] &euuele väärtusele
+        &6[newValue]'
+      ls: '&6[key]&e: [value]'
+  util:
+    help:
+      info: Administratiooni tööriistad
+      args: (removeseats/testtarget)
+    info:
+      removedSits: '&eEemaldatud &6[count] &etühja istumist kõikidest maailmatest.'
+  vanish:
+    help:
+      info: '&eHaihtu mängija'
+      args: (playerName/list) (on/off) (-s)
+    info:
+      vanished: '&eSa oled haihtunud'
+      unvanish: '&eSa oled nähtav'
+      targetVanished: '&6[playerDisplayName] &ehaihtus'
+      targetUnvanish: '&6[playerDisplayName] &emuutus nähtavaks'
+      list: '&e[place]. &6[playerDisplayName] &e(&6[offon]&e)'
+      noVanished: '&eHaihtunud mängijaid ei ole'
+      noMsg: '&cEi saa saata sõnumeid, kui oled haihtunud. Värskenda seda kasutades
+        vanishedit'
+  vanishedit:
+    help:
+      info: '&eMuuda haihtumise režiimi mängijale'
+      args: (playerName)
+    info:
+      isVanished: '&eHaihtunud'
+      damageToEntity: '&eSaab tekitada kahju teistele'
+      playerDamage: '&eSaab võtta vastu kahju'
+      itemPickup: '&eSaab asju üles korrata'
+      mobAggro: '&eLoomad saavad sihtida'
+      interaction: '&eSaab füüsiliselt tegutseda'
+      noisyChest: '&eValjud kirstud'
+      informOnLeave: '&eNäitab lahkumise sõnumit'
+      informOnJoin: '&eNäitab liitumise sõnumit'
+      nightVision: '&ePaigalda öönägemine'
+      bossbar: '&eNäita bossBar kui haihtunud'
+      afkcommands: '&eVallanda AFK käske kui oled haihtunud'
+      PrivateMessages: '&eVõtab privaatseid sõnumeid vastu'
+      relogDisable: '&eDisable vanish on relog'
+      noMessages: '&eNo public messages'
+      fakeJoinLeave: '&eShow fake join/leave messages on vanish state change'
+      mobSpawning: '&eMobs will spawn nearby'
+      stopPlaytime: '&ePlaytime will stop increasing'
+      sleepIgnore: '&eIgnore for sleeping count'
+      joinVanished: '&eAlways join in vanish mode'
+      deathMessages: '&eShow death message'
+      bossbarTitle: '&fVanished'
+  version:
+    help:
+      info: '&eShow plugin version'
+      args: ''
+    info:
+      cmiVersion: '&eCMI: &6[version]'
+      cmiVersionNew: '&e-> [newVersion]'
+      dbType: ' &7[db]'
+      newServer: '&eServer: &6[version]'
+      Economy: '&eCMI economy: &6[state] '
+      Chat: '&eCMI Chat: &6[state] '
+      CMIB: '&7CMIB '
+      newVault: '&eVault: &6[version] '
+      Modules: '&eModules -> &a[enabled] enabled &7[disabled] disabled&e: &c[list]'
+      Bungee: ' &eBungeeCord '
+      CMILib: '&eCMILib: &6[version] '
+      cmilVersionNew: '&e-> [newVersion]'
+  viewrange:
+    help:
+      info: '&eChange view range'
+      args: '[range] (playerName)'
+    info:
+      changed: '&eView range changed to &6[range]'
+      NoProtocolLib: '&cThis function requires ProtocolLib!'
+      NoMore: '&eRange can''t be more than 32 chunks. Changed to 32.'
+  voteedit:
+    help:
+      info: '&eManage players votes'
+      args: (playerName) [add/set/take/clear] [amount] (-s)
+      explanation:
+      - 'Example:'
+      - /voteedit Zrips
+      - /voteedit add 10
+      - /voteedit take 10
+      - /voteedit Zrips clear
+      - /voteedit Zrips add 10
+    info:
+      currentVotes: '&e[playerDisplayName] &ehas &6[votes] &evotes'
+      selfFeedback: '&eVotes was set to &3[votes] &efor &3[playerDisplayName]&e (&3[offon]&e).'
+      targetFeedback: '&eYour vote count was set to &3[votes]&e by &3[senderDisplayName]&e.'
+  votes:
+    help:
+      info: '&eCheck players vote count'
+      args: (playerName)
+    info:
+      currentVoteSelf: '&eSa oled andnud &6[votes] &ehäält'
+      currentVotes: '&e[playerDisplayName] &eomab &6[votes] &ehäält'
+      voteCooldown: '&eSa pead ootama &6[time]&euuesti hääletamiseks'
+      voteLimit: '&eSa oled jõudnud tänase hääletamiste limiidini. Sa pead ootama
+        &6[time]&euuesti hääletamiseks'
+  votetop:
+    help:
+      info: '&eVaata top hääletanute nimekirja'
+      args: (playerName)
+    info:
+      topLine: '&e----- Top hääletajad &e-----'
+      list: '&e[place]. &6[playerDisplayName]: &e[votes]'
+      ownLine: '&2[place]. &2[playerDisplayName]: &2[votes]'
+  walkspeed:
+    help:
+      info: '&eSeadista mängijate kõndimiskiirus 0 kuni 10'
+      args: (playerName) [amount] (-s)
+    info:
+      feedback: '&eSa seadistasid &3[amount]&e kõndimise kiiruseks mängijale &3[playerDisplayName]&e
+        (&3[offon]&e).'
+      targetfeedback: '&eSinu kõndimise kiirus seati &3[amount]&e &3[senderDisplayName]
+        &epoolt.'
+      max: '&eMaksimaalne lubatud kõndimise kiirus sinule on &6[max]&e.'
+  warn:
+    help:
+      info: '&eHoiata mängijat'
+      args: '[playerName] (category) (reason) (-s)'
+    info:
+      noSelfWarning: '&cSa ei saa ennast hoiatada'
+      cantBan: '&eSeda mängijat ei saa hoiatada'
+      messageToAll: '&6[playerDisplayName] &esai hoiatuse mängijalt &6[senderDisplayName]
+        &cpõhjusega: &6[reason]'
+      banedSilent: '&7[&8Silent&7]&6[playerDisplayName] &csai hoiatusemängijalt &6[senderDisplayName]
+        &cpõhjusega: &6[reason]'
+  warnings:
+    help:
+      info: '&eKontrolli mängija hoiatusi'
+      args: (playerName)
+    info:
+      totalPoints: '&7---- &e[playerDisplayName] &erikkumispunktid: &6[totalPoints]
+        &7----'
+      noWarnings: '&eEi oma ühtegi hoiatust'
+      list: '&7[place]. &e[time] &6by [warnedBy] &cfor: &7[warnedFor]'
+      hover:
+      - '&7Aegub: &e[time]'
+      - '&7Rikkumiste punktid: &e[points]'
+  warp:
+    help:
+      info: '&eTeleporteeru lõimu asukohta'
+      args: (warpName) (playerName) (-s) (-g:[groupName]) (-p:[pageNumber])
+    info:
+      list: '&eLõime: &6'
+      click: '&eKliki teleporteerumiseks lõimu &6[warp]'
+      teleported: '&eTeleporteeritud lõimu: &6[warp]'
+      noWarps: '&cSalvestatud lõimud puuduvad'
+      autoLoreName: '&7[warpName]'
+      autoLoreFormat:
+      - '&7[worldName]'
+      - '&e[x]:[y]:[z]'
+      - '[creator]'
+      creator: '&eLooja: &6[creator]'
+      noWarpByName: '&cSelle nimega lõime ei ole'
+      noAccess: '&cLigipääs sellele lõimule puudub'
+      guiTitle: '&6Lõimud'
+      pageTitles:
+      - '&2Lõimud 1'
+      - '&8Lõimud 2'
+      - '&0Lõimud 3'
+  warpgroups:
+    help:
+      info: '&eNäitab lõimude rühmi'
+      args: ''
+    info:
+      list: '&e[number]. &7[group] &6(&e[amount]&6)'
+  weather:
+    help:
+      info: '&eKontrollib serveri ilma'
+      args: (sun/rain/storm) (lock/duration) (worldName/all)
+      explanation:
+      - 'Lisa aja formaadid saavad omada: s/m/h/d/w/M/Y'
+      - 'Näide:'
+      - /sun
+      - /rain
+      - /storm
+      - /sun lock
+      - /sun 120
+      - /sun Lt_Craft
+      - /sun 1h
+      - /sun 10m
+    info:
+      setTo: '&eSet &6[world] &eweather to &6[weather] &efor next &6[time]'
+      currentState: '&6[world] &e-> &6[weather] &efor next &6[time]'
+      sunny: sunny
+      rainy: rainy
+      thundering: thundering
+  workbench:
+    help:
+      info: '&eOpen workbench'
+      args: (playerName) (-s)
+    info:
+      feedback: '&eYou have opened workbench for &3[playerDisplayName]&e (&3[offon]&e).'
+      targetfeedback: '&3[senderDisplayName]&e opened workbench for you.'
+  world:
+    help:
+      info: '&eTeleports to different world'
+      args: (normal/nether/end/1/2/3...) (playerName) (-s)
+      explanation:
+      - Requires cmi.command.world.[worldName] in addition to base permission node
+    info:
+      here: '&eJuba siin'
+  worth:
+    help:
+      info: '&eKontrolli esemete väärtust'
+      args: (all/blocks/hand/material)
+    info:
+      worthless: '&eWorthless'
+      damaged: ' &6(&2[percent]% &6damaged)'
+      shulker: '&6Eemalda asjad shulker boxist enne müümist'
+      repair: '&eParanda enne müümist'
+      basePrice: '&6[itemName]&e(&7[amount]&e) -> &f[price]'
+      fullPrice: '&7[price]'
+      total: '&eVäärtus kokku: &7[total]'
+  worthlist:
+    help:
+      info: '&eKontrolli esemete nimekirja määratud müügihindadega'
+      args: (playerName) (-missing)
+    info:
+      type: '&7[type]'
+      worth: '&7Väärtus: &e[price]'
+      title: '&8Väärtuste nimekiri'

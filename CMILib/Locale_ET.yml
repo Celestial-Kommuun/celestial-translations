@@ -1,0 +1,697 @@
+# The phrases support full color (hex) code, and some variables.
+# Keep in mind that some variables will not work for certain lines.
+# Just keep them where there are now and everything will be okay :)
+# Some lines can have global variables set. For the player who will be affected. For example /heal Zrips then Zrips data will be used as variable
+# [serverName] to show server name
+# [playerName] to show target player name
+# [playerDisplayName] to show target player display name
+# [lvl] to show target player level
+# [exp] to show target player total exp
+# [hp] to show target player health
+# [maxHp] to show target player max health
+# [hunger] to show target player hunger level
+# [gameMode] to show target player gamemode
+# [prefix] to show target player prefix if possible
+# [suffix] to show target player suffix if possible
+# Sender is console or player who performs the command. For example Zrips performs /heal Zhax then Zrips data will be used
+# [senderName] to show Sender player name
+# [senderDisplayName] to show Sender player display name
+# [senderLvl] to show Sender player level
+# [senderExp] to show Sender player total exp
+# [senderHp] to show Sender player health
+# [senderMaxHp] to show Sender player max health
+# [senderHunger] to show Sender player hunger level
+# [senderGameMode] to show Sender player gamemode
+# [senderPrefix] to show Sender player prefix if possible
+# [senderSuffix] to show Sender player suffix if possible
+# Source is player which is being used for extra info. For example Zrips performs /tp Zhax Zrips then Zhax data will be used as its location is being taken for new player location
+# [sourceName] to show source player name
+# [sourceDisplayName] to show source player display name
+# [sourceLvl] to show source player level
+# [sourceExp] to show source player total exp
+# [sourceHp] to show source player health
+# [sourceMaxHp] to show source player max health
+# [sourceHunger] to show source player hunger level
+# [sourceGameMode] to show source player gamemode
+# [sourcePrefix] to show source player prefix if possible
+# [sourceSuffix] to show source player suffix if possible
+# ***********************************************
+# Some lines support the option to send them to custom places, like action bar, title, sub-title, or even create JSON/clickable messages
+# If the line starts with !toast! then player will get toast message (advancement popup, only 1.12 and up). Some extra variables can be used to define type and icon. example: !toast! -t:goal -icon:paper Hello world!
+# If the line starts with !actionbar! then player will get action bar message defined after this variable
+# If the line starts with !actionbar:[seconds]! then player will get action bar message for a defined amount of time
+# If the line starts with !broadcast! then everyone will receive message. You can add extra !toast! !actionbar! or !title! to send message for everyone to specific place, in example !broadcast!!title!
+# If the line starts with !customtext:[cTextName]! then custom text will be taken by name provided and shown for player. In case it is used after !broadcast! then everyone who is online will get this custom text message
+# If the line starts with !title! then player will get title message defined after this variable, in addition it can contain !subtitle! which will add subtitle message
+# If the line starts with !bossbar:[name]-[timer]! then player will get bossbar message defined after this variable, in addition you can define how long this message will be visible. You need to define bossbar name which can be anything you want, but lines with same name will override each other to prevent stacking
+# To include clickable messages: <T>Text</T><H>Hover text</H><C>command</C><SC>Suggested text</SC>
+# <T> and </T> required, other is optional
+# Use /n to break line
+# To have more than one JSON message use <Next>
+# <C> performs command as a player who clicked
+# <CC> performs command from console once
+# <CCI> performs command from console every time player clicks text
+# <URL> includes url
+
+info:
+  # Use !prefix! in any locale line to automatically include this prefix
+  prefix: '&e[&aNG&e] '
+  NoPermission: '&cTeil ei ole luba!'
+  CantHavePermission: '&cTe ei saa seda luba!'
+  WrongGroup: '&cTe olete selle jaoks vales grupis!'
+  NoPlayerPermission: '&c[playerName] puudub luba õigusele: [permission]'
+  Ingame: '&cSeda saab kasutada vaid mängus!'
+  NoInformation: '&cTeavet ei leitud!'
+  Console: '&6Server'
+  FromConsole: '&cSeda saab kasutada ainult konsoolis!'
+  NotOnline: '&cMängija ei ole võrgus!'
+  NobodyOnline: '&cKeegi ei ole võrgus!'
+  NoPlayer: '&cSelle nimega mängijat ei leitud!'
+  NoCommand: '&cSellise nimega käsku ei ole olemas!'
+  cantFindCommand: '&5Ei saanud leida &7[%1]&5 käsku, kas mõtlesite &7[%2]&5?'
+  nolocation: '&4Ei leia sobivat asukohta'
+  FeatureNotEnabled: '&cSee funktsioon ei ole lubatud!'
+  ModuleNotEnabled: '&cSee moodul ei ole sisse lülitatud!'
+  versionNotSupported: '&cSee funktsioon ei toeta serveri versiooni'
+  spigotNotSupported: '&cSelleks on vaja PaperSpigoti haru tüüpi serverit, et see
+    töötaks.'
+  bungeeNoGo: '&cSee funktsioon ei tööta bungee võrgustiku põhises serveris.'
+  clickToTeleport: '&eKlõpsake teleportimiseks'
+  UseMaterial: '&4Palun kasutage materjalide nimesid!'
+  IncorrectMaterial: '&4Vale materjali nimi!'
+  UseInteger: '&4Palun kasutage numbreid!'
+  UseBoolean: '&4Palun kasutage True või False!'
+  NoLessThan: '&4Number ei saa olla väiksem kui [amount]!'
+  NoMoreThan: '&4Väärtus ei saa olla suurem kui [amount]'
+  NoWorld: '&4Ei suuda leida maailma selle nimega!'
+  IncorrectLocation: '&4Asukoht on valesti määratletud!'
+  Show: '&eNäita'
+  Remove: '&cEemalda'
+  Back: '&eTagasi'
+  Forward: '&eEdasi'
+  Update: '&eVärskenda'
+  Save: '&eSalvesta'
+  Delete: '&cKustuta'
+  Click: '&eKlõpsake'
+  Preview: '&eEelvaade'
+  PasteOld: '&eKleebi vana'
+  ClickToPaste: '&eKlõpsake vestlusesse kleepimiseks'
+  CantTeleportWorld: '&eSellesse maailma ei saa teleportida.'
+  CantTeleportNoWorld: '&cSihtmaailma ei ole olemas. Teleportatsioon tühistatud'
+  ClickToConfirmDelete: '&eKlõpsake, et kinnitada &6[name] &eeemaldamist'
+  teleported: '&eTeid on teleporteeritud.'
+  PlayerSpliter: '&e----- &6[playerDisplayName] &e-----'
+  Spliter: '&e--------------------------------------------------'
+  SpliterValue: '&e------------------ &6[value] &e------------------'
+  singleSpliter: '&e-'
+  SpliterMiddle: ' &6[value] '
+  ListSpliter: ', '
+  ProgressBarFill: '&2▏'
+  ProgressBarEmpty: '&e▏'
+  nothingInHand: '!actionbar!&eSa pead hoidma eset käes'
+  nothingInHandLeather: '&eSa pead hoidma nahast eset käes'
+  nothingToShow: '&ePole midagi näidata'
+  noItem: '&cEi leia eset'
+  dontHaveItem: '&cSul ei ole &6[amount]x [itemName] &coma varude hulgas'
+  wrongWorld: '&cSelles maailmas ei saa seda teha'
+  differentWorld: '&cErinevad maailmas'
+  HaveItem: '&cSul on &6[amount]x [itemName] &coma varude hulgas'
+  cantDoInGamemode: '&eSelles mängurežiimis ei saa seda teha.'
+  cantDoForPlayer: '&eSa ei saa seda teha mängijale &6[playerDisplayName]'
+  cantDoForYourSelf: '&eSa ei saa seda endale teha'
+  cantDetermineMobType: '&cEi saa määrata mobi tüüpi &e[type] &cmuutujaga'
+  cantRename: '!actionbar!&eSa ei saa seda nime kasutada'
+  confirmRedefine: '&eKlõpsake uuesti määratlemise kinnitamiseks'
+  cantEdit: '&eSa ei saa seda muuta'
+  wrongName: '&cVale nimi'
+  unknown: unknown
+  invalidName: '&cVigane nimi'
+  alreadyexist: '&4See nimi on võetud'
+  dontexist: '&4Selle nimega ei leitud midagi'
+  worldDontExist: '&cSihtmaailma ei pääse enam ligi. Ei saa teid sinna teleporteerida!'
+  notSet: not set
+  lookAtSign: '&eVaata silti'
+  lookAtBlock: '&eVaata plokki'
+  lookAtEntity: '&eVaata olemit'
+  noSpace: '&eEi ole piisavalt vaba ruumi'
+  notOnGround: '&eSeda ei saa teha lendamise ajal'
+  bungee:
+    Online: '&6Võrgus'
+    Offline: '&cVõrgust väljas'
+    not: '&cServer ei kuulu bungee-võrku'
+    noserver: '&cEi leia selle nimega serverit!'
+    server: '&eServer: &7[name]'
+  variables:
+    am: '&eAM'
+    pm: '&ePM'
+    Online: '&6Võrgus'
+    Offline: '&cVõrgust väljas'
+    TrueColor: '&2'
+    FalseColor: '&4'
+    'True': '&6True'
+    'False': '&cFalse'
+    Enabled: '&6Lubatud'
+    Disabled: '&cKeelatud'
+    survival: '&6Ellujäämine'
+    creative: '&6Loominguline'
+    adventure: '&6Seiklus'
+    spectator: '&6Vaatleja'
+    flying: '&6Lendab'
+    notflying: '&6Ei lenda'
+  Inventory:
+    Full: '&5Teie seljakott on täis. Ei saa lisada eset'
+    FullDrop: '&5Kõik esemed ei mahu seljakotti. Nad on maha kukutatud.'
+  TimeNotRecorded: '&e-Puuduvad andmed-'
+  months: '&e[months] &6kuud '
+  oneMonth: '&e[months] &6kuu '
+  weeks: '&e[weeks] &6nädalat '
+  oneWeek: '&e[weeks] &6nädal '
+  years: '&e[years] &6aastat '
+  oneYear: '&e[years] &6aasta '
+  day: '&e[days] &6päeva '
+  oneDay: '&e[days] &6päev '
+  hour: '&e[hours] &6tundi '
+  oneHour: '&e[hours] &6tund '
+  min: '&e[mins] &6minutit '
+  sec: '&e[secs] &6sekundit '
+  nextPageConsole: '&fJärgmise lehekülje jaoks kasutage käsku &5[command]'
+  prevPage: '&2----<< &6Eelmine '
+  prevCustomPage: '&2----<< &6[value] '
+  prevPageGui: '&6Eelmine leht '
+  prevPageClean: '&6Eelmine '
+  prevPageOff: '&2----<< &7Eelmine '
+  prevCustomPageOff: '&2----<< &7[value] '
+  prevPageHover: '&7<<<'
+  firstPageHover: '&7|<'
+  nextPage: '&6 Järgmine &2>>----'
+  nextCustomPage: '&6 [value] &2>>----'
+  nextPageGui: '&6Järgmine leht'
+  nextPageClean: '&6 Järgmine'
+  nextPageOff: '&7 Järgmine &2>>----'
+  nextCustomPageOff: '&7 [value] &2>>----'
+  nextPageHover: '&7>>>'
+  lastPageHover: '&7>|'
+  pageCount: '&2[current]&7/&2[total]'
+  pageCountHover: '&e[totalEntries] sissekannet'
+  skullOwner: '!actionbar!&7Omanik:&r [playerName]'
+  circle: '&3Ring'
+  square: '&5Ruut'
+  clear: '&7Puhas'
+  protectedArea: '&cKaitstud ala. Siin ei saa seda teha.'
+  valueToLong: '&eVäärtus on liiga kõrge. Max: [max]'
+  valueToShort: '&eVäärtus on liiga madal. Min: [min]'
+  pickIcon: '&8Vali ikoon'
+  Spawner: '&r[type] Spawner'
+  DamageCause:
+    block_explosion: Plahvatus
+    contact: Ploki kahjustus
+    cramming: kokkusurumine
+    custom: Tundmatu
+    dragon_breath: Lohe hingeõhk
+    drowning: Uppumine
+    dryout: kuivamine
+    entity_attack: Olevuse rünnak
+    entity_explosion: Plahvatus
+    entity_sweep_attack: olevuse sweep rünnak
+    fall: Kukkumine
+    falling_block: Langev plokk
+    fire: Tuli
+    fire_tick: Tuli
+    fly_into_wall: Vastu seina lendamine
+    freeze: külmumine
+    hot_floor: Magma plokk
+    kill: kill
+    lava: Laava
+    lightning: Välk
+    magic: Maagia
+    melting: Sulatamine
+    poison: Mürk
+    projectile: Mürsk
+    sonic_boom: helipuhang
+    starvation: Nälgimine
+    suffocation: Lämbumine
+    suicide: Enesetapp
+    thorns: Okkad
+    void: Tühjus
+    wither: Wither
+    world_border: world border
+  Biomes:
+    BADLANDS: Badlands
+    BAMBOO_JUNGLE: Bambuse džungel
+    BASALT_DELTAS: Basalt deltad
+    BEACH: Rand
+    BIRCH_FOREST: Kasemets
+    CHERRY_GROVE: Cherry grove
+    COLD_OCEAN: Külm ookean
+    CRIMSON_FOREST: Karmiinpunane mets
+    CUSTOM: Kohandatud
+    DARK_FOREST: Pime mets
+    DEEP_COLD_OCEAN: Sügav külm ookean
+    DEEP_DARK: Sügav pimedus
+    DEEP_FROZEN_OCEAN: Sügav külmunud ookean
+    DEEP_LUKEWARM_OCEAN: Sügav leige ookean
+    DEEP_OCEAN: Sügav ookean
+    DESERT: Kõrb
+    DRIPSTONE_CAVES: Dripstone koopad
+    END_BARRENS: End barrens
+    END_HIGHLANDS: End kõrgustikud
+    END_MIDLANDS: End midlands
+    ERODED_BADLANDS: Erodeeritud mägismaa
+    FLOWER_FOREST: Lillemets
+    FOREST: Mets
+    FROZEN_OCEAN: Jäätunud ookean
+    FROZEN_PEAKS: Jäätunud tipud
+    FROZEN_RIVER: Jäätunud jõgi
+    GROVE: Grove
+    ICE_SPIKES: Jääpiigid
+    JAGGED_PEAKS: Lõhestatud tipud
+    JUNGLE: Džungel
+    LUKEWARM_OCEAN: Leige ookean
+    LUSH_CAVES: Lopsakad koopad
+    MANGROVE_SWAMP: Mangroovisoo
+    MEADOW: Niit
+    MUSHROOM_FIELDS: Seenepõllud
+    NETHER_WASTES: Nether jäätmed
+    OCEAN: Ookean
+    OLD_GROWTH_BIRCH_FOREST: Vana kasemets
+    OLD_GROWTH_PINE_TAIGA: Vana männi taiga
+    OLD_GROWTH_SPRUCE_TAIGA: Vana kuuse taiga
+    PLAINS: Tasandikud
+    RIVER: Jõgi
+    SAVANNA: Savann
+    SAVANNA_PLATEAU: Savanniplatoo
+    SMALL_END_ISLANDS: Väiksed end saared
+    SNOWY_BEACH: Lumine rand
+    SNOWY_PLAINS: Lumised tasandikud
+    SNOWY_SLOPES: Lumised nõlvad
+    SNOWY_TAIGA: Lumine taiga
+    SOUL_SAND_VALLEY: Hingeliiva org
+    SPARSE_JUNGLE: Hõre džungel
+    STONY_PEAKS: Kivised tipud
+    STONY_SHORE: Kivine rannik
+    SUNFLOWER_PLAINS: Päevalille tasandikud
+    SWAMP: Soo
+    TAIGA: Taiga
+    THE_END: Lõpp
+    THE_VOID: Tühjus
+    WARM_OCEAN: Soe ookean
+    WARPED_FOREST: Väändunud mets
+    WINDSWEPT_FOREST: Tuulest puhutud mets
+    WINDSWEPT_GRAVELLY_HILLS: Tuulest puhutud kruusased künkad
+    WINDSWEPT_HILLS: Tuulest puhutud mäed
+    WINDSWEPT_SAVANNA: Tuulest puhutud savann
+    WOODED_BADLANDS: Metsased mägismaad
+  EntityType:
+    allay: Allay
+    area_effect_cloud: Alaefektiga pilv
+    armor_stand: Armori stend
+    arrow: Nool
+    axolotl: Aksolotl
+    bat: Nahkhiir
+    bee: Mesilane
+    blaze: Blaze
+    block_display: Block display
+    boat: Paat
+    camel: Kaamel
+    cat: Kass
+    cave_spider: Koopa ämblik
+    chest_boat: Kirstuga paat
+    chicken: Kana
+    cod: Tursk
+    cow: Lehm
+    creeper: Creeper
+    dolphin: Delfiin
+    donkey: Eesel
+    dragon_fireball: Lohe tulepall
+    dropped_item: Mahaviskatud ese
+    drowned: Drowned
+    egg: Muna
+    elder_guardian: Elder guardian
+    enderman: Enderman
+    endermite: Endermite
+    ender_crystal: Ender kristall
+    ender_dragon: Ender lohe
+    ender_pearl: Ender pärl
+    ender_signal: Ender signaal
+    evoker: Evoker
+    evoker_fangs: Evoker fangs
+    experience_orb: Kogemuskera
+    falling_block: Langev plokk
+    fireball: Tulekera
+    firework: Ilutulestik
+    fishing_hook: Kalastuskonks
+    fox: Rebane
+    frog: Konn
+    ghast: Ghast
+    giant: Gigant
+    glow_item_frame: Hõõguv eseme raam
+    glow_squid: Hõõguv kalmaar
+    goat: Kits
+    guardian: Guardian
+    hoglin: Hoglin
+    horse: Hobune
+    husk: Husk
+    illusioner: Illusioner
+    interaction: Interaction
+    iron_golem: Iron golem
+    item_display: Item display
+    item_frame: Eseme raam
+    leash_hitch: Rihma kinnitus
+    lightning: Välk
+    llama: Laama
+    llama_spit: Laama sülg
+    magma_cube: Magma cube
+    marker: Marker
+    minecart: Kaevanduskäru
+    minecart_chest: Kaevanduskäru kirstuga
+    minecart_command: Kaevanduskäru käsuga
+    minecart_furnace: Kaevanduskäru ahjuga
+    minecart_hopper: Kaevanduskäru hopperiga
+    minecart_mob_spawner: Kaevanduskäru mob spawneriga
+    minecart_tnt: Kaevanduskäru tnt-ga
+    mule: Muul
+    mushroom_cow: Seenelehm
+    ocelot: Otselot
+    painting: Maal
+    panda: Panda
+    parrot: Papagoi
+    phantom: Phantom
+    pig: Siga
+    piglin: Piglin
+    piglin_brute: Piglin brute
+    pillager: Pillager
+    player: Mängija
+    polar_bear: Jääkaru
+    primed_tnt: Süüdatud tnt
+    pufferfish: Pufferfish
+    rabbit: Jänes
+    ravager: Ravager
+    salmon: Lõhe
+    sheep: Lammas
+    shulker: Shulker
+    shulker_bullet: Shulker bullet
+    silverfish: Silverfish
+    skeleton: Luukere
+    skeleton_horse: Luukere hobune
+    slime: Lima
+    small_fireball: Väike tulekera
+    sniffer: Sniffer
+    snowball: Lumepall
+    snowman: Lumememm
+    spectral_arrow: Spectral nool
+    spider: Ämblik
+    splash_potion: Splash potion
+    squid: Kalmaar
+    stray: Stray
+    strider: Strider
+    tadpole: Konnakulles
+    text_display: Text display
+    thrown_exp_bottle: Visatud exp pudel
+    trader_llama: Kaupleja-laama
+    trident: Kolmhark
+    tropical_fish: Troopiline kala
+    turtle: Kilpkonn
+    unknown: Tundmatu
+    vex: Vex
+    villager: Külaelanik
+    vindicator: Vindicator
+    wandering_trader: Rändav kaupleja
+    warden: Warden
+    witch: Nõid
+    wither: Wither
+    wither_skeleton: Wither luukere
+    wither_skull: Wither pealuu
+    wolf: Hunt
+    zoglin: Zoglin
+    zombie: Zombi
+    zombie_horse: Zombi hobune
+    zombie_villager: Zombi külaealnik
+    zombified_piglin: Zombifitseeritud piglin
+  EnchantAliases:
+    protection_fire:
+    - FireProtection
+    damage_all:
+    - Sharpness
+    arrow_fire:
+    - Flame
+    soul_speed:
+    - SOULSPEED
+    water_worker:
+    - AquaAffinity
+    arrow_knockback:
+    - Punch
+    loyalty:
+    - Loyalty
+    depth_strider:
+    - DepthStrider
+    vanishing_curse:
+    - VanishingCurse
+    durability:
+    - Unbreaking
+    knockback:
+    - Knockback
+    luck:
+    - Luck
+    binding_curse:
+    - BindingCurse
+    loot_bonus_blocks:
+    - Fortune
+    protection_environmental:
+    - Protection
+    dig_speed:
+    - Efficiency
+    mending:
+    - Mending
+    frost_walker:
+    - FrostWalker
+    lure:
+    - Lure
+    loot_bonus_mobs:
+    - Looting
+    piercing:
+    - Piercing
+    protection_explosions:
+    - BlastProtection
+    damage_undead:
+    - Smite
+    multishot:
+    - Multishot
+    swift_sneak:
+    - SWIFTSNEAK
+    fire_aspect:
+    - FireAspect
+    channeling:
+    - Channeling
+    sweeping_edge:
+    - SweepingEdge
+    thorns:
+    - Thorns
+    damage_arthropods:
+    - BaneOfArthropods
+    oxygen:
+    - Respiration
+    riptide:
+    - Riptide
+    silk_touch:
+    - SilkTouch
+    quick_charge:
+    - QUICKCHARGE
+    protection_projectile:
+    - ProjectileProtection
+    impaling:
+    - Impaling
+    protection_fall:
+    - FallProtection
+    - FeatherFalling
+    arrow_damage:
+    - Power
+    arrow_infinite:
+    - Infinity
+  PotionEffectAliases:
+    speed:
+    - Speed
+    slow:
+    - Slow
+    fast_digging:
+    - Fast digging
+    slow_digging:
+    - Slow digging
+    increase_damage:
+    - Increase damage
+    heal:
+    - Heal
+    harm:
+    - Harm
+    jump:
+    - Jump
+    confusion:
+    - Confusion
+    regeneration:
+    - Regeneration
+    damage_resistance:
+    - Damage resistance
+    fire_resistance:
+    - Fire resistance
+    water_breathing:
+    - Water breathing
+    invisibility:
+    - Invisibility
+    blindness:
+    - Blindness
+    night_vision:
+    - Night vision
+    hunger:
+    - Hunger
+    weakness:
+    - Weakness
+    poison:
+    - Poison
+    wither:
+    - Wither
+    health_boost:
+    - Health boost
+    absorption:
+    - Absorption
+    saturation:
+    - Saturation
+    glowing:
+    - Glowing
+    levitation:
+    - Levitation
+    luck:
+    - Luck
+    unluck:
+    - Unluck
+    slow_falling:
+    - Slow falling
+    conduit_power:
+    - Conduit power
+    dolphins_grace:
+    - Dolphins grace
+    bad_omen:
+    - Bad omen
+    hero_of_the_village:
+    - Hero of the village
+    darkness:
+    - Darkness
+direction:
+  n: Põhi
+  ne: Kirre
+  e: Ida
+  se: Kagu
+  s: Lõuna
+  sw: Edela
+  w: Lääs
+  nw: Loe
+modify:
+  middlemouse: '&2Keskmine hiireklõps redigeerimiseks'
+  qButtonEdit: '&2Redigeerimiseks klõpsa Q'
+  newItem: '&7Asetage uus objekt siia'
+  newLine: '&2<NewLine>'
+  newLineHover: '&2Lisa uus rida'
+  newPage: '&2<NewPage>'
+  newPageHover: '&2Loo uus lehekülg'
+  removePage: '&c<RemovePage>'
+  removePageHover: '&cEemalda lehekülg'
+  deleteSymbol: ' &c[X]'
+  deleteSymbolHover: '&cKustuta &e[text]'
+  extraEditSymbol: ' &6!'
+  addSymbol: '&2[+]'
+  addSymbolHover: '&2Lisa uus'
+  cancelSymbol: ' &7&l[X]'
+  cancelSymbolHover: '&aKatkesta'
+  acceptSymbol: ' &2&l[✔]'
+  acceptSymbolHover: '&aNõustu'
+  denySymbol: ' &4&l[X]'
+  denySymbolHover: '&cKeeldu'
+  enabledSymbol: '&2[+]'
+  disabledSymbol: '&c[-]'
+  enabled: '&2Lubatud'
+  disabled: '&cKeelatud'
+  running: '&2Jookseb'
+  paused: '&cPausil'
+  editSymbol: '&e✎'
+  editSymbolHover: '&eMuuda &6[text]'
+  editLineColor: '&f'
+  listUpSymbol: '&6⇑'
+  listUpSymbolHover: '&eÜles'
+  listDownSymbol: '&6⇓'
+  listDownSymbolHover: '&eAlla'
+  listNumbering: '&e[number]. '
+  listAlign: '&80'
+  ChangeHover: '&eClick to change'
+  ChangeCommands: '&eCommands'
+  enabledColor: '&6'
+  disabledColor: '&7'
+  commandTitle: ' &e--- &6[name] &e---'
+  commandList: ' &e[command]  '
+  emptyLine: '&7[Empty line]'
+  commandEdit: '&eMuuda nimekirja'
+  nameAddInfo: '&eSisestage uus nimi. Sisestage &6cancel &e, et katkestada'
+  lineAddInfo: '&eSisestage uus rida. Sisestage &6cancel &e, et katkestada'
+  commandAddInfo: '&eSisesta uus käsk. Sisestage &6cancel &e, et katkestada'
+  commandAddInformationHover: "&e[playerName] saab kasutada mängija nime saamiseks\
+    \ \n&eEt lisada käskudesse viivitus: \n&eviivitus! 5 \n&eToetatakse spetsiaalseid\
+    \ käske. Rohkem infot \n&ehttps://www.zrips.net/cmi/commands/specialized/"
+  commandEditInfo: '&eKlõpsake vana teksti kleepimiseks. Sisestage &6cancel &eet katkestada
+    tegevust'
+  listLimit: '&eNimekiri ei saa olla suurem kui &6[amount] &ekirjet'
+  commandEditInfoHover: '&eKlõpsake vana teksti kleepimiseks'
+teleportation:
+  relocation: '!actionbar!&4Teie telepordi asukoht oli takistatud. Teid on teleporteeritud
+    turvalisse kohta.'
+econ:
+  noMoney: '&cSul ei ole raha'
+  charged: '!actionbar!&fVõetud: &6[amount]'
+  notEnoughMoney: '&cTeil ei ole piisavalt raha. Vajalik (&6[amount]&c)'
+  tooMuchMoney: '&cSul on liiga palju raha'
+Selection:
+  SelectPoints: '&cValige 2 punkti valikutööriistaga! AKA: &6[tool]'
+  PrimaryPoint: '&eMääratud &6Peamine &eValikupunkt [point]'
+  SecondaryPoint: '&eMääratud &6Teine &eValikupunkt [point]'
+  CoordsTop: '&eX:&6[x] &eY:&6[y] &eZ:&6[z]'
+  CoordsBottom: '&eX:&6[x] &eY:&6[y] &eZ:&6[z]'
+  Area: '&7[world] &f(&6[x1]:[y1]:[z1] &e[x2]:[y2]:[z2]&f)'
+Location:
+  Title: '&8Mängija asukoht'
+  Killer: '&eTapja: &6[killer]'
+  OneLiner: '&eAsukoht: &6[location]'
+  DeathReason: '&eSurma põhjus: &6[reason]'
+  Full: '&7[world] &f[x]&7:&f[y]&7:&f[z]'
+  World: '&eWorld: &6[world]'
+  X: '&eX: &6[x]'
+  Y: '&eY: &6[y]'
+  Z: '&eZ: &6[z]'
+  Pitch: '&ePitch: &6[pitch]'
+  Yaw: '&eYaw: &6[yaw]'
+  WorldNames:
+  - world-&2World
+  - world_nether-&2World Nether
+  - world_the_end-&2World The End
+Locations: '&7Asukohad: '
+command:
+  help:
+    output:
+      usage: '&eKasutus: &7%usage%'
+      cmdInfoFormat: '[command] &f- &e[description]'
+      cmdFormat: '&6/[command]&f[arguments]'
+      helpPageDescription: '&e* [description]'
+      explanation: '&e * [explanation]'
+      title: '&e------ ======= &6Abi&e &e======= ------'
+  nocmd:
+    help:
+      info: '&eNäitab kõiki olemasolevaid käske'
+      args: ''
+  clearcache:
+    help:
+      info: '&eTühjenda vahemälu'
+      args: ''
+  reload:
+    help:
+      info: '&eTaaslaadib pluginate konfiguratsiooni- ja lokalisatsioonifailid'
+      args: ''
+    info:
+      feedback: '&6CMIL Konfiguratsioonid ja lokalisatsiooni failid taaslaaditud!
+        Aega võttis [ms]ms'
+      failedConfig: '&4Ei õnnestunud laadida konfiguratsioonifaili! Kontrollige õigekirja!'
+      failedLocale: '&4Ei õnnestunud laadida lokalisatsioonifaili! Kontrollige õigekirja!'
