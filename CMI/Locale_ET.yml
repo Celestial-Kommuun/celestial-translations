@@ -293,7 +293,7 @@ command:
       message: '&f[message]'
   afk:
     help:
-      info: '&eAfk-režiimi ümberlülitamine. Põhjus võib olla lisatud'
+      info: '&eAfk-režiimi ümberlülitamine. Võib lisada ka põhjuse.'
       args: (-p:playerName) (reason) (-s)
     info:
       # This only determines message in title message and not message shown in chat. For chat message check config.yml file
@@ -301,7 +301,7 @@ command:
       afkSubTitle:
       - '&2Ootame sind ikka tagasi!'
       - '&2Kus oled?'
-      - '&2Afk, jälle?'
+      - '&2Eemal, jälle?'
       - '&2Kus sa oled?'
   afkcheck:
     help:
