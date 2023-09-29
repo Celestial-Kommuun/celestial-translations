@@ -3063,7 +3063,7 @@ command:
       ridingYou: '&6[playerDisplayName] &esõidab sinuga, kirjuta &6/shakeitoff &emaharaputamiseks'
   rt:
     help:
-      info: '&7Teleporteeru suvalisse asukohta'
+      info: '&eTeleporteeru suvalisse asukohta'
       args: (playerName) (worldName) (-s)
     info:
       possible: '&eVõimalikud maailmad: &6[worlds]'
@@ -3936,7 +3936,7 @@ command:
       prevented: '&cTeleportation has been prevented by another plugin'
   tpa:
     help:
-      info: '&eKüsi mängijalt, kas sa saad tema juurde teleporteeruda'
+      info: '&eTaotleb mängija juurde teleporteerumist'
       args: '[playerName] (playerName) (-c)'
     info:
       requestSent: '&eSooviavaldus saadetud mängijale &6[playerDisplayName]'
