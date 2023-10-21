@@ -56,7 +56,7 @@
 info:
   # Use !prefix! in any locale line to automatically include this prefix
   prefix: '&e[&aNG&e] '
-  NoPermission: '&cTeil ei ole luba!'
+  NoPermission: '&cTeil puudub selle jaoks luba!'
   CantHavePermission: '&cTe ei saa seda luba!'
   WrongGroup: '&cTe olete selle jaoks vales grupis!'
   NoPlayerPermission: '&c[playerName] puudub luba õigusele: [permission]'
